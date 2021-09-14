@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Brand_post">
         <activity
+            android:name=".Activity.post_rv"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Editing_post"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
