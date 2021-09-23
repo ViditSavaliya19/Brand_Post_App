@@ -1,9 +1,15 @@
 package com.example.brand_post.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -11,11 +17,22 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.brand_post.Adapter.FontStyleAdapter;
 import com.example.brand_post.MTouch.MultiTouchListener;
 import com.example.brand_post.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.xiaopo.flying.sticker.BitmapStickerIcon;
+import com.xiaopo.flying.sticker.DeleteIconEvent;
+import com.xiaopo.flying.sticker.DrawableSticker;
+import com.xiaopo.flying.sticker.FlipHorizontallyEvent;
+import com.xiaopo.flying.sticker.Sticker;
+import com.xiaopo.flying.sticker.StickerView;
+import com.xiaopo.flying.sticker.TextSticker;
+import com.xiaopo.flying.sticker.ZoomIconEvent;
+
+import java.util.Arrays;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -33,6 +50,9 @@ public class Editing_post extends AppCompatActivity {
     private FrameLayout m_size;
     private FrameLayout f_color;
     private ImageView text_edit;
+    private StickerView stickerView;
+    private TextSticker  sticker;
+    private String TAG="Hello";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +69,10 @@ public class Editing_post extends AppCompatActivity {
         text123 = title_text.getText().toString();
         title_text.setOnTouchListener(new MultiTouchListener());
         text_edit=findViewById(R.id.text_edit);
+        stickerView=findViewById(R.id.sticker_view);
+
+
+
         text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,6 +261,8 @@ public class Editing_post extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }
