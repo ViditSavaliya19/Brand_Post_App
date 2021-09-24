@@ -6,6 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="130dp"
+        android:id="@+id/card"
         android:layout_height="150dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"

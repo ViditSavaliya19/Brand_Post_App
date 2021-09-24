@@ -1,8 +1,13 @@
 package com.example.brand_post.Activity;
 
+import static com.example.brand_post.Activity.SpleshActivity.postModelList;
+import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,7 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brand_post.Adapter.FontStyleAdapter;
+import com.example.brand_post.Adapter.Post_Adapter;
+import com.example.brand_post.Adapter.Rv_Adapter;
 import com.example.brand_post.MTouch.MultiTouchListener;
+import com.example.brand_post.MainActivity;
 import com.example.brand_post.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.xiaopo.flying.sticker.BitmapStickerIcon;
@@ -44,33 +52,37 @@ public class Editing_post extends AppCompatActivity {
     private TextView title_text;
     private String text123;
     private BottomSheetDialog bottomSheetDialog;
-    static int a=20;
+    static int a = 20;
     private int DefaultColor;
     private FrameLayout f_size;
     private FrameLayout m_size;
     private FrameLayout f_color;
     private ImageView text_edit;
     private StickerView stickerView;
-    private TextSticker  sticker;
-    private String TAG="Hello";
+    private TextSticker sticker;
+    private String TAG = "Hello";
+    private String id;
+    private RecyclerView rv_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_post);
         showBottomSheetDialog();
+
+        id = getIntent().getStringExtra("value_position");
+
         initView();
 
     }
 
     private void initView() {
-        bg=findViewById(R.id.bg);
-        title_text=findViewById(R.id.title_text);
+        bg = findViewById(R.id.bg);
+        title_text = findViewById(R.id.title_text);
         text123 = title_text.getText().toString();
         title_text.setOnTouchListener(new MultiTouchListener());
-        text_edit=findViewById(R.id.text_edit);
-        stickerView=findViewById(R.id.sticker_view);
-
+        text_edit = findViewById(R.id.text_edit);
+        stickerView = findViewById(R.id.sticker_view);
 
 
         text_edit.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +108,15 @@ public class Editing_post extends AppCompatActivity {
 
         bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottomsheet);
-        grid_fontstyle=bottomSheetDialog.findViewById(R.id.grid_fontstyle);
+        rv_view=bottomSheetDialog.findViewById(R.id.rv_view);
+
+        Rv_Post();
+
+
+        grid_fontstyle = bottomSheetDialog.findViewById(R.id.grid_fontstyle);
         f_size = bottomSheetDialog.findViewById(R.id.f_size);
         m_size = bottomSheetDialog.findViewById(R.id.m_size);
-        f_color=bottomSheetDialog.findViewById(R.id.f_color);
+        f_color = bottomSheetDialog.findViewById(R.id.f_color);
 
         f_color.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +143,13 @@ public class Editing_post extends AppCompatActivity {
         });
 
 
+    }
+
+    private void Rv_Post() {
+        Post_Adapter adapter=new Post_Adapter(Editing_post.this,postModelList,id);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(Editing_post.this);
+        rv_view.setLayoutManager(layoutManager);
+        rv_view.setAdapter(adapter);
     }
 
     public void color(boolean AlphaSupport) {
@@ -261,8 +285,6 @@ public class Editing_post extends AppCompatActivity {
         }
 
     }
-
-
 
 
 }
