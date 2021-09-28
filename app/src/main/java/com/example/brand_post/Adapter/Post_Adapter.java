@@ -1,5 +1,6 @@
 package com.example.brand_post.Adapter;
 
+import static com.example.brand_post.Activity.Editing_post.image;
 import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -50,23 +52,16 @@ public class Post_Adapter extends RecyclerView.Adapter<Post_Adapter.viewData> {
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onBindViewHolder: ====****" + imageLink + "" + list.get(position).getimage_name());
+                Glide.with(activity)
+                        .load(imageLink + "" + list.get(position).getimage_name())
+                        .centerCrop()
+                        .into(image);
             }
         });
         Glide.with(activity)
                 .load(imageLink + "" + list.get(position).getimage_name())
                 .centerCrop()
                 .into(holder.image_view);
-        for (int i = 0; i < list.size(); i++) {
-
-            if (list.get(position).getId().equals(n)) {
-
-                Glide.with(activity)
-                        .load(imageLink + "" + list.get(position).getimage_name())
-                        .centerCrop()
-                        .into(holder.image_view);
-            }
-        }
 
 
     }

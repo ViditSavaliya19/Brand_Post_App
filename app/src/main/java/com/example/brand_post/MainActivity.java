@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     void Recycler_view()
     {
-
         Rv_Adapter adapter=new Rv_Adapter(MainActivity.this,sub_modelList);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this,RecyclerView.HORIZONTAL,false);
         recycler_trending.setLayoutManager(layoutManager);
