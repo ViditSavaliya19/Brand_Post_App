@@ -1,5 +1,5 @@
 
-package com.example.brand_post.Util;
+package com.example.brand_post.Util.Model;
 
 import java.util.List;
 

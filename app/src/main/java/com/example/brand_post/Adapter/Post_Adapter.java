@@ -1,6 +1,6 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.SpleshActivity.postModelList;
+import static com.example.brand_post.Activity.Editing_post.image;
 import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -21,19 +22,22 @@ import com.bumptech.glide.Glide;
 import com.example.brand_post.Activity.Editing_post;
 import com.example.brand_post.MainActivity;
 import com.example.brand_post.R;
+import com.example.brand_post.Util.Model.PostModel;
 import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.util.List;
 
-public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
+public class Post_Adapter extends RecyclerView.Adapter<Post_Adapter.viewData> {
 
     Activity activity;
-    List<Sub_Model> list;
+    List<PostModel> list;
     private String TAG;
+    String n;
 
-    public Rv_Adapter(MainActivity mainActivity, List<Sub_Model> list) {
+    public Post_Adapter(Editing_post mainActivity, List<PostModel> list, String n) {
         activity = mainActivity;
         this.list = list;
+        this.n = n;
     }
 
     @NonNull
@@ -45,28 +49,19 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
 
     @Override
     public void onBindViewHolder(@NonNull viewData holder, @SuppressLint("RecyclerView") int position) {
-        holder.txt.setText(list.get(position).getName());
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(activity, Editing_post.class);
-                intent.putExtra("value_position",list.get(position).getId().toString());
-                activity.startActivity(intent);
-
+                Glide.with(activity)
+                        .load(imageLink + "" + list.get(position).getimage_name())
+                        .centerCrop()
+                        .into(image);
             }
         });
-//        for (int i = 0; i < postModelList.size(); i++) {
-//
-//            if (list.get(position).getId().equals(postModelList.get(i).gets_cate())) {
-//
-//                Log.e(TAG, "=============>> " + postModelList.get(i).gets_cate());
-//                Glide.with(activity)
-//                        .load(imageLink + "" + postModelList.get(position).getimage_name().toString())
-//                        .centerCrop()
-//                        .into(holder.image_view);
-//            }
-//        }
-
+        Glide.with(activity)
+                .load(imageLink + "" + list.get(position).getimage_name())
+                .centerCrop()
+                .into(holder.image_view);
 
 
     }
@@ -84,7 +79,7 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
         public viewData(@NonNull View itemView) {
             super(itemView);
             txt = itemView.findViewById(R.id.txt);
-            card=itemView.findViewById(R.id.card);
+            card = itemView.findViewById(R.id.card);
             image_view = itemView.findViewById(R.id.image_view);
         }
     }
