@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.brand_post.MainActivity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Constant;
@@ -36,7 +35,7 @@ public class SpleshActivity extends AppCompatActivity {
                 Intent intent=new Intent(SpleshActivity.this,MainActivity.class);
                 startActivity(intent);
             }
-        },5000);
+        },3000);
     }
 
 

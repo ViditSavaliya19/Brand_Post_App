@@ -1,24 +1,15 @@
 package com.example.brand_post.Activity;
 
 import static com.example.brand_post.Activity.SpleshActivity.postModelList;
-import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,18 +24,14 @@ import android.widget.Toast;
 
 import com.example.brand_post.Adapter.FontStyleAdapter;
 import com.example.brand_post.Adapter.Post_Adapter;
-import com.example.brand_post.Adapter.Rv_Adapter;
 import com.example.brand_post.MTouch.MultiTouchListener;
-import com.example.brand_post.MainActivity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.PostModel;
 import com.example.brand_post.Util.Stickers.StickerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import yuku.ambilwarna.AmbilWarnaDialog;

@@ -5,6 +5,7 @@ import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class List_Post_Adapter extends RecyclerView.Adapter<List_Post_Adapter.vi
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                activity.startActivity(new Intent(activity,Editing_post.class));
             }
         });
         Glide.with(activity)
