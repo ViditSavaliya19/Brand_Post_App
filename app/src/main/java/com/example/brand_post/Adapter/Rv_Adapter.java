@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brand_post.Activity.Post_list;
-import com.example.brand_post.Activity.MainActivity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Sub_Model;
 
@@ -26,7 +26,7 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
     List<Sub_Model> list;
     private String TAG;
 
-    public Rv_Adapter(MainActivity mainActivity, List<Sub_Model> list) {
+    public Rv_Adapter(FragmentActivity mainActivity, List<Sub_Model> list) {
         activity = mainActivity;
         this.list = list;
     }
