@@ -19,8 +19,12 @@ import android.widget.Toast;
 
 
 import com.example.brand_post.Adapter.Rv_Adapter;
+import com.example.brand_post.Adapter.SliderAdapterExample;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Sub_Model;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,20 +41,30 @@ public class Dashbord_Fragment extends Fragment {
     private String formattedDate;
     private SimpleDateFormat dateFormat;
     List<String> date15 = new ArrayList<String>();
+    private SliderView imageSlider;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_dashbord_, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashbord_, container, false);
 
         setDate();
 
-
+        imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
+
+
+        SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity());
+        imageSlider.setSliderAdapter(adapterExample);
+        imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        imageSlider.startAutoCycle();
+
+
         data_filter();
         Recycler_view();
-        
 
 
         return view;
@@ -118,5 +132,10 @@ public class Dashbord_Fragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }
