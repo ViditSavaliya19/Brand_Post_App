@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.example.brand_post.Adapter.Rv_Adapter;
+import com.example.brand_post.Adapter.Rv_Adapter_day;
 import com.example.brand_post.Adapter.SliderAdapterExample;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Sub_Model;
@@ -34,14 +35,16 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class Dashbord_Fragment extends Fragment {
+public class    Dashbord_Fragment extends Fragment {
 
     private RecyclerView recycler_trending;
     public static List<Sub_Model> filter_date_cate = new ArrayList<Sub_Model>();
+    public static List<Sub_Model> filter_date_cate_day = new ArrayList<Sub_Model>();
     private String formattedDate;
     private SimpleDateFormat dateFormat;
     List<String> date15 = new ArrayList<String>();
     private SliderView imageSlider;
+    private RecyclerView recycler_upcoming;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
@@ -54,7 +57,7 @@ public class Dashbord_Fragment extends Fragment {
 
         imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
-
+        recycler_upcoming=view.findViewById(R.id.recycler_upcoming);
 
         SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity());
         imageSlider.setSliderAdapter(adapterExample);
@@ -65,6 +68,7 @@ public class Dashbord_Fragment extends Fragment {
 
         data_filter();
         Recycler_view();
+        Recycler_view_day();
 
 
         return view;
@@ -72,22 +76,44 @@ public class Dashbord_Fragment extends Fragment {
 
     void data_filter() {
 
+
+
         for (int i = 0; i < sub_modelList.size(); i++) {
             for (int j = 0; j < date15.size(); j++) {
                 if (sub_modelList.get(i).getDate().equals(date15.get(j))) {
 
-                    String id = sub_modelList.get(i).getId();
-                    String title = sub_modelList.get(i).getC_id();
-                    String body = sub_modelList.get(i).getDate();
-                    String body2 = sub_modelList.get(i).getName();
+                    if(sub_modelList.get(i).getC_id().equals("6"))
+                    {
+                        String id = sub_modelList.get(i).getId();
+                        String title = sub_modelList.get(i).getC_id();
+                        String body = sub_modelList.get(i).getDate();
+                        String body2 = sub_modelList.get(i).getName();
 
-                    Sub_Model model = new Sub_Model();
-                    model.setId(id);
-                    model.setC_id(title);
-                    model.setDate(body);
-                    model.setName(body2);
+                        Sub_Model model = new Sub_Model();
+                        model.setId(id);
+                        model.setC_id(title);
+                        model.setDate(body);
+                        model.setName(body2);
 
-                    filter_date_cate.add(model);
+                        filter_date_cate.add(model);
+                    }
+                    else
+                    {
+
+                        String id = sub_modelList.get(i).getId();
+                        String title = sub_modelList.get(i).getC_id();
+                        String body = sub_modelList.get(i).getDate();
+                        String body2 = sub_modelList.get(i).getName();
+
+                        Sub_Model model = new Sub_Model();
+                        model.setId(id);
+                        model.setC_id(title);
+                        model.setDate(body);
+                        model.setName(body2);
+
+                        filter_date_cate_day.add(model);
+                    }
+
                 }
             }
         }
@@ -99,6 +125,14 @@ public class Dashbord_Fragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recycler_trending.setLayoutManager(layoutManager);
         recycler_trending.setAdapter(adapter);
+    }
+
+
+    void Recycler_view_day() {
+        Rv_Adapter_day adapter = new Rv_Adapter_day(getActivity(), filter_date_cate_day);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
+        recycler_upcoming.setLayoutManager(layoutManager);
+        recycler_upcoming.setAdapter(adapter);
     }
 
 
