@@ -7,6 +7,15 @@ public class Sub_Model {
     String name;
     String date;
 
+    String thumb;
+
+    public String getImage() {
+        return thumb;
+    }
+
+    public void setImage(String thumb) {
+        this.thumb = thumb;
+    }
 
     public String getId() {
         return id;

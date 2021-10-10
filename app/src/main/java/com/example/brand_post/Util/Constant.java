@@ -19,6 +19,7 @@ public class Constant {
 
 
     public  static String imageLink="https://satkaivalsaheb.xyz/app/html/images/";
+    public  static String ThumbLink="https://satkaivalsaheb.xyz/app/html/thumb/";
     public List<PostModel> postModelList = new ArrayList<PostModel>();
     public List<Cate_model> cate_modelList1 = new ArrayList<Cate_model>();
     public List<Sub_Model> sub_modelList1 = new ArrayList<Sub_Model>();
@@ -125,11 +126,13 @@ public class Constant {
                         String title = user.get(i).getC_id();
                         String name = user.get(i).getName();
                         String date = user.get(i).getDate();
+                        String image = user.get(i).getImage();
 
                         Sub_Model model = new Sub_Model();
                         model.setId(id);
                         model.setDate(date);
                         model.setName(name);
+                        model.setImage(image);
                         model.setC_id(title);
 
                         sub_modelList1.add(model);

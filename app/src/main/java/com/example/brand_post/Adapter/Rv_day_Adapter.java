@@ -23,13 +23,13 @@ import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.util.List;
 
-public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
+public class Rv_day_Adapter extends RecyclerView.Adapter<Rv_day_Adapter.viewData> {
 
     Activity activity;
     List<Sub_Model> list;
     private String TAG;
 
-    public Rv_Adapter(FragmentActivity mainActivity, List<Sub_Model> list) {
+    public Rv_day_Adapter(FragmentActivity mainActivity, List<Sub_Model> list) {
         activity = mainActivity;
         this.list = list;
     }

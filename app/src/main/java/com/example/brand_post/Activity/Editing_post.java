@@ -1,6 +1,7 @@
 package com.example.brand_post.Activity;
 
 import static com.example.brand_post.Activity.SpleshActivity.postModelList;
+import static com.example.brand_post.Util.Constant.imageLink;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.brand_post.Adapter.FontStyleAdapter;
 import com.example.brand_post.Adapter.Post_Adapter;
 import com.example.brand_post.MTouch.MultiTouchListener;
@@ -60,12 +62,16 @@ public class Editing_post extends AppCompatActivity {
     private FrameLayout framlayout;
     private StickerView mCurrentView;
     private ImageView adda_Image;
+    private String post_image;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_post);
+
+        post_image=getIntent().getStringExtra("post");
+        filter_post_List=getIntent().getParcelableExtra("list_post");
         c1 = new Constant();
         showBottomSheetDialog();
 
@@ -79,6 +85,10 @@ public class Editing_post extends AppCompatActivity {
     private void initView() {
         bg = findViewById(R.id.bg);
         image=findViewById(R.id.image);
+        Glide.with(Editing_post.this)
+                .load(post_image)
+                .centerCrop()
+                .into(image);
         title_text = findViewById(R.id.title_text);
         text123 = title_text.getText().toString();
         framlayout=findViewById(R.id.framlayout);
@@ -177,46 +187,44 @@ public class Editing_post extends AppCompatActivity {
 
     }
 
-    public  List<PostModel> Filter_Cate(String n)
-    {
-        List<PostModel> filter_post_List = new ArrayList<PostModel>();
-        for (int i = 0; i < postModelList.size(); i++) {
-            Toast.makeText(Editing_post.this, ""+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
-
-            if (postModelList.get(i).gets_cate().equals(n)) {
-
-                Toast.makeText(Editing_post.this, "True "+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
-
-                String id = postModelList.get(i).getId();
-                String title = postModelList.get(i).getm_cate();
-                String body = postModelList.get(i).gets_cate();
-                String body2 = postModelList.get(i).getimage_name();
-                String body3 = postModelList.get(i).getstatus();
-                String body4 = postModelList.get(i).getf_date();
-                String body5 = postModelList.get(i).getlangauge();
-
-                PostModel model = new PostModel();
-                model.setf_date(body4);
-                model.setId(id);
-                model.setlangauge(body5);
-                model.setimage_name(body2);
-                model.sets_cate(body);
-                model.setm_cate(title);
-                model.setstatus(body3);
-
-                filter_post_List.add(model);
-//                Log.e("Filter ", "id      : " + id);
-//                Log.e("Filter ", "title   : " + title);
-                Log.e("Filter" , "body    : " + body);
-                Log.e("Filter ", "-------------------------------------------------");
-            }
-        }
-        return filter_post_List;
-    }
+//    public  List<PostModel> Filter_Cate(String n)
+//    {
+//        List<PostModel> filter_post_List = new ArrayList<PostModel>();
+//        for (int i = 0; i < postModelList.size(); i++) {
+//            Toast.makeText(Editing_post.this, ""+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
+//
+//            if (postModelList.get(i).gets_cate().equals(n)) {
+//
+//                Toast.makeText(Editing_post.this, "True "+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
+//
+//                String id = postModelList.get(i).getId();
+//                String title = postModelList.get(i).getm_cate();
+//                String body = postModelList.get(i).gets_cate();
+//                String body2 = postModelList.get(i).getimage_name();
+//                String body3 = postModelList.get(i).getstatus();
+//                String body4 = postModelList.get(i).getf_date();
+//                String body5 = postModelList.get(i).getlangauge();
+//
+//                PostModel model = new PostModel();
+//                model.setf_date(body4);
+//                model.setId(id);
+//                model.setlangauge(body5);
+//                model.setimage_name(body2);
+//                model.sets_cate(body);
+//                model.setm_cate(title);
+//                model.setstatus(body3);
+//
+//                filter_post_List.add(model);
+////                Log.e("Filter ", "id      : " + id);
+////                Log.e("Filter ", "title   : " + title);
+//                Log.e("Filter" , "body    : " + body);
+//                Log.e("Filter ", "-------------------------------------------------");
+//            }
+//        }
+//        return filter_post_List;
+//    }
 
     private void Rv_Post() {
-        filter_post_List = Filter_Cate(id);
-        Toast.makeText(Editing_post.this, ""+filter_post_List.size(), Toast.LENGTH_SHORT).show();
         Post_Adapter adapter = new Post_Adapter(Editing_post.this, filter_post_List, id);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Editing_post.this, 3);
         rv_view.setLayoutManager(layoutManager);
