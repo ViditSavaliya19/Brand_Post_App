@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/bg"
     android:padding="10dp"
     android:layout_height="match_parent"
     tools:context=".Activity.Post_list">
@@ -26,7 +26,7 @@
                 android:gravity="center"
                 android:text="Gujarati"
                 android:textColor="#2940BD"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
         </LinearLayout>
 
@@ -43,7 +43,7 @@
                 android:gravity="center"
                 android:text="Hindi"
                 android:textColor="#2940BD"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
 
         </LinearLayout>
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:text="English"
                 android:textColor="#2940BD"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
 
         </LinearLayout>

@@ -55,7 +55,7 @@ public class List_Post_Adapter extends RecyclerView.Adapter<List_Post_Adapter.vi
 
                 Intent intent=new Intent(activity,Editing_post.class);
                 intent.putExtra("post", imageLink +""+list.get(position).getimage_name());
-                intent.putExtra("list_post", (Parcelable) list);
+//                intent.putExtra("list_post", (Parcelable) list);
 //                Toast.makeText(activity, ""+ imageLink +""+list.get(position).getimage_name(), Toast.LENGTH_SHORT).show();
                 activity.startActivity(intent);
             }

@@ -76,7 +76,7 @@ public class Editing_post extends AppCompatActivity {
         showBottomSheetDialog();
 
         id = getIntent().getStringExtra("value_position");
-        Toast.makeText(Editing_post.this, "" + id, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(Editing_post.this, "" + id, Toast.LENGTH_SHORT).show();
 
         initView();
 
@@ -95,7 +95,7 @@ public class Editing_post extends AppCompatActivity {
         title_text.setOnTouchListener(new MultiTouchListener());
         text_edit = findViewById(R.id.text_edit);
         adda_Image=findViewById(R.id.adda_Image);
-        Rv_Post();
+//        Rv_Post();
 
 
         framlayout.setOnTouchListener(new View.OnTouchListener() {
