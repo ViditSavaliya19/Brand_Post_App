@@ -54,7 +54,11 @@ public class Dashbord_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashbord_, container, false);
 
+
         setDate();
+
+        filter_date_cate.clear();
+        filter_date_cate_days.clear();
 
         imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
@@ -69,15 +73,14 @@ public class Dashbord_Fragment extends Fragment {
 
 
         data_filter();
-        Recycler_view();
-        Recycler_view_day();
 
 
         return view;
     }
 
     void data_filter() {
-
+        filter_date_cate.clear();
+        filter_date_cate_days.clear();
         for (int i = 0; i < sub_modelList.size(); i++) {
             for (int j = 0; j < date15.size(); j++) {
                 if (sub_modelList.get(i).getDate().equals(date15.get(j))) {
@@ -118,6 +121,9 @@ public class Dashbord_Fragment extends Fragment {
                 }
             }
         }
+
+        Recycler_view();
+        Recycler_view_day();
     }
 
 
