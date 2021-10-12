@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,8 +63,12 @@ public class Editing_post extends AppCompatActivity {
     public static ImageView image;
     private FrameLayout framlayout;
     private StickerView mCurrentView;
-    private ImageView adda_Image;
+    private ImageView adda_Image, img_logo;
     private String post_image;
+    private List<String> list = new ArrayList<String>();
+
+    private Constant constant;
+    private Bitmap bmp;
 
 
     @Override
@@ -70,31 +76,48 @@ public class Editing_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_post);
 
-        post_image=getIntent().getStringExtra("post");
-        filter_post_List=getIntent().getParcelableExtra("list_post");
+        post_image = getIntent().getStringExtra("post");
+        filter_post_List = getIntent().getParcelableExtra("list_post");
         c1 = new Constant();
         showBottomSheetDialog();
 
         id = getIntent().getStringExtra("value_position");
 //        Toast.makeText(Editing_post.this, "" + id, Toast.LENGTH_SHORT).show();
-
+        constant = new Constant();
         initView();
+
+        if (!(list = constant.Read_Pref(Editing_post.this)).isEmpty()) {
+
+            if (list.get(3) != null) {
+                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
+                byte[] array = new byte[split.length];
+                for (int i = 0; i < split.length; i++) {
+                    array[i] = Byte.parseByte(split[i]);
+                }
+
+                 bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+                title_text.setText(list.get(0));
+            }
+        }
+
 
     }
 
     private void initView() {
         bg = findViewById(R.id.bg);
-        image=findViewById(R.id.image);
+        image = findViewById(R.id.image);
+        img_logo = findViewById(R.id.img_logo);
+        img_logo.setOnTouchListener(new MultiTouchListener());
         Glide.with(Editing_post.this)
                 .load(post_image)
                 .centerCrop()
                 .into(image);
         title_text = findViewById(R.id.title_text);
         text123 = title_text.getText().toString();
-        framlayout=findViewById(R.id.framlayout);
+        framlayout = findViewById(R.id.framlayout);
         title_text.setOnTouchListener(new MultiTouchListener());
         text_edit = findViewById(R.id.text_edit);
-        adda_Image=findViewById(R.id.adda_Image);
+        adda_Image = findViewById(R.id.adda_Image);
 //        Rv_Post();
 
 
@@ -110,7 +133,10 @@ public class Editing_post extends AppCompatActivity {
         adda_Image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addStrickerView(R.drawable.download);
+
+                img_logo.setImageBitmap(bmp);
+
+//                addStrickerView(R.drawable.download);
 //                Intent intent = new Intent(Intent.ACTION_PICK,
 //                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                startActivityForResult(intent, 0);
@@ -154,7 +180,7 @@ public class Editing_post extends AppCompatActivity {
         bottomSheetDialog.setContentView(R.layout.bottomsheet);
         rv_view = bottomSheetDialog.findViewById(R.id.rv_view);
 
-        f_setting=bottomSheetDialog.findViewById(R.id.f_setting);
+        f_setting = bottomSheetDialog.findViewById(R.id.f_setting);
 
         grid_fontstyle = bottomSheetDialog.findViewById(R.id.grid_fontstyle);
         f_size = bottomSheetDialog.findViewById(R.id.f_size);
@@ -403,9 +429,8 @@ public class Editing_post extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             Uri targetUri = data.getData();
-
 
 
 //            Bitmap bitmap;

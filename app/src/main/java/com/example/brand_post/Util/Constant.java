@@ -1,14 +1,16 @@
 package com.example.brand_post.Util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Model.PostModel;
 import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Constant {
+
 
 
     public  static String imageLink="https://satkaivalsaheb.xyz/app/html/images/";
@@ -149,6 +152,34 @@ public class Constant {
         });
         return sub_modelList1;
     }
+
+// Shard pref ================================
+
+
+    public void Pref(Activity activity, String name, String degi, String num, byte[] image)
+    {
+        SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("Name",name);
+        editor.putString("Business",degi);
+        editor.putString("mobile",num);
+        editor.putString("image", Arrays.toString(image));
+        editor.commit();
+    }
+
+
+    public List<String> Read_Pref(Activity activity)
+    {
+        List<String> list=new ArrayList<>();
+        SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
+        list.add(sharedPreferences.getString("Name",null));
+        list.add(sharedPreferences.getString("Business",null));
+        list.add(sharedPreferences.getString("mobile",null));
+        list.add(sharedPreferences.getString("image",null));
+
+        return list;
+    }
+
 
 
 }
