@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.brand_post.MTouch;
+package com.example.brand_post.Util.MTouch;
 
 import android.util.Log;
 import android.view.MotionEvent;

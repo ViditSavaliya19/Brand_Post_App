@@ -47,23 +47,29 @@ public class Business_edit extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_save);
         constant = new Constant();
 
-        if (!(list = constant.Read_Pref(Business_edit.this)).isEmpty()) {
+        list= constant.Read_Pref(Business_edit.this);
 
-            if (list.get(3) != null) {
-                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
-                byte[] array = new byte[split.length];
-                for (int i = 0; i < split.length; i++) {
-                    array[i] = Byte.parseByte(split[i]);
-                }
-                String imgString = Base64.encodeToString(array, Base64.NO_WRAP);
-                Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+        name_edt.setText(list.get(0));
+        business_edt.setText(list.get(1));
+        number_edt.setText(list.get(2));
 
-                card_image.setImageBitmap(bmp);
-                name_edt.setText(list.get(0));
-                business_edt.setText(list.get(1));
-                number_edt.setText(list.get(2));
-            }
-        }
+//        if (!(list = constant.Read_Pref(Business_edit.this)).isEmpty()) {
+//
+//            if (list.get(3) != null) {
+//                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
+//                byte[] array = new byte[split.length];
+//                for (int i = 0; i < split.length; i++) {
+//                    array[i] = Byte.parseByte(split[i]);
+//                }
+//                String imgString = Base64.encodeToString(array, Base64.NO_WRAP);
+//                Bitmap bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+//
+//                card_image.setImageBitmap(bmp);
+//                name_edt.setText(list.get(0));
+//                business_edt.setText(list.get(1));
+//                number_edt.setText(list.get(2));
+//            }
+//        }
 
         card_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +84,8 @@ public class Business_edit extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                byte[] image = getBytesFromBitmap(bitmap);
-                constant.Pref(Business_edit.this, name_edt.getText().toString(), business_edt.getText().toString(), number_edt.getText().toString(), image);
+//                constant.Pref(Business_edit.this, name_edt.getText().toString(), business_edt.getText().toString(), number_edt.getText().toString(), image);
+                constant.Pref(Business_edit.this,name_edt.getText().toString(),business_edt.getText().toString(),number_edt.getText().toString());
                 Toast.makeText(Business_edit.this, "Success Update", Toast.LENGTH_SHORT).show();
             }
         });

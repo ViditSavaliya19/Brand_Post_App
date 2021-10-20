@@ -1,11 +1,11 @@
-package com.example.brand_post.MTouch;
+package com.example.brand_post.Util.MTouch;
 
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class FrontOnMultitouch implements OnTouchListener {
+public class MultiTouchListener implements OnTouchListener {
 
     private static final int INVALID_POINTER_ID = -1;
     public boolean isRotateEnabled = true;
@@ -20,14 +20,15 @@ public class FrontOnMultitouch implements OnTouchListener {
     private ScaleGestureDetector mScaleGestureDetector;
     OnRotateListner rotateListner;
 
-    public FrontOnMultitouch(boolean isRotateEnabled, boolean isTranslateEnabled, boolean isScaleEnabled) {
+    public MultiTouchListener(boolean isRotateEnabled, boolean isTranslateEnabled, boolean isScaleEnabled) {
         this.isRotateEnabled = isRotateEnabled;
         this.isScaleEnabled = isScaleEnabled;
         this.isTranslateEnabled = isTranslateEnabled;
         mScaleGestureDetector = new ScaleGestureDetector(new ScaleGestureListener());
 
     }
-    public FrontOnMultitouch(boolean isRotateEnabled, boolean isTranslateEnabled, boolean isScaleEnabled, OnRotateListner rotateListner) {
+
+    public MultiTouchListener(boolean isRotateEnabled, boolean isTranslateEnabled, boolean isScaleEnabled, OnRotateListner rotateListner) {
         this.isRotateEnabled = isRotateEnabled;
         this.isScaleEnabled = isScaleEnabled;
         this.isTranslateEnabled = isTranslateEnabled;
@@ -37,8 +38,7 @@ public class FrontOnMultitouch implements OnTouchListener {
     }
 
 
-
-    public FrontOnMultitouch() {
+    public MultiTouchListener() {
         mScaleGestureDetector = new ScaleGestureDetector(new ScaleGestureListener());
     }
 
@@ -52,7 +52,7 @@ public class FrontOnMultitouch implements OnTouchListener {
         return degrees;
     }
 
-    private  void move(View view, TransformInfo info) {
+    private void move(View view, TransformInfo info) {
         computeRenderOffset(view, info.pivotX, info.pivotY);
         adjustTranslation(view, info.deltaX, info.deltaY);
 
@@ -97,15 +97,12 @@ public class FrontOnMultitouch implements OnTouchListener {
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         mScaleGestureDetector.onTouchEvent(view, event);
-        view.bringToFront();
-        view.getParent().requestLayout();
 
         if (!isTranslateEnabled) {
             return true;
         }
 
         int action = event.getAction();
-
         switch (action & event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN: {
                 mPrevX = event.getX();
@@ -124,7 +121,7 @@ public class FrontOnMultitouch implements OnTouchListener {
                 if (pointerIndex != -1) {
                     float currX = event.getX(pointerIndex);
                     float currY = event.getY(pointerIndex);
-                    //Log.i("Test:  x=",currX+" y="+currY);
+                  //  Log.i("Test:  x=",currX+" y="+currY);
                     // Only move if the ScaleGestureDetector isn't processing a
                     // gesture.
                     if (!mScaleGestureDetector.isInProgress()) {
@@ -159,7 +156,6 @@ public class FrontOnMultitouch implements OnTouchListener {
                 break;
             }
         }
-
         return true;
     }
 
@@ -205,7 +201,8 @@ public class FrontOnMultitouch implements OnTouchListener {
         public float minimumScale;
         public float maximumScale;
     }
-    public  interface  OnRotateListner {
+
+    public interface OnRotateListner {
         public float getRotation(float rotation);
     }
 }

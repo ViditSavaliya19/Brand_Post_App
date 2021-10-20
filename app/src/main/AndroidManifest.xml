@@ -15,6 +15,17 @@
         android:theme="@style/Theme.Brand_post"
         tools:targetApi="n">
         <activity
+            android:name=".Activity.Login_Activity"
+            android:exported="true"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Brand_post.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Activity.Business_edit"
             android:exported="true" />
         <activity
@@ -26,11 +37,7 @@
         <activity
             android:name=".Activity.SpleshActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.post_rv"

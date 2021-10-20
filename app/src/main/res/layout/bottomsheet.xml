@@ -4,13 +4,41 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    //settings
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:id="@+id/settings_linera"
+        android:layout_height="100dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/call" />
+
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/email" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/call" />
+
+    </LinearLayout>
+
     //post
 
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_view"/>
+        android:layout_height="match_parent" />
 
 
     //Font View
