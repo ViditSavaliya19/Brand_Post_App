@@ -54,7 +54,7 @@ public class Dashbord_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashbord_, container, false);
 
-
+        date15.clear();
         setDate();
 
         filter_date_cate.clear();
@@ -173,8 +173,5 @@ public class Dashbord_Fragment extends Fragment {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
+
 }

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.brand_post.Util.Model.Cate_model;
+import com.example.brand_post.Util.Model.Data.Example;
+import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Model.PostModel;
 import com.example.brand_post.Util.Model.Sub_Model;
 
@@ -153,17 +155,42 @@ public class Constant {
         return sub_modelList1;
     }
 
+//Registration =================================
+
+    public void Registration(Model_Ragister model_ragister)
+    {
+
+
+        Api_Inter api_inter=Api.getData().create(Api_Inter.class);
+        api_inter.getRagi(model_ragister.getName(),model_ragister.getEmail(),model_ragister.getPassword(),model_ragister.getBusiness_name(),model_ragister.getProfile_image(),model_ragister.getMobile(),model_ragister.getPlan()).enqueue(new Callback<Model_Ragister>() {
+            @Override
+            public void onResponse(Call<Model_Ragister> call, Response<Model_Ragister> response) {
+
+                Model_Ragister model_ragister1=response.body();
+                Log.e("TAG", "onResponse: Registration "+response.raw() );
+            }
+
+            @Override
+            public void onFailure(Call<Model_Ragister> call, Throwable t) {
+                Log.e("TAG", "onFailure: "+t.getMessage() );
+            }
+        });
+    }
+
+
 // Shard pref ================================
 
 
-    public void Pref(Activity activity, String name, String degi, String num, byte[] image)
+    public void Pref(Activity activity, String name, String degi ,String num)
     {
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("Name",name);
+//        editor.putString("Email",email);
+//        editor.putString("Password",password);
         editor.putString("Business",degi);
         editor.putString("mobile",num);
-        editor.putString("image", Arrays.toString(image));
+//        editor.putString("image", Arrays.toString(image));
         editor.commit();
     }
 
@@ -175,7 +202,8 @@ public class Constant {
         list.add(sharedPreferences.getString("Name",null));
         list.add(sharedPreferences.getString("Business",null));
         list.add(sharedPreferences.getString("mobile",null));
-        list.add(sharedPreferences.getString("image",null));
+//        list.add(sharedPreferences.getString("Email",null));
+//        list.add(sharedPreferences.getString("Password",null));
 
         return list;
     }

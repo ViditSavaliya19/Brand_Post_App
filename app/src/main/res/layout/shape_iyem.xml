@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/shape"
-    android:gravity="bottom|center"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="bottom|center">
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/top_design"
+        android:background="@drawable/shape"
+  />
+
+    <FrameLayout
         android:layout_width="340dp"
         android:layout_height="30dp"
-        android:gravity="center"
-        android:background="@drawable/round">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+917046632531"
-            android:textSize="10dp"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hello@gmail.com"
-            android:layout_marginLeft="20dp"
-            android:textSize="10dp"
-            android:textColor="@color/white"/>
-
-    </LinearLayout>
+        android:layout_gravity="bottom|center">
 
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bottom_design"
+            android:src="@drawable/round"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+917046632531"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/email_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="hello@gmail.com"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+
+</FrameLayout>

@@ -1,19 +1,18 @@
 package com.example.brand_post.Activity;
 
-import static com.example.brand_post.Activity.SpleshActivity.postModelList;
-import static com.example.brand_post.Util.Constant.imageLink;
+import static com.example.brand_post.Activity.Post_list.filter_post_List1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,16 +22,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.brand_post.Adapter.Color_Adapter;
 import com.example.brand_post.Adapter.FontStyleAdapter;
 import com.example.brand_post.Adapter.Post_Adapter;
-import com.example.brand_post.MTouch.MultiTouchListener;
+import com.example.brand_post.Util.MTouch.MultiTouchListener;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
-import com.example.brand_post.Util.Model.PostModel;
-import com.example.brand_post.Util.Stickers.StickerView;
+import com.example.brand_post.Util.Stickers.StickerImageView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class Editing_post extends AppCompatActivity {
     private ImageView bg;
     private GridView grid_fontstyle;
     private Typeface typeface;
-    private TextView title_text;
+    public static TextView title_text;
     private String text123;
     private BottomSheetDialog bottomSheetDialog;
     static int a = 20;
@@ -58,17 +56,23 @@ public class Editing_post extends AppCompatActivity {
     private String id;
     private RecyclerView rv_view;
     private Constant c1;
-    List<PostModel> filter_post_List = new ArrayList<PostModel>();
     private LinearLayout f_setting;
     public static ImageView image;
     private FrameLayout framlayout;
-    private StickerView mCurrentView;
     private ImageView adda_Image, img_logo;
     private String post_image;
     private List<String> list = new ArrayList<String>();
 
     private Constant constant;
     private Bitmap bmp;
+    private List<String> preflist = new ArrayList<String>();
+    private TextView mobile;
+    private TextView email_txt;
+    private ImageView setting_image;
+    private LinearLayout settings_linera;
+    private ImageView fram_color;
+    public static ImageView bottom_design, top_design;
+    private StickerImageView stickerImageView;
 
 
     @Override
@@ -77,33 +81,34 @@ public class Editing_post extends AppCompatActivity {
         setContentView(R.layout.activity_editing_post);
 
         post_image = getIntent().getStringExtra("post");
-        filter_post_List = getIntent().getParcelableExtra("list_post");
         c1 = new Constant();
         showBottomSheetDialog();
 
         id = getIntent().getStringExtra("value_position");
 //        Toast.makeText(Editing_post.this, "" + id, Toast.LENGTH_SHORT).show();
-        constant = new Constant();
+//        constant = new Constant();
         initView();
 
-        if (!(list = constant.Read_Pref(Editing_post.this)).isEmpty()) {
-
-            if (list.get(3) != null) {
-                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
-                byte[] array = new byte[split.length];
-                for (int i = 0; i < split.length; i++) {
-                    array[i] = Byte.parseByte(split[i]);
-                }
-
-                 bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
-                title_text.setText(list.get(0));
-            }
-        }
+//        if (!(list = constant.Read_Pref(Editing_post.this)).isEmpty()) {
+//
+//            if (list.get(3) != null) {
+//                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
+//                byte[] array = new byte[split.length];
+//                for (int i = 0; i < split.length; i++) {
+//                    array[i] = Byte.parseByte(split[i]);
+//                }
+//
+//                 bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
+//                title_text.setText(list.get(0));
+//            }
+//        }
 
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
+
         bg = findViewById(R.id.bg);
         image = findViewById(R.id.image);
         img_logo = findViewById(R.id.img_logo);
@@ -118,24 +123,58 @@ public class Editing_post extends AppCompatActivity {
         title_text.setOnTouchListener(new MultiTouchListener());
         text_edit = findViewById(R.id.text_edit);
         adda_Image = findViewById(R.id.adda_Image);
-//        Rv_Post();
-
-
-        framlayout.setOnTouchListener(new View.OnTouchListener() {
+        mobile = findViewById(R.id.mobile);
+        top_design = findViewById(R.id.top_design);
+        setting_image = findViewById(R.id.setting_image);
+        email_txt = findViewById(R.id.email_txt);
+        fram_color = findViewById(R.id.fram_color);
+        bottom_design = findViewById(R.id.bottom_design);
+        stickerImageView = new StickerImageView(Editing_post.this);
+        stickerImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (mCurrentView != null)
-                    mCurrentView.setInEdit(false);
+                stickerImageView.setControlItemsHidden(false);
                 return false;
             }
         });
 
+
+//        preflist = constant.Read_Pref(this);
+        fram_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Rv_Color();
+                settings_linera.setVisibility(View.GONE);
+                rv_view.setVisibility(View.VISIBLE);
+                f_setting.setVisibility(View.GONE);
+                bottomSheetDialog.show();
+            }
+        });
+
+        setting_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.show();
+                settings_linera.setVisibility(View.VISIBLE);
+                rv_view.setVisibility(View.GONE);
+                f_setting.setVisibility(View.GONE);
+            }
+        });
+
+//        title_text.setText(preflist.get(0));
+//        email_txt.setText(preflist.get(2));
+//        mobile.setText(preflist.get(1));
+
+
         adda_Image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stickerImageView.setImageResource(R.drawable.ad_congratulations);
 
-                img_logo.setImageBitmap(bmp);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                framlayout.addView(stickerImageView, layoutParams);
 
+//                img_logo.setImageBitmap(bmp);
 //                addStrickerView(R.drawable.download);
 //                Intent intent = new Intent(Intent.ACTION_PICK,
 //                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -154,8 +193,7 @@ public class Editing_post extends AppCompatActivity {
         framlayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (mCurrentView != null)
-                    mCurrentView.setInEdit(false);
+                stickerImageView.setControlItemsHidden(true);
                 return false;
             }
         });
@@ -167,8 +205,10 @@ public class Editing_post extends AppCompatActivity {
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                f_setting.setVisibility(View.GONE);
+                Rv_Post();
+                settings_linera.setVisibility(View.GONE);
                 rv_view.setVisibility(View.VISIBLE);
+                f_setting.setVisibility(View.GONE);
                 bottomSheetDialog.show();
             }
         });
@@ -181,7 +221,7 @@ public class Editing_post extends AppCompatActivity {
         rv_view = bottomSheetDialog.findViewById(R.id.rv_view);
 
         f_setting = bottomSheetDialog.findViewById(R.id.f_setting);
-
+        settings_linera = bottomSheetDialog.findViewById(R.id.settings_linera);
         grid_fontstyle = bottomSheetDialog.findViewById(R.id.grid_fontstyle);
         f_size = bottomSheetDialog.findViewById(R.id.f_size);
         m_size = bottomSheetDialog.findViewById(R.id.m_size);
@@ -251,8 +291,15 @@ public class Editing_post extends AppCompatActivity {
 //    }
 
     private void Rv_Post() {
-        Post_Adapter adapter = new Post_Adapter(Editing_post.this, filter_post_List, id);
+        Post_Adapter adapter = new Post_Adapter(Editing_post.this, filter_post_List1, id);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Editing_post.this, 3);
+        rv_view.setLayoutManager(layoutManager);
+        rv_view.setAdapter(adapter);
+    }
+
+    private void Rv_Color() {
+        Color_Adapter adapter = new Color_Adapter(Editing_post.this, getResources().getIntArray(R.array.rainbow));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Editing_post.this, LinearLayoutManager.HORIZONTAL, false);
         rv_view.setLayoutManager(layoutManager);
         rv_view.setAdapter(adapter);
     }
@@ -391,38 +438,38 @@ public class Editing_post extends AppCompatActivity {
 
     }
 
-    public void addStrickerView(int sticker) {
-        final StickerView stickerView = new StickerView(this);
-        stickerView.setImageResource(sticker);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        framlayout.addView(stickerView, layoutParams);
-        setCurrentEdit(stickerView);
-        stickerView.setOperationListener(new StickerView.OperationListener() {
-            @Override
-            public void onDeleteClick() {
-                framlayout.removeView(stickerView);
-            }
+//    public void addStrickerView(int sticker) {
+//        final StickerView stickerView = new StickerView(this);
+//        stickerView.setImageResource(sticker);
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+//        framlayout.addView(stickerView, layoutParams);
+//        setCurrentEdit(stickerView);
+//        stickerView.setOperationListener(new StickerView.OperationListener() {
+//            @Override
+//            public void onDeleteClick() {
+//                framlayout.removeView(stickerView);
+//            }
+//
+//            @Override
+//            public void onEdit(StickerView stickerView) {
+//                mCurrentView.setInEdit(false);
+//                mCurrentView = stickerView;
+//                mCurrentView.setInEdit(true);
+//            }
+//
+//            @Override
+//            public void onTop(StickerView stickerView) {
+//            }
+//        });
+//    }
 
-            @Override
-            public void onEdit(StickerView stickerView) {
-                mCurrentView.setInEdit(false);
-                mCurrentView = stickerView;
-                mCurrentView.setInEdit(true);
-            }
-
-            @Override
-            public void onTop(StickerView stickerView) {
-            }
-        });
-    }
-
-    private void setCurrentEdit(StickerView stickerView) {
-        if (mCurrentView != null) {
-            mCurrentView.setInEdit(false);
-        }
-        mCurrentView = stickerView;
-        stickerView.setInEdit(true);
-    }
+//    private void setCurrentEdit(StickerView stickerView) {
+//        if (mCurrentView != null) {
+//            mCurrentView.setInEdit(false);
+//        }
+//        mCurrentView = stickerView;
+//        stickerView.setInEdit(true);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

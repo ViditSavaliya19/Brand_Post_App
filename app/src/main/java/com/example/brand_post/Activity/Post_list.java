@@ -22,7 +22,7 @@ import java.util.List;
 public class Post_list extends AppCompatActivity {
 
     private RecyclerView rv_post;
-    List<PostModel> filter_post_List1 = new ArrayList<PostModel>();
+    public  static  List<PostModel> filter_post_List1 = new ArrayList<PostModel>();
     private LinearLayout gujarat;
     private LinearLayout english,hindi;
 

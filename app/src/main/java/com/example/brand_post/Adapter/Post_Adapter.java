@@ -38,7 +38,7 @@ public class Post_Adapter extends RecyclerView.Adapter<Post_Adapter.viewData> {
     @NonNull
     @Override
     public viewData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.edit_bg_item, parent, false);
         return new viewData(view);
     }
 
@@ -67,15 +67,13 @@ public class Post_Adapter extends RecyclerView.Adapter<Post_Adapter.viewData> {
     }
 
     class viewData extends RecyclerView.ViewHolder {
-        private final TextView txt;
         private final ImageView image_view;
         private final CardView card;
 
         public viewData(@NonNull View itemView) {
             super(itemView);
-            txt = itemView.findViewById(R.id.txt);
-            card = itemView.findViewById(R.id.card);
-            image_view = itemView.findViewById(R.id.image_view);
+            card = itemView.findViewById(R.id.card_edt);
+            image_view = itemView.findViewById(R.id.image_view_edt);
         }
     }
 }

@@ -44,16 +44,16 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
     @Override
     public void onBindViewHolder(@NonNull viewData holder, @SuppressLint("RecyclerView") int position) {
         holder.txt.setText(list.get(position).getName());
+        holder.date_txt.setText(list.get(position).getDate());
+        Glide.with(activity).load(Constant.ThumbLink + "" + list.get(position).getImage()).into(holder.image_view);
 
-        Glide.with(activity).load(Constant.ThumbLink +""+list.get(position).getImage()).into(holder.image_view);
-
-        Log.e(TAG, "onBindViewHolder: "+Constant.ThumbLink +""+list.get(position).getImage());
+        Log.e(TAG, "onBindViewHolder: " + Constant.ThumbLink + "" + list.get(position).getImage());
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(activity, Post_list.class);
-                intent.putExtra("value_position",list.get(position).getId().toString());
+                Intent intent = new Intent(activity, Post_list.class);
+                intent.putExtra("value_position", list.get(position).getId().toString());
                 activity.startActivity(intent);
 
             }
@@ -71,7 +71,6 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
 //        }
 
 
-
     }
 
     @Override
@@ -80,14 +79,15 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
     }
 
     class viewData extends RecyclerView.ViewHolder {
-        private final TextView txt;
+        private final TextView txt, date_txt;
         private final ImageView image_view;
         private final CardView card;
 
         public viewData(@NonNull View itemView) {
             super(itemView);
             txt = itemView.findViewById(R.id.txt);
-            card=itemView.findViewById(R.id.card);
+            card = itemView.findViewById(R.id.card);
+            date_txt = itemView.findViewById(R.id.date_txt);
             image_view = itemView.findViewById(R.id.image_view);
         }
     }
