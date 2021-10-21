@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Brand_post"
         tools:targetApi="n">
         <activity
+            android:name=".Activity.Register_Activity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Login_Activity"
             android:exported="true"
             android:label="@string/title_activity_login"
@@ -36,9 +39,7 @@
             android:exported="true" />
         <activity
             android:name=".Activity.SpleshActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.post_rv"
             android:exported="true" />

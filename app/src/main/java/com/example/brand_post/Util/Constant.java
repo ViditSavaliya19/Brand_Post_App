@@ -167,7 +167,9 @@ public class Constant {
             public void onResponse(Call<Model_Ragister> call, Response<Model_Ragister> response) {
 
                 Model_Ragister model_ragister1=response.body();
-                Log.e("TAG", "onResponse: Registration "+response.raw() );
+
+
+                Log.e("TAG", "onResponse: Registration "+response.errorBody());
             }
 
             @Override
@@ -181,16 +183,17 @@ public class Constant {
 // Shard pref ================================
 
 
-    public void Pref(Activity activity, String name, String degi ,String num)
+    public void Pref(Activity activity,Model_Ragister model_ragister)
     {
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("Name",name);
-//        editor.putString("Email",email);
-//        editor.putString("Password",password);
-        editor.putString("Business",degi);
-        editor.putString("mobile",num);
-//        editor.putString("image", Arrays.toString(image));
+        editor.putString("Name",model_ragister.getName());
+        editor.putString("Email",model_ragister.getEmail());
+        editor.putString("Password",model_ragister.getPassword());
+        editor.putString("Business",model_ragister.getBusiness_name());
+        editor.putString("mobile",model_ragister.getMobile());
+        editor.putString("image",model_ragister.getProfile_image());
+        editor.putString("plan",model_ragister.getPlan());
         editor.commit();
     }
 
@@ -200,10 +203,12 @@ public class Constant {
         List<String> list=new ArrayList<>();
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
         list.add(sharedPreferences.getString("Name",null));
+        list.add(sharedPreferences.getString("Email",null));
+        list.add(sharedPreferences.getString("Password",null));
         list.add(sharedPreferences.getString("Business",null));
         list.add(sharedPreferences.getString("mobile",null));
-//        list.add(sharedPreferences.getString("Email",null));
-//        list.add(sharedPreferences.getString("Password",null));
+        list.add(sharedPreferences.getString("image",null));
+        list.add(sharedPreferences.getString("plan",null));
 
         return list;
     }

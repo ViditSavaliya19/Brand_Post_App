@@ -85,7 +85,7 @@ public class Business_edit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                constant.Pref(Business_edit.this, name_edt.getText().toString(), business_edt.getText().toString(), number_edt.getText().toString(), image);
-                constant.Pref(Business_edit.this,name_edt.getText().toString(),business_edt.getText().toString(),number_edt.getText().toString());
+//                constant.Pref(Business_edit.this,name_edt.getText().toString(),business_edt.getText().toString(),number_edt.getText().toString());
                 Toast.makeText(Business_edit.this, "Success Update", Toast.LENGTH_SHORT).show();
             }
         });
