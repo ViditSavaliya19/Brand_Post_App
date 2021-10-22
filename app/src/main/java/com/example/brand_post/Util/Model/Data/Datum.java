@@ -1,37 +1,26 @@
 
 package com.example.brand_post.Util.Model.Data;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class Datum {
 
-    @SerializedName("uid")
-    @Expose
+
     private String uid;
-    @SerializedName("name")
-    @Expose
+
     private String name;
-    @SerializedName("email")
-    @Expose
+
     private String email;
-    @SerializedName("password")
-    @Expose
+
     private String password;
-    @SerializedName("business_name")
-    @Expose
+
     private String businessName;
-    @SerializedName("profile_image")
-    @Expose
+
     private String profileImage;
-    @SerializedName("mobile")
-    @Expose
+
     private String mobile;
-    @SerializedName("plan")
-    @Expose
+
     private String plan;
-    @SerializedName("created_at")
-    @Expose
+
     private String createdAt;
 
     public String getUid() {

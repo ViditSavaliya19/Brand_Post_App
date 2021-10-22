@@ -47,7 +47,7 @@ public class Business_edit extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_save);
         constant = new Constant();
 
-        list= constant.Read_Pref(Business_edit.this);
+//        list= constant.Read_Pref(Business_edit.this);
 
         name_edt.setText(list.get(0));
         business_edt.setText(list.get(1));
