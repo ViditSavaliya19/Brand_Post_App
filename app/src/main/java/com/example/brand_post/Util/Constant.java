@@ -198,19 +198,19 @@ public class Constant {
     }
 
 
-    public List<String> Read_Pref(Activity activity)
+    public Model_Ragister Read_Pref(Activity activity)
     {
-        List<String> list=new ArrayList<>();
+        Model_Ragister model_ragister=new Model_Ragister();
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
-        list.add(sharedPreferences.getString("Name",null));
-        list.add(sharedPreferences.getString("Email",null));
-        list.add(sharedPreferences.getString("Password",null));
-        list.add(sharedPreferences.getString("Business",null));
-        list.add(sharedPreferences.getString("mobile",null));
-        list.add(sharedPreferences.getString("image",null));
-        list.add(sharedPreferences.getString("plan",null));
+        model_ragister.setName(sharedPreferences.getString("Name",null));
+        model_ragister.setEmail(sharedPreferences.getString("Email",null));
+        model_ragister.setPassword(sharedPreferences.getString("Password",null));
+        model_ragister.setBusiness_name(sharedPreferences.getString("Business",null));
+        model_ragister.setMobile(sharedPreferences.getString("mobile",null));
+        model_ragister.setProfile_image(sharedPreferences.getString("image",null));
+        model_ragister.setPlan(sharedPreferences.getString("plan",null));
 
-        return list;
+        return model_ragister;
     }
 
 

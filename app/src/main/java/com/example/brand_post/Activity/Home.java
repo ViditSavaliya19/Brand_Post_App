@@ -64,4 +64,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+
+
 }

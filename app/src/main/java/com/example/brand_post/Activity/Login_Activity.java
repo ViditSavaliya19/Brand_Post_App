@@ -17,6 +17,7 @@ import com.example.brand_post.Util.Api;
 import com.example.brand_post.Util.Api_Inter;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Data.Example;
+import com.example.brand_post.Util.Model.Model_Ragister;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class Login_Activity extends AppCompatActivity {
     private EditText lPassword_edt;
     private TextView l_ragister;
     private List<String> list_data = new ArrayList<>();
+    Constant constant = new Constant();
+    Model_Ragister model_ragister12 = new Model_Ragister();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,16 @@ public class Login_Activity extends AppCompatActivity {
 
                 model_ragister1 = response.body();
 
-                    startActivity(new Intent(Login_Activity.this, Home.class));
+                model_ragister12.setEmail(model_ragister1.getData().get(0).getEmail());
+                model_ragister12.setName(model_ragister1.getData().get(0).getName());
+                model_ragister12.setPassword(model_ragister1.getData().get(0).getPassword());
+                model_ragister12.setMobile(model_ragister1.getData().get(0).getMobile());
+                model_ragister12.setPlan(model_ragister1.getData().get(0).getPlan());
+                model_ragister12.setBusiness_name(model_ragister1.getData().get(0).getBusinessName());
+                model_ragister12.setProfile_image(model_ragister1.getData().get(0).getProfileImage());
+                constant.Pref(Login_Activity.this,model_ragister12);
+
+                startActivity(new Intent(Login_Activity.this, Home.class));
 
 
                 Log.e("TAG", "onResponse: Registration " + model_ragister1.getMsg());
@@ -101,10 +113,17 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences sharedPreferences=getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        if(sharedPreferences.getString("email",null).isEmpty() && sharedPreferences.getString("password",null).isEmpty())
-        {
-            startActivity(new Intent(Login_Activity.this,Home.class));
+
+        model_ragister12 = constant.Read_Pref(Login_Activity.this);
+        if (model_ragister12.getEmail() == null) {
+        } else {
+            startActivity(new Intent(Login_Activity.this, Home.class));
+
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+            finishAffinity();
     }
 }

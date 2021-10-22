@@ -14,6 +14,11 @@ public class Model_Ragister {
         this.plan = plan;
     }
 
+    public Model_Ragister() {
+
+
+    }
+
     public String getName() {
         return name;
     }
