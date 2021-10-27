@@ -21,6 +21,14 @@
             android:textColor="@color/backgroung"
             android:textSize="30dp"
             android:layout_marginBottom="50dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/r_select_Image_circle"
+            android:layout_gravity="center"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="60dp"

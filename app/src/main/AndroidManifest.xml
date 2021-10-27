@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Brand_post"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="n">
         <activity
             android:name=".Activity.Register_Activity"

@@ -3,18 +3,27 @@ package com.example.brand_post.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
+import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Model.Data.Example;
 import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Model.PostModel;
 import com.example.brand_post.Util.Model.Sub_Model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -157,18 +166,25 @@ public class Constant {
 
 //Registration =================================
 
-    public void Registration(Model_Ragister model_ragister)
+    public void Registration(Model_Ragister model_ragister, String file, Bitmap bitmap)
     {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+
+        Log.e("TAG", "Registration: Byte Array ===="+imageString );
 
 
         Api_Inter api_inter=Api.getData().create(Api_Inter.class);
-        api_inter.getRagi(model_ragister.getName(),model_ragister.getEmail(),model_ragister.getPassword(),model_ragister.getBusiness_name(),model_ragister.getProfile_image(),model_ragister.getMobile(),model_ragister.getPlan()).enqueue(new Callback<Model_Ragister>() {
+        api_inter.getRagi(model_ragister.getName(),model_ragister.getEmail(),model_ragister.getPassword(),model_ragister.getBusiness_name(),imageString,model_ragister.getMobile(),model_ragister.getPlan()).enqueue(new Callback<Model_Ragister>() {
             @Override
             public void onResponse(Call<Model_Ragister> call, Response<Model_Ragister> response) {
 
                 Model_Ragister model_ragister1=response.body();
-
-
+             
                 Log.e("TAG", "onResponse: Registration "+response.errorBody());
             }
 

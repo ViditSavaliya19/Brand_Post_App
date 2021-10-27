@@ -4,24 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Fragments.Dashbord_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/backgroung"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:background="@drawable/home_profile_shape"
         android:elevation="10dp">
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:civ_border_color="#FF8080"
+            app:civ_border_width="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/user"/>
+
+        <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="Brand Post"
-            android:textColor="@color/bg"
-            android:textSize="20dp" />
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                android:text="Brand Post"
+                android:textColor="#B5B5B5"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Fenil Virani"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:tint="#939393"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_baseline_notifications_24"/>
 
     </LinearLayout>
 
