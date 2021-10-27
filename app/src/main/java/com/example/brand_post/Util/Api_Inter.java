@@ -33,13 +33,9 @@ public interface Api_Inter {
 
     @FormUrlEncoded
     @POST("postapi.php/")
-    Call<Model_Ragister> getRagi(@Field("name")String name,@Field("email")String email,@Field("password")String password,@Field("business_name")String b_name,@Field("profile_image")String profile,@Field("mobile")String mobile,@Field("plan")String plan);
+    Call<Model_Ragister> getRagi(@Field("name") String  name,@Field("email")String  email,@Field("password")String  password,@Field("business_name")String  b_name,@Field("profile_image")String  profile,@Field("mobile")String  mobile,@Field("plan")String  plan);
 
     @FormUrlEncoded
     @POST("loginapi.php")
     Call<Example>getLoginData(@Field("email")String email, @Field("password")String password);
-
-    @Multipart
-    @POST("upload")
-    Call<RequestBody> uploadImage(@Part MultipartBody.Part part, @Part("somedata") RequestBody requestBody);
 }

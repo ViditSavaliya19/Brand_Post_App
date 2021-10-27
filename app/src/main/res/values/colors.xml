@@ -38,4 +38,7 @@
         <item>@color/violet</item>
         <item>@color/magenta</item>
     </array>
+
+
+    <color name="primary">#ffebeb</color>
 </resources>

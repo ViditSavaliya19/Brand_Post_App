@@ -1,5 +1,6 @@
 package com.example.brand_post.Util;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -10,9 +11,10 @@ public class Api {
 
     public static Retrofit getData() {
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
                 .build();
         return retrofit;
     }
