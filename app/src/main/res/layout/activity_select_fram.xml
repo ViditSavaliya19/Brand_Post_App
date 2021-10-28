@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Activity.Post_list">
-
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Select_Fram">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
@@ -32,8 +31,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="350dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/s_img"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/recommedd"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,13 +69,13 @@
             android:padding="5dp">
 
             <LinearLayout
-                android:id="@+id/gujarat"
+                android:id="@+id/s_gujarat"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_bg">
 
                 <TextView
-                    android:id="@+id/gujarat_txt"
+                    android:id="@+id/s_gujarat_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -63,13 +86,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/hindi"
+                android:id="@+id/s_hindi"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/hindi_txt"
+                    android:id="@+id/s_hindi_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -81,13 +104,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/english"
+                android:id="@+id/s_english"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/english_txt"
+                    android:id="@+id/s_english_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -100,9 +123,11 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_post"
+            android:id="@+id/s_rv_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp" />
+
+
     </LinearLayout>
 </LinearLayout>

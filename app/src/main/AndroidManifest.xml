@@ -10,11 +10,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Brand_post"
-        android:requestLegacyExternalStorage="true"
         tools:targetApi="n">
+        <activity
+            android:name=".Activity.Select_Fram"
+            android:exported="true" />
         <activity
             android:name=".Activity.Register_Activity"
             android:exported="true" />
@@ -22,9 +25,7 @@
             android:name=".Activity.Login_Activity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Brand_post.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.Brand_post.NoActionBar"></activity>
         <activity
             android:name=".Activity.Business_edit"
             android:exported="true" />
@@ -42,7 +43,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activity.post_rv"

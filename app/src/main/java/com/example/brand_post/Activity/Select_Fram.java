@@ -1,6 +1,7 @@
 package com.example.brand_post.Activity;
 
 import static com.example.brand_post.Activity.SpleshActivity.postModelList;
+import static com.example.brand_post.Util.Constant.imageLink;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +12,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.brand_post.Adapter.List_Post_Adapter;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.PostModel;
@@ -22,29 +25,36 @@ import com.example.brand_post.Util.Model.PostModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Post_list extends AppCompatActivity {
+public class Select_Fram extends AppCompatActivity {
 
-    private RecyclerView rv_post;
-    public static List<PostModel> filter_post_List1 = new ArrayList<PostModel>();
+    private RecyclerView s_rv_post;
+    public List<PostModel>s_filter_post_List1 = new ArrayList<PostModel>();
     private LinearLayout gujarat;
     private LinearLayout english, hindi;
     private TextView gujarat_txt, hindi_txt, english_txt;
-    private String n;
+    public static ImageView s_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_list);
-        n = getIntent().getStringExtra("value_position");
-        gujarat = findViewById(R.id.gujarat);
-        gujarat_txt = findViewById(R.id.gujarat_txt);
-        hindi_txt = findViewById(R.id.hindi_txt);
-        english_txt = findViewById(R.id.english_txt);
-        english = findViewById(R.id.english);
-        hindi = findViewById(R.id.hindi);
+        setContentView(R.layout.activity_select_fram);
 
+        String n = getIntent().getStringExtra("value_position");
+        String link = getIntent().getStringExtra("post");
+        //ID ====
+        s_img=findViewById(R.id.s_img);
+        Glide.with(Select_Fram.this)
+                .load(link)
+                .centerCrop()
+                .into(s_img);
 
-        rv_post = findViewById(R.id.rv_post);
+        s_rv_post=findViewById(R.id.s_rv_post);
+        gujarat = findViewById(R.id.s_gujarat);
+        gujarat_txt = findViewById(R.id.s_gujarat_txt);
+        hindi_txt = findViewById(R.id.s_hindi_txt);
+        english_txt = findViewById(R.id.s_english_txt);
+        english = findViewById(R.id.s_english);
+        hindi = findViewById(R.id.s_hindi);
 
         gujarat.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -56,8 +66,8 @@ public class Post_list extends AppCompatActivity {
                 english.setBackground(getDrawable(R.drawable.tab_bg));
                 hindi_txt.setTextColor(getColor(R.color.primary4));
                 english_txt.setTextColor(getColor(R.color.primary4));
-                filter_post_List1 = Guj_Filter_Cate(n, "0");
-                Recycler_post(filter_post_List1);
+                s_filter_post_List1 = Guj_Filter_Cate(n, "0");
+                Recycler_post(s_filter_post_List1);
             }
         });
 
@@ -72,8 +82,8 @@ public class Post_list extends AppCompatActivity {
                 english.setBackground(getDrawable(R.drawable.tab_bg));
                 gujarat_txt.setTextColor(getColor(R.color.primary4));
                 english_txt.setTextColor(getColor(R.color.primary4));
-                filter_post_List1 = Guj_Filter_Cate(n, "1");
-                Recycler_post(filter_post_List1);
+                s_filter_post_List1 = Guj_Filter_Cate(n, "1");
+                Recycler_post(s_filter_post_List1);
             }
         });
         english.setOnClickListener(new View.OnClickListener() {
@@ -86,28 +96,28 @@ public class Post_list extends AppCompatActivity {
                 hindi.setBackground(getDrawable(R.drawable.tab_bg));
                 gujarat_txt.setTextColor(getColor(R.color.primary4));
                 hindi_txt.setTextColor(getColor(R.color.primary4));
-                filter_post_List1 = Guj_Filter_Cate(n, "2");
-                Recycler_post(filter_post_List1);
+                s_filter_post_List1 = Guj_Filter_Cate(n, "2");
+                Recycler_post(s_filter_post_List1);
             }
         });
-        filter_post_List1 = Guj_Filter_Cate(n, "0");
-        Recycler_post(filter_post_List1);
 
+        s_filter_post_List1 = Guj_Filter_Cate(n, "0");
+        Recycler_post(s_filter_post_List1);
     }
+
 
 
     void Recycler_post(List<PostModel> filter_post_List1) {
-        List_Post_Adapter list_post_adapter = new List_Post_Adapter(Post_list.this, filter_post_List1,n);
+        List_Post_Adapter list_post_adapter = new List_Post_Adapter(Select_Fram.this, filter_post_List1,1);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
-        rv_post.setLayoutManager(layoutManager);
-        rv_post.setAdapter(list_post_adapter);
+        s_rv_post.setLayoutManager(layoutManager);
+        s_rv_post.setAdapter(list_post_adapter);
     }
-
 
     public List<PostModel> Guj_Filter_Cate(String n, String s) {
         List<PostModel> filter_post_List = new ArrayList<PostModel>();
         for (int i = 0; i < postModelList.size(); i++) {
-            Toast.makeText(Post_list.this, "" + postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Select_Fram.this, "" + postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
             if (postModelList.get(i).gets_cate().equals(n)) {
                 if (postModelList.get(i).getlangauge().equals(s)) {
 
