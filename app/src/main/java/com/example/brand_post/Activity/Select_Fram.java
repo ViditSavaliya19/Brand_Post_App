@@ -5,9 +5,13 @@ import static com.example.brand_post.Util.Constant.imageLink;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,27 +32,48 @@ import java.util.List;
 public class Select_Fram extends AppCompatActivity {
 
     private RecyclerView s_rv_post;
-    public List<PostModel>s_filter_post_List1 = new ArrayList<PostModel>();
+    public List<PostModel> s_filter_post_List1 = new ArrayList<PostModel>();
     private LinearLayout gujarat;
     private LinearLayout english, hindi;
     private TextView gujarat_txt, hindi_txt, english_txt;
     public static ImageView s_img;
+    private ImageView s_back_btn;
+    private CardView s_image_card;
+    public static Bitmap bitmap_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_fram);
 
+        s_back_btn = findViewById(R.id.s_back_btn);
+        s_image_card = findViewById(R.id.s_image_card);
+        s_image_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapDrawable drawable = (BitmapDrawable)s_img.getDrawable();
+                bitmap_image = drawable.getBitmap();
+                startActivity(new Intent(Select_Fram.this, Edit_post.class));
+            }
+        });
+
+
+        s_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         String n = getIntent().getStringExtra("value_position");
         String link = getIntent().getStringExtra("post");
         //ID ====
-        s_img=findViewById(R.id.s_img);
+        s_img = findViewById(R.id.s_img);
         Glide.with(Select_Fram.this)
                 .load(link)
                 .centerCrop()
                 .into(s_img);
 
-        s_rv_post=findViewById(R.id.s_rv_post);
+        s_rv_post = findViewById(R.id.s_rv_post);
         gujarat = findViewById(R.id.s_gujarat);
         gujarat_txt = findViewById(R.id.s_gujarat_txt);
         hindi_txt = findViewById(R.id.s_hindi_txt);
@@ -106,9 +131,8 @@ public class Select_Fram extends AppCompatActivity {
     }
 
 
-
     void Recycler_post(List<PostModel> filter_post_List1) {
-        List_Post_Adapter list_post_adapter = new List_Post_Adapter(Select_Fram.this, filter_post_List1,1);
+        List_Post_Adapter list_post_adapter = new List_Post_Adapter(Select_Fram.this, filter_post_List1, 1);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
         s_rv_post.setLayoutManager(layoutManager);
         s_rv_post.setAdapter(list_post_adapter);

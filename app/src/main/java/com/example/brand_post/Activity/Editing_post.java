@@ -30,6 +30,7 @@ import com.example.brand_post.Adapter.Post_Adapter;
 import com.example.brand_post.Util.MTouch.MultiTouchListener;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
+import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Stickers.StickerImageView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -73,6 +74,7 @@ public class Editing_post extends AppCompatActivity {
     private ImageView fram_color;
     public static ImageView bottom_design, top_design;
     private StickerImageView stickerImageView;
+    private Model_Ragister model=new Model_Ragister();
 
 
     @Override
@@ -85,23 +87,10 @@ public class Editing_post extends AppCompatActivity {
         showBottomSheetDialog();
 
         id = getIntent().getStringExtra("value_position");
-//        Toast.makeText(Editing_post.this, "" + id, Toast.LENGTH_SHORT).show();
-//        constant = new Constant();
+
         initView();
 
-//        if (!(list = constant.Read_Pref(Editing_post.this)).isEmpty()) {
-//
-//            if (list.get(3) != null) {
-//                String[] split = list.get(3).substring(1, list.get(3).length() - 1).split(", ");
-//                byte[] array = new byte[split.length];
-//                for (int i = 0; i < split.length; i++) {
-//                    array[i] = Byte.parseByte(split[i]);
-//                }
-//
-//                 bmp = BitmapFactory.decodeByteArray(array, 0, array.length);
-//                title_text.setText(list.get(0));
-//            }
-//        }
+
 
 
     }
@@ -139,7 +128,10 @@ public class Editing_post extends AppCompatActivity {
         });
 
 
-//        preflist = constant.Read_Pref(this);
+        model = constant.Read_Pref(this);
+        title_text.setText(model.getName());
+        email_txt.setText(model.getEmail());
+        mobile.setText(model.getMobile());
         fram_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,9 +153,7 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
-//        title_text.setText(preflist.get(0));
-//        email_txt.setText(preflist.get(2));
-//        mobile.setText(preflist.get(1));
+
 
 
         adda_Image.setOnClickListener(new View.OnClickListener() {
@@ -175,10 +165,7 @@ public class Editing_post extends AppCompatActivity {
                 framlayout.addView(stickerImageView, layoutParams);
 
 //                img_logo.setImageBitmap(bmp);
-//                addStrickerView(R.drawable.download);
-//                Intent intent = new Intent(Intent.ACTION_PICK,
-//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent, 0);
+//                addStrickerView(R.draw(intent, 0);
             }
         });
         text_edit.setOnClickListener(new View.OnClickListener() {

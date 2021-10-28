@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
+import com.example.brand_post.Util.Model.Model_Ragister;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -34,6 +35,7 @@ public class Business_edit extends AppCompatActivity {
     Bitmap bitmap;
     private List<String> list=new ArrayList<>();
     Constant constant;
+    private Model_Ragister model=new Model_Ragister();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +49,11 @@ public class Business_edit extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_save);
         constant = new Constant();
 
-//        list= constant.Read_Pref(Business_edit.this);
+        model= constant.Read_Pref(Business_edit.this);
 
-        name_edt.setText(list.get(0));
-        business_edt.setText(list.get(1));
-        number_edt.setText(list.get(2));
+        name_edt.setText(model.getName());
+        business_edt.setText(model.getBusiness_name());
+        number_edt.setText(model.getMobile());
 
 //        if (!(list = constant.Read_Pref(Business_edit.this)).isEmpty()) {
 //
@@ -79,14 +81,11 @@ public class Business_edit extends AppCompatActivity {
             }
         });
 
-        constant = new Constant();
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                constant.Pref(Business_edit.this, name_edt.getText().toString(), business_edt.getText().toString(), number_edt.getText().toString(), image);
-//                constant.Pref(Business_edit.this,name_edt.getText().toString(),business_edt.getText().toString(),number_edt.getText().toString());
-                Toast.makeText(Business_edit.this, "Success Update", Toast.LENGTH_SHORT).show();
+              Toast.makeText(Business_edit.this, "Success Update", Toast.LENGTH_SHORT).show();
             }
         });
     }
