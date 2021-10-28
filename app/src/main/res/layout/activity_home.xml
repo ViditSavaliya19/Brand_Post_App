@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activity.Home">
 
     <FrameLayout
@@ -17,10 +18,10 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/bg"
+        android:background="@drawable/bottom_bar_shape"
         app:itemIconTint="@drawable/tab_color"
         app:itemTextColor="@drawable/tab_color"
-        app:itemRippleColor="@color/backgroung"
+        app:itemRippleColor="@color/primary2"
         app:menu="@menu/botton_nav" />
 
 </LinearLayout>

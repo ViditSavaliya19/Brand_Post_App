@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.brand_post.Adapter.Rv_Adapter;
 import com.example.brand_post.Adapter.Rv_day_Adapter;
+import com.example.brand_post.Adapter.Rv_trending_Adapter;
 import com.example.brand_post.Adapter.SliderAdapterExample;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
@@ -135,7 +136,7 @@ public class Dashbord_Fragment extends Fragment {
     }
 
     void Recycler_view_day() {
-        Rv_day_Adapter adapter = new Rv_day_Adapter(getActivity(), filter_date_cate_days);
+        Rv_trending_Adapter adapter = new Rv_trending_Adapter(getActivity(), filter_date_cate_days);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recycler_upcoming.setLayoutManager(layoutManager);
         recycler_upcoming.setAdapter(adapter);

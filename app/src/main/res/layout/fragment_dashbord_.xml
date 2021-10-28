@@ -12,13 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:gravity="center"
-        android:background="@drawable/home_profile_shape"
-        android:elevation="10dp">
+        android:background="@drawable/home_profile_shape">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:civ_border_color="#FF8080"
+            app:civ_border_color="@color/primary2"
             app:civ_border_width="1dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -37,14 +36,14 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:gravity="center"
                 android:text="Brand Post"
-                android:textColor="#B5B5B5"
+                android:textColor="@color/primary4"
                 android:textSize="15dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Fenil Virani"
-                android:textColor="@color/black"
+                android:textColor="@color/primary3"
                 android:textSize="18dp" />
 
         </LinearLayout>
@@ -52,7 +51,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:tint="#939393"
+            android:tint="@color/primary4"
             android:layout_marginRight="10dp"
             android:src="@drawable/ic_baseline_notifications_24"/>
 
@@ -101,14 +100,18 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Upcoming Festival"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp">
+
+              <ImageView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/up_lable_home"/>
+          </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_trending"
@@ -116,15 +119,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Upcoming day's"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/trading_lable_home"/>
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_upcoming"
                 android:layout_width="match_parent"
