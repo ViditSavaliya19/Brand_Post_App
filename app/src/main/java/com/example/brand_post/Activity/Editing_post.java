@@ -74,7 +74,7 @@ public class Editing_post extends AppCompatActivity {
     private ImageView fram_color;
     public static ImageView bottom_design, top_design;
     private StickerImageView stickerImageView;
-    private Model_Ragister model=new Model_Ragister();
+    private Model_Ragister model1 = new Model_Ragister();
 
 
     @Override
@@ -89,8 +89,6 @@ public class Editing_post extends AppCompatActivity {
         id = getIntent().getStringExtra("value_position");
 
         initView();
-
-
 
 
     }
@@ -127,11 +125,13 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
+        constant = new Constant();
+        model1 = constant.Read_Pref(Editing_post.this);
+        title_text.setText(model1.getName());
+//        email_txt.setText(model1.getEmail());
+//        mobile.setText(model1.getMobile());
 
-        model = constant.Read_Pref(this);
-        title_text.setText(model.getName());
-        email_txt.setText(model.getEmail());
-        mobile.setText(model.getMobile());
+
         fram_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,8 +152,6 @@ public class Editing_post extends AppCompatActivity {
                 f_setting.setVisibility(View.GONE);
             }
         });
-
-
 
 
         adda_Image.setOnClickListener(new View.OnClickListener() {
@@ -192,11 +190,15 @@ public class Editing_post extends AppCompatActivity {
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rv_Post();
-                settings_linera.setVisibility(View.GONE);
-                rv_view.setVisibility(View.VISIBLE);
-                f_setting.setVisibility(View.GONE);
-                bottomSheetDialog.show();
+
+
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 100);
+//                Rv_Post();
+//                settings_linera.setVisibility(View.GONE);
+//                rv_view.setVisibility(View.VISIBLE);
+//                f_setting.setVisibility(View.GONE);
+//                bottomSheetDialog.show();
             }
         });
     }
@@ -463,9 +465,9 @@ public class Editing_post extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == 100) {
             Uri targetUri = data.getData();
-
+            img_logo.setImageURI(targetUri);
 
 //            Bitmap bitmap;
 //            try {

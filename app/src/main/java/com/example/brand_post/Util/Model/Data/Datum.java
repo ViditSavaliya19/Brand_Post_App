@@ -13,9 +13,9 @@ public class Datum {
 
     private String password;
 
-    private String businessName;
+    private String business_name;
 
-    private String profileImage;
+    private String profile_image;
 
     private String mobile;
 
@@ -56,19 +56,19 @@ public class Datum {
     }
 
     public String getBusinessName() {
-        return businessName;
+        return business_name;
     }
 
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
+    public void setBusinessName(String business_name) {
+        this.business_name = business_name;
     }
 
     public String getProfileImage() {
-        return profileImage;
+        return profile_image;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setProfileImage(String profile_image) {
+        this.profile_image = profile_image;
     }
 
     public String getMobile() {

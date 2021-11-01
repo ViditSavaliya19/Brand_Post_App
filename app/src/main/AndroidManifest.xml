@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Brand_post"
         tools:targetApi="n">
         <activity
+            android:name=".Activity.Custome_edit"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Payment.Package"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Edit_post"
             android:exported="true" />
         <activity

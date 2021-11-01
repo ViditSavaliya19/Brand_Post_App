@@ -11,6 +11,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -38,4 +39,8 @@ public interface Api_Inter {
     @FormUrlEncoded
     @POST("loginapi.php")
     Call<Example>getLoginData(@Field("email")String email, @Field("password")String password);
+
+    @Multipart
+    @POST("postapi.php/")
+    Call <ResponseBody> getImage(@Part MultipartBody.Part file, @Part("file") RequestBody name);
 }

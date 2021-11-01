@@ -85,6 +85,8 @@ public class Login_Activity extends AppCompatActivity {
 
                 model_ragister1 = response.body();
 
+
+
                 model_ragister12.setEmail(model_ragister1.getData().get(0).getEmail());
                 model_ragister12.setName(model_ragister1.getData().get(0).getName());
                 model_ragister12.setPassword(model_ragister1.getData().get(0).getPassword());

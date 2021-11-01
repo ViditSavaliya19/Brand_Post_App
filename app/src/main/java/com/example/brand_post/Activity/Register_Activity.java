@@ -66,7 +66,7 @@ public class Register_Activity extends AppCompatActivity {
                 Bitmap bitmap = ((BitmapDrawable) r_select_Image_circle.getDrawable()).getBitmap();
 
                 Model_Ragister model_ragister = new Model_Ragister(r_Name_edt.getText().toString().trim(), r_Email_edt.getText().toString().trim(), r_Password_edt.getText().toString(), r_Business_edt.getText().toString().trim(), "test.jpg", r_Mobile_edt.getText().toString().trim(), "0");
-                constant.Registration(model_ragister,link.toString(),bitmap);
+                constant.Registration(Register_Activity.this,model_ragister,link,bitmap);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

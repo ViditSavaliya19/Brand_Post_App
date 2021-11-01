@@ -3,10 +3,15 @@ package com.example.brand_post.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.loader.content.CursorLoader;
 
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.Cate_model;
@@ -166,8 +171,18 @@ public class Constant {
 
 //Registration =================================
 
-    public void Registration(Model_Ragister model_ragister, String file, Bitmap bitmap)
+    public void Registration(Activity activity,Model_Ragister model_ragister, Uri file1, Bitmap bitmap)
     {
+
+//        File file = new File(file1.toString());
+
+        File file = new File(FileUtil.getPath(file1, activity));
+
+        // Parsing any Media type file
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("multipart/form-data"), file.getName());
+
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -175,7 +190,7 @@ public class Constant {
         String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
 
-        Log.e("TAG", "Registration: Byte Array ===="+imageString );
+        Log.e("TAG", "Registration: Byte Array ====          "+imageString );
 
 
         Api_Inter api_inter=Api.getData().create(Api_Inter.class);
@@ -193,14 +208,44 @@ public class Constant {
                 Log.e("TAG", "onFailure: "+t.getMessage() );
             }
         });
+
+        api_inter.getImage(fileToUpload,filename).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+                if(response.isSuccessful())
+                {
+                    Log.e("TAG", "onResponse: image "+response.body() );
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.e("TAG", "onFailure: image "+t.getMessage() );
+            }
+        });
     }
 
+
+    String getRealPathFromURI(Activity activity,Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(activity, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
 
 // Shard pref ================================
 
 
     public void Pref(Activity activity,Model_Ragister model_ragister)
     {
+
+        Log.e("TAG", "Pref: "+model_ragister.getBusiness_name()+" ******  "+model_ragister.getProfile_image());
         SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("Name",model_ragister.getName());
@@ -225,6 +270,7 @@ public class Constant {
         model_ragister.setMobile(sharedPreferences.getString("mobile",null));
         model_ragister.setProfile_image(sharedPreferences.getString("image",null));
         model_ragister.setPlan(sharedPreferences.getString("plan",null));
+
 
         return model_ragister;
     }
