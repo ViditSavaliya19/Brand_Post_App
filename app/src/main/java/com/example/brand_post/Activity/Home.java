@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,8 +46,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 return true;
 
             case R.id.home:
-                secondFragment = new Custom_Fragment();
-                loadFragment(secondFragment);
+                startActivity(new Intent(Home.this,Editing_post.class));
+//                secondFragment = new Custom_Fragment();
+//                loadFragment(secondFragment);
                 return true;
 
             case R.id.settings:
