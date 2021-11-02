@@ -1,6 +1,5 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.Editing_post.image;
 import static com.example.brand_post.Activity.Select_Fram.s_img;
 import static com.example.brand_post.Util.Constant.imageLink;
 

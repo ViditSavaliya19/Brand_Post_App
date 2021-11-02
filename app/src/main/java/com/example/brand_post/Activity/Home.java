@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import com.example.brand_post.Fragments.Business_Fragment;
 import com.example.brand_post.Fragments.Custom_Fragment;
 import com.example.brand_post.Fragments.Dashbord_Fragment;
+import com.example.brand_post.Fragments.f_Save;
 import com.example.brand_post.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,13 +30,13 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        flFragment=findViewById(R.id.flFragment);
+        flFragment = findViewById(R.id.flFragment);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         firstFragment = new Dashbord_Fragment();
-         loadFragment(firstFragment);
+        loadFragment(firstFragment);
     }
 
     @Override
@@ -46,9 +47,14 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 return true;
 
             case R.id.home:
-                startActivity(new Intent(Home.this,Editing_post.class));
+                startActivity(new Intent(Home.this, Editing_post.class));
 //                secondFragment = new Custom_Fragment();
 //                loadFragment(secondFragment);
+                return true;
+
+            case R.id.Save_post:
+                f_Save f_save =new f_Save();
+                loadFragment(f_save);
                 return true;
 
             case R.id.settings:
@@ -66,7 +72,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
 
 }

@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,16 +27,24 @@ import com.example.brand_post.Adapter.SliderAdapterExample;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Sub_Model;
+import com.google.android.material.navigation.NavigationView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Dashbord_Fragment extends Fragment {
@@ -47,6 +57,10 @@ public class Dashbord_Fragment extends Fragment {
     List<String> date15 = new ArrayList<String>();
     private SliderView imageSlider;
     private RecyclerView recycler_upcoming;
+    private NavigationView nav_drawer;
+    private DrawerLayout drawer;
+    private CircleImageView circle_profile;
+    private Date[] date;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
@@ -58,12 +72,23 @@ public class Dashbord_Fragment extends Fragment {
         date15.clear();
         setDate();
 
+
         filter_date_cate.clear();
         filter_date_cate_days.clear();
 
         imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
         recycler_upcoming=view.findViewById(R.id.recycler_upcoming);
+        nav_drawer=view.findViewById(R.id.nav_drawer);
+        drawer=view.findViewById(R.id.drawer);
+        circle_profile=view.findViewById(R.id.circle_profile);
+        circle_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(GravityCompat.START
+                );
+            }
+        });
 
 
         SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity());
@@ -122,6 +147,28 @@ public class Dashbord_Fragment extends Fragment {
                 }
             }
         }
+
+        Collections.sort(filter_date_cate, new Comparator<Sub_Model>() {
+            @Override
+            public int compare(Sub_Model item1, Sub_Model item2) {
+                return item1.getDate().compareToIgnoreCase(item2.getDate());
+
+            }
+        });
+
+
+
+        Collections.sort(filter_date_cate_days, new Comparator<Sub_Model>() {
+            @Override
+            public int compare(Sub_Model item1, Sub_Model item2) {
+                return item1.getDate().compareToIgnoreCase(item2.getDate());
+
+            }
+        });
+
+
+
+
 
         Recycler_view();
         Recycler_view_day();

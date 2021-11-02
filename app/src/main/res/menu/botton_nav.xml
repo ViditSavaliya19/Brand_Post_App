@@ -9,6 +9,11 @@
         android:title="Home"
         android:icon="@drawable/ic_baseline_close_24"/>
     <item
+        android:id="@+id/Save_post"
+        android:title="Save"
+        android:icon="@drawable/ic_baseline_business_center_24"/>
+
+    <item
         android:id="@+id/settings"
         android:title="Business"
         android:icon="@drawable/ic_baseline_business_center_24"/>

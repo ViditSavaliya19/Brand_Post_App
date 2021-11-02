@@ -17,6 +17,8 @@ public class Edit_post extends AppCompatActivity {
 
     private ImageView e_img, s_save_btn;
     private BottomSheetDialog bottomSheetDialog;
+    private ImageView edit_setting_image;
+    private BottomSheetDialog bottomSheetDialog1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,14 @@ public class Edit_post extends AppCompatActivity {
         e_img = findViewById(R.id.e_img);
         e_img.setImageBitmap(Select_Fram.bitmap_image);
         s_save_btn = findViewById(R.id.s_save_btn);
+        edit_setting_image=findViewById(R.id.edit_setting_image);
+
+        edit_setting_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         s_save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +80,14 @@ public class Edit_post extends AppCompatActivity {
                 startActivity(new Intent(Edit_post.this, Package.class));
             }
         });
+
+    }
+
+    void Image_Settings()
+    {
+        bottomSheetDialog1 = new BottomSheetDialog(Edit_post.this);
+        bottomSheetDialog1.setContentView(R.layout.bottomsheet);
+
 
     }
 }

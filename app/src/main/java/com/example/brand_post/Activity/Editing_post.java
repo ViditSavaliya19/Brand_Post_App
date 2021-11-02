@@ -10,18 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.brand_post.Adapter.Color_Adapter;
@@ -34,7 +40,12 @@ import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Stickers.StickerImageView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -69,12 +80,14 @@ public class Editing_post extends AppCompatActivity {
     private List<String> preflist = new ArrayList<String>();
     private TextView mobile;
     private TextView email_txt;
-    private ImageView setting_image;
+    private ImageView setting_image, add_logo;
     private LinearLayout settings_linera;
     private ImageView fram_color;
     public static ImageView bottom_design, top_design;
     private StickerImageView stickerImageView;
     private Model_Ragister model1 = new Model_Ragister();
+    private ImageView e_save_btn;
+    private String ts;
 
 
     @Override
@@ -82,7 +95,7 @@ public class Editing_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_post);
 
-        post_image = getIntent().getStringExtra("post");
+//        post_image = getIntent().getStringExtra("post");
         c1 = new Constant();
         showBottomSheetDialog();
 
@@ -97,25 +110,35 @@ public class Editing_post extends AppCompatActivity {
     private void initView() {
 
         bg = findViewById(R.id.bg);
-        image = findViewById(R.id.image);
+        image = findViewById(R.id.image1);
         img_logo = findViewById(R.id.img_logo);
         img_logo.setOnTouchListener(new MultiTouchListener());
-        Glide.with(Editing_post.this)
-                .load(post_image)
-                .centerCrop()
-                .into(image);
+
         title_text = findViewById(R.id.title_text);
         text123 = title_text.getText().toString();
         framlayout = findViewById(R.id.framlayout);
         title_text.setOnTouchListener(new MultiTouchListener());
         text_edit = findViewById(R.id.text_edit);
-        adda_Image = findViewById(R.id.adda_Image);
+//        adda_Image = findViewById(R.id.adda_Image);
+        add_logo = findViewById(R.id.add_logo);
         mobile = findViewById(R.id.mobile);
         top_design = findViewById(R.id.top_design);
         setting_image = findViewById(R.id.setting_image);
         email_txt = findViewById(R.id.email_txt);
         fram_color = findViewById(R.id.fram_color);
         bottom_design = findViewById(R.id.bottom_design);
+        e_save_btn = findViewById(R.id.e_save_btn);
+
+        e_save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Editing_post.this, "Clicked", Toast.LENGTH_SHORT).show();
+                Bitmap finalEditedImage = getMainFrameBitmap(framlayout);
+                save_Post(finalEditedImage);
+            }
+        });
+
+
         stickerImageView = new StickerImageView(Editing_post.this);
         stickerImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -128,8 +151,8 @@ public class Editing_post extends AppCompatActivity {
         constant = new Constant();
         model1 = constant.Read_Pref(Editing_post.this);
         title_text.setText(model1.getName());
-//        email_txt.setText(model1.getEmail());
-//        mobile.setText(model1.getMobile());
+        email_txt.setText(model1.getEmail());
+        mobile.setText(model1.getMobile());
 
 
         fram_color.setOnClickListener(new View.OnClickListener() {
@@ -153,19 +176,21 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
+// STICKER VIEW ADDED CODE =====================================================================
 
-        adda_Image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stickerImageView.setImageResource(R.drawable.ad_congratulations);
 
-                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                framlayout.addView(stickerImageView, layoutParams);
-
-//                img_logo.setImageBitmap(bmp);
-//                addStrickerView(R.draw(intent, 0);
-            }
-        });
+//        adda_Image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stickerImageView.setImageResource(R.drawable.ad_congratulations);
+//
+//                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+//                framlayout.addView(stickerImageView, layoutParams);
+//
+////                img_logo.setImageBitmap(bmp);
+////                addStrickerView(R.draw(intent, 0);
+//            }
+//        });
         text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,10 +215,8 @@ public class Editing_post extends AppCompatActivity {
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 100);
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, 1);
 //                Rv_Post();
 //                settings_linera.setVisibility(View.GONE);
 //                rv_view.setVisibility(View.VISIBLE);
@@ -201,6 +224,23 @@ public class Editing_post extends AppCompatActivity {
 //                bottomSheetDialog.show();
             }
         });
+
+
+        // ADD LOGO ===========
+        add_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto, 2);
+            }
+        });
+    }
+
+    private Bitmap getMainFrameBitmap(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmap));
+        return bitmap;
     }
 
     private void showBottomSheetDialog() {
@@ -210,11 +250,56 @@ public class Editing_post extends AppCompatActivity {
         rv_view = bottomSheetDialog.findViewById(R.id.rv_view);
 
         f_setting = bottomSheetDialog.findViewById(R.id.f_setting);
+
+
+        //SETTINGS TOOLS =================================
         settings_linera = bottomSheetDialog.findViewById(R.id.settings_linera);
+        CheckBox mobile_txt_chk = bottomSheetDialog.findViewById(R.id.mobile_txt_chk);
+        CheckBox email_txt_chk = bottomSheetDialog.findViewById(R.id.email_txt_chk);
+        CheckBox business_txt_chk = bottomSheetDialog.findViewById(R.id.business_txt_chk);
+
+        mobile_txt_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mobile.setVisibility(View.VISIBLE);
+                } else {
+                    mobile.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
+        email_txt_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    email_txt.setVisibility(View.VISIBLE);
+                } else {
+                    email_txt.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
+        business_txt_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    title_text.setVisibility(View.VISIBLE);
+                } else {
+                    title_text.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
+
         grid_fontstyle = bottomSheetDialog.findViewById(R.id.grid_fontstyle);
         f_size = bottomSheetDialog.findViewById(R.id.f_size);
         m_size = bottomSheetDialog.findViewById(R.id.m_size);
         f_color = bottomSheetDialog.findViewById(R.id.f_color);
+
         f_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -465,19 +550,56 @@ public class Editing_post extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 100) {
-            Uri targetUri = data.getData();
-            img_logo.setImageURI(targetUri);
+
+        if (requestCode == 1) {
+
+            if (data != null) {
+                Uri selectedImage = data.getData();
+                image.setImageURI(selectedImage);
+            }
 
 //            Bitmap bitmap;
 //            try {
-//                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+//                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage));
+//                image.setImageBitmap(bitmap);
 //
 //            } catch (FileNotFoundException e) {
 //                // TODO Auto-generated catch block
 //                e.printStackTrace();
 //            }
+        } else if (requestCode == 2) {
+            if (data != null) {
+                Uri selectedImage = data.getData();
+                img_logo.setImageURI(selectedImage);
+            }
         }
+    }
+
+
+    private void save_Post(Bitmap imageToSave) {
+        ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()).toString();
+        File direct = new File(Environment.getExternalStorageDirectory() + "/Daily Post Maker");
+
+        if (!direct.exists()) {
+            File wallpaperDirectory = new File("/sdcard/Daily Post Maker/");
+            wallpaperDirectory.mkdirs();
+        }
+
+        File file = new File("/sdcard/Daily Post Maker/", ts + ".png");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            Toast.makeText(Editing_post.this, "Success save", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

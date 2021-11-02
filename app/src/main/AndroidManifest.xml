@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -16,7 +17,7 @@
         android:theme="@style/Theme.Brand_post"
         tools:targetApi="n">
         <activity
-            android:name=".Activity.Custome_edit"
+            android:name=".Activity.Share_Post"
             android:exported="true" />
         <activity
             android:name=".Activity.Payment.Package"
@@ -62,6 +63,16 @@
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.brand_post"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>
