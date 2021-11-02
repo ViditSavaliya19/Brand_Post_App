@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Activity.Custome_edit">
+    tools:context=".Activity.Share_Post">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,63 +48,88 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/s_image_card"
+        android:id="@+id/shr_image_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-        <FrameLayout
-            android:layout_width="380dp"
-            android:layout_height="380dp">
 
-            <ImageView
-                android:id="@+id/e_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/imagebg" />
-
-            <include layout="@layout/shape_iyem" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/shr_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/imagebg" />
 
     </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/share_image" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/bottom_bar_shape"
-        android:gravity="center">
-
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:id="@+id/c_pick_image"
-            android:src="@drawable/image_select_icon" />
+            android:id="@+id/shr_fb_l"
+            android:gravity="center">
 
-        <ImageView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fb" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shr_insta_l"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:src="@drawable/addtext" />
+            android:gravity="center">
 
-        <ImageView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/insta" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shr_whatsapp_l"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:src="@drawable/select_bg" />
+            android:gravity="center">
 
-        <ImageView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whatsapp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shr_more_l"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:src="@drawable/sricker_pen" />
+            android:gravity="center">
 
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/more_share" />
+        </LinearLayout>
     </LinearLayout>
+
+
 </LinearLayout>

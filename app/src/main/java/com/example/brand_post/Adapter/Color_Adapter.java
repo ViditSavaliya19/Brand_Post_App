@@ -1,7 +1,6 @@
 package com.example.brand_post.Adapter;
 
 import static com.example.brand_post.Activity.Editing_post.bottom_design;
-import static com.example.brand_post.Activity.Editing_post.image;
 import static com.example.brand_post.Activity.Editing_post.title_text;
 import static com.example.brand_post.Activity.Editing_post.top_design;
 import static com.example.brand_post.Util.Constant.imageLink;

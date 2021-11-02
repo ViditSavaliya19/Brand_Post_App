@@ -75,6 +75,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:padding="10dp">
 
             <HorizontalScrollView
@@ -104,7 +105,27 @@
 
             </HorizontalScrollView>
 
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/bottom_bar_shape"
+            android:padding="10dp">
+
+
+            <ImageView
+                android:id="@+id/edit_setting_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/setting_icon"
+                android:tint="@color/primary4" />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

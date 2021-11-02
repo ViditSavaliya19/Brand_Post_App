@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Activity.Editing_post">
 
 
@@ -40,7 +40,7 @@
             android:src="@drawable/edit_icon" />
 
         <ImageView
-            android:id="@+id/s_save_btn"
+            android:id="@+id/e_save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -55,22 +55,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1080px">
+            android:layout_height="1080px"
+
+            android:gravity="center">
+
 
             <FrameLayout
                 android:id="@+id/framlayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_width="380dp"
+                android:layout_height="380dp">
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/image1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/imagebg" />
 
                 <include layout="@layout/shape_iyem" />
+
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/default_logo" />
 
                 <TextView
                     android:id="@+id/title_text"
@@ -83,15 +93,17 @@
                     android:textSize="20dp" />
 
 
-                <ImageView
-                    android:id="@+id/img_logo"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/call" />
-
 
             </FrameLayout>
+
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:scaleType="centerCrop"-->
+            <!--                    android:src="@drawable/ic_launcher_background" />-->
+
+            <!--                <include layout="@layout/shape_iyem" />-->
 
 
         </LinearLayout>
@@ -100,24 +112,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:padding="10dp"
-        android:background="@drawable/bottom_bar_shape">
-
-
+        android:background="@drawable/bottom_bar_shape"
+        android:padding="10dp">
         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:id="@+id/bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/select_bg" />
+            android:src="@drawable/image_select_icon" />
 
 
         <ImageView
-            android:id="@+id/adda_Image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/image_select_icon" />
+            android:tint="@color/primary4"
+            android:id="@+id/add_logo"
+            android:src="@drawable/add_logo_icon" />
+
+
 
 
         <ImageView
@@ -141,8 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_settings_24"
-            android:tint="@color/black" />
+            android:src="@drawable/setting_icon"
+            android:tint="@color/primary4" />
 
 
     </LinearLayout>
