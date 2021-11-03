@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/s_image_card"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp">
 
             <FrameLayout
@@ -68,7 +68,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:src="@drawable/recommedd"/>
 
@@ -77,8 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/tab_bg"
             android:gravity="center"
             android:padding="5dp">
@@ -141,7 +141,7 @@
             android:id="@+id/s_rv_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="5dp" />
 
 
     </LinearLayout>
