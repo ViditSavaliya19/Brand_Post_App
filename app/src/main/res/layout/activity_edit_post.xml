@@ -54,13 +54,17 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/s_image_card"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
             <FrameLayout
-                android:layout_width="380dp"
+                android:layout_width="match_parent"
                 android:layout_height="380dp">
+
+
 
                 <ImageView
                     android:id="@+id/e_img"
@@ -68,6 +72,15 @@
                     android:layout_height="match_parent" />
 
                 <include layout="@layout/shape_iyem" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hello"
+                    android:id="@+id/title_text_ep"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textSize="18dp"/>
             </FrameLayout>
 
         </androidx.cardview.widget.CardView>
