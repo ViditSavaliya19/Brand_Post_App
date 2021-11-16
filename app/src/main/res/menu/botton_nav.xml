@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/person"
+        android:id="@+id/home_dash"
         android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/home_fw"/>
     <item
-        android:id="@+id/home"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_close_24"/>
+        android:id="@+id/edit_post"
+        android:title="Create"
+        android:icon="@drawable/edit_fw"/>
     <item
-        android:id="@+id/Save_post"
+        android:id="@+id/save_post"
         android:title="Save"
-        android:icon="@drawable/ic_baseline_business_center_24"/>
+        android:icon="@drawable/download_fw"/>
+
+<!--    <item-->
+<!--        android:id="@+id/premium"-->
+<!--        android:title="Premium"-->
+<!--        android:icon="@drawable/premium_fw"/>-->
 
     <item
         android:id="@+id/settings"
-        android:title="Business"
-        android:icon="@drawable/ic_baseline_business_center_24"/>
+        android:title="Settings"
+        android:icon="@drawable/settings_fw"/>
 </menu>

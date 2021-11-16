@@ -1,6 +1,7 @@
 package com.example.brand_post.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +10,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.brand_post.Activity.SpleshActivity;
 import com.example.brand_post.R;
+import com.example.brand_post.Util.Constant;
+import com.example.brand_post.Util.Model.Slider_data;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-public class SliderAdapterExample extends
-        SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
 
     private Context context;
 
-    String image[]={"https://chennaidesignshoppe.com/wp-content/uploads/2020/11/festival-post-design-banner-top.jpg","https://pbs.twimg.com/media/Esju0TMXcAEOvu9.jpg","https://yi-files.s3.eu-west-1.amazonaws.com/products/1000000/1000128/1679036-full.jpg"};
-//    private List<SliderItem> mSliderItems = new ArrayList<>();
+//    String image[]={"https://chennaidesignshoppe.com/wp-content/uploads/2020/11/festival-post-design-banner-top.jpg","https://pbs.twimg.com/media/Esju0TMXcAEOvu9.jpg","https://yi-files.s3.eu-west-1.amazonaws.com/products/1000000/1000128/1679036-full.jpg"};
+    private List<Slider_data> mSliderItems = new ArrayList<Slider_data>();
 
-    public SliderAdapterExample(Context context) {
+    public SliderAdapterExample(Context context, List<Slider_data> slider_list_s1) {
         this.context = context;
+        this.mSliderItems=slider_list_s1;
     }
 
 
@@ -35,9 +42,10 @@ public class SliderAdapterExample extends
     public void onBindViewHolder(SliderAdapterVH viewHolder, final int position) {
 
         Glide.with(viewHolder.itemView)
-                .load(image[position])
+                .load(Constant.imageLink+mSliderItems.get(position).getName())
                 .fitCenter()
                 .into(viewHolder.imageViewBackground);
+
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +58,7 @@ public class SliderAdapterExample extends
     @Override
     public int getCount() {
         //slider view count could be dynamic size
-        return image.length;
+        return mSliderItems.size();
     }
 
     class SliderAdapterVH extends SliderViewAdapter.ViewHolder {

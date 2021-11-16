@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class Register_Activity extends AppCompatActivity {
 
     private LinearLayout Register_btn;
     EditText r_Name_edt, r_Email_edt, r_Password_edt, r_Business_edt, r_Mobile_edt;
-    private CircleImageView r_select_Image_circle;
+    private ImageView r_select_Image_circle;
     private File uri;
     private String part_image;
     private Uri link;
@@ -46,7 +47,7 @@ public class Register_Activity extends AppCompatActivity {
         r_Password_edt = findViewById(R.id.r_Password_edt);
         r_Business_edt = findViewById(R.id.r_Business_edt);
         r_Mobile_edt = findViewById(R.id.r_Mobile_edt);
-        r_select_Image_circle = findViewById(R.id.r_select_Image_circle);
+        r_select_Image_circle = findViewById(R.id.r_image);
         r_select_Image_circle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

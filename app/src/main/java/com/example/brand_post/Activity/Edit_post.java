@@ -1,20 +1,34 @@
 package com.example.brand_post.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.brand_post.Activity.Payment.Package;
+import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.R;
+import com.example.brand_post.Util.Constant;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
+
 
 public class Edit_post extends AppCompatActivity {
 
@@ -23,13 +37,20 @@ public class Edit_post extends AppCompatActivity {
     private ImageView edit_setting_image;
     private BottomSheetDialog bottomSheetDialog1;
     private TextView mobile, email_txt, title_text_ep;
+    private HorizontalScrollView scroll;
+    private RecyclerView rv_view_frame;
+    int[] layout_fram={R.layout.frame2,R.layout.frame3};
+    Constant constant;
+    private FrameLayout e_main_save_frame;
+    private ScrollingPagerIndicator indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_post);
+        constant=new Constant();
         //ID=========
-
+        rv_view_frame=findViewById(R.id.rv_view_frame);
         e_img = findViewById(R.id.e_img);
         e_img.setImageBitmap(Select_Fram.bitmap_image);
         s_save_btn = findViewById(R.id.s_save_btn);
@@ -38,6 +59,19 @@ public class Edit_post extends AppCompatActivity {
         mobile = findViewById(R.id.mobile);
         email_txt = findViewById(R.id.email_txt);
         mobile = findViewById(R.id.mobile);
+        e_main_save_frame=findViewById(R.id.e_main_save_frame);
+        indicator=findViewById(R.id.indicator);
+
+        Fram_Adapter fram_adapter=new Fram_Adapter(this,layout_fram);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        rv_view_frame.setLayoutManager(layoutManager);
+        rv_view_frame.setAdapter(fram_adapter);
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(rv_view_frame);
+        indicator.attachToRecyclerView(rv_view_frame);
+
+
+
 
         edit_setting_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +112,9 @@ public class Edit_post extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Ad Code
+
+                Bitmap finalEditedImage = constant.getMainFrameBitmap(e_main_save_frame);
+                constant.save_Post(Edit_post.this,finalEditedImage);
             }
         });
 

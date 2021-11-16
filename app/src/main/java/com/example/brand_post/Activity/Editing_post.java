@@ -5,49 +5,47 @@ import static com.example.brand_post.Activity.Post_list.filter_post_List1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.brand_post.Adapter.Color_Adapter;
 import com.example.brand_post.Adapter.FontStyleAdapter;
+import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.Adapter.Post_Adapter;
 import com.example.brand_post.Util.MTouch.MultiTouchListener;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Model_Ragister;
+
 import com.example.brand_post.Util.Stickers.StickerImageView;
+import com.example.brand_post.Util.Stickers.StickerTextView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class Editing_post extends AppCompatActivity {
@@ -70,7 +68,7 @@ public class Editing_post extends AppCompatActivity {
     private Constant c1;
     private LinearLayout f_setting;
     public static ImageView image;
-    private FrameLayout framlayout;
+    private FrameLayout framlayout, sticker_fram;
     private ImageView adda_Image, img_logo;
     private String post_image;
     private List<String> list = new ArrayList<String>();
@@ -81,13 +79,20 @@ public class Editing_post extends AppCompatActivity {
     private TextView mobile;
     private TextView email_txt;
     private ImageView setting_image, add_logo;
-    private LinearLayout settings_linera;
+    private LinearLayout settings_linera, sticker_bg;
     private ImageView fram_color;
-    public static ImageView bottom_design, top_design;
-    private StickerImageView stickerImageView;
+    public static ImageView bottom_design;
+//    private StickerImageView stickerImageView;
     private Model_Ragister model1 = new Model_Ragister();
     private ImageView e_save_btn;
     private String ts;
+    private RecyclerView e_rv_view_frame;
+    int[] layout_fram = {R.layout.frame2, R.layout.frame3};
+    private ScrollingPagerIndicator indicator1;
+    private FrameLayout inner_sticker_frame;
+    private Dialog dialog;
+    private EditText add_text_edt;
+    private StickerImageView stickerImageView;
 
 
     @Override
@@ -122,19 +127,52 @@ public class Editing_post extends AppCompatActivity {
 //        adda_Image = findViewById(R.id.adda_Image);
         add_logo = findViewById(R.id.add_logo);
         mobile = findViewById(R.id.mobile);
-        top_design = findViewById(R.id.top_design);
+        sticker_fram = findViewById(R.id.sticker_fram);
+        sticker_fram.setOnTouchListener(new MultiTouchListener());
+
         setting_image = findViewById(R.id.setting_image);
         email_txt = findViewById(R.id.email_txt);
         fram_color = findViewById(R.id.fram_color);
         bottom_design = findViewById(R.id.bottom_design);
         e_save_btn = findViewById(R.id.e_save_btn);
+        e_rv_view_frame = findViewById(R.id.e_rv_view_frame);
+        indicator1 = findViewById(R.id.indicator1);
+
+
+        Fram_Adapter fram_adapter = new Fram_Adapter(Editing_post.this, layout_fram);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        e_rv_view_frame.setLayoutManager(layoutManager);
+        e_rv_view_frame.setAdapter(fram_adapter);
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(e_rv_view_frame);
+        indicator1.attachToRecyclerView(e_rv_view_frame);
+
+//        inner_sticker_frame=findViewById(R.id.inner_sticker_frame);
+        title_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                addTextDailog();
+                add_text_edt.setText(title_text.getText());
+            }
+        });
+
+//        StickerImageView iv_sticker = new StickerImageView(Editing_post.this);
+//        iv_sticker.setImageResource(R.drawable.add_logo_icon);
+//        framlayout.addView(iv_sticker);
+
+
+
+
+
+
 
         e_save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Editing_post.this, "Clicked", Toast.LENGTH_SHORT).show();
-                Bitmap finalEditedImage = getMainFrameBitmap(framlayout);
-                save_Post(finalEditedImage);
+                Bitmap finalEditedImage = constant.getMainFrameBitmap(framlayout);
+                constant.save_Post(Editing_post.this, finalEditedImage);
             }
         });
 
@@ -150,9 +188,9 @@ public class Editing_post extends AppCompatActivity {
 
         constant = new Constant();
         model1 = constant.Read_Pref(Editing_post.this);
-        title_text.setText(model1.getName());
-        email_txt.setText(model1.getEmail());
-        mobile.setText(model1.getMobile());
+//        title_text.setText(model1.getName());
+//        email_txt.setText(model1.getEmail());
+//        mobile.setText(model1.getMobile());
 
 
         fram_color.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +214,10 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
+
+
 // STICKER VIEW ADDED CODE =====================================================================
+
 
 
 //        adda_Image.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +235,10 @@ public class Editing_post extends AppCompatActivity {
         text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rv_view.setVisibility(View.GONE);
-                f_setting.setVisibility(View.VISIBLE);
-                bottomSheetDialog.show();
+//                rv_view.setVisibility(View.GONE);
+//                f_setting.setVisibility(View.VISIBLE);
+//                bottomSheetDialog.show();
+                addTextDailog();
             }
         });
 
@@ -237,11 +279,42 @@ public class Editing_post extends AppCompatActivity {
         });
     }
 
-    private Bitmap getMainFrameBitmap(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        view.draw(new Canvas(bitmap));
-        return bitmap;
+
+    void addSticker(String s1)
+    {
+        StickerTextView iv_sticker1 = new StickerTextView(Editing_post.this);
+        iv_sticker1.setText(s1);
+        framlayout.addView(iv_sticker1);
+
+
+//        iv_sticker1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
+
+
+    void addTextDailog() {
+
+        dialog = new Dialog(Editing_post.this);
+        dialog.setContentView(R.layout.add_text_item);
+         add_text_edt = dialog.findViewById(R.id.add_text_edt);
+        Button add_text_btn = dialog.findViewById(R.id.add_text_btn);
+
+        add_text_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addSticker(add_text_edt.getText().toString());
+//                title_text.setText(add_text_edt.getText().toString());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
 
     private void showBottomSheetDialog() {
 
@@ -327,42 +400,6 @@ public class Editing_post extends AppCompatActivity {
 
     }
 
-//    public  List<PostModel> Filter_Cate(String n)
-//    {
-//        List<PostModel> filter_post_List = new ArrayList<PostModel>();
-//        for (int i = 0; i < postModelList.size(); i++) {
-//            Toast.makeText(Editing_post.this, ""+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
-//
-//            if (postModelList.get(i).gets_cate().equals(n)) {
-//
-//                Toast.makeText(Editing_post.this, "True "+postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
-//
-//                String id = postModelList.get(i).getId();
-//                String title = postModelList.get(i).getm_cate();
-//                String body = postModelList.get(i).gets_cate();
-//                String body2 = postModelList.get(i).getimage_name();
-//                String body3 = postModelList.get(i).getstatus();
-//                String body4 = postModelList.get(i).getf_date();
-//                String body5 = postModelList.get(i).getlangauge();
-//
-//                PostModel model = new PostModel();
-//                model.setf_date(body4);
-//                model.setId(id);
-//                model.setlangauge(body5);
-//                model.setimage_name(body2);
-//                model.sets_cate(body);
-//                model.setm_cate(title);
-//                model.setstatus(body3);
-//
-//                filter_post_List.add(model);
-////                Log.e("Filter ", "id      : " + id);
-////                Log.e("Filter ", "title   : " + title);
-//                Log.e("Filter" , "body    : " + body);
-//                Log.e("Filter ", "-------------------------------------------------");
-//            }
-//        }
-//        return filter_post_List;
-//    }
 
     private void Rv_Post() {
         Post_Adapter adapter = new Post_Adapter(Editing_post.this, filter_post_List1, id);
@@ -575,31 +612,5 @@ public class Editing_post extends AppCompatActivity {
         }
     }
 
-
-    private void save_Post(Bitmap imageToSave) {
-        ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()).toString();
-        File direct = new File(Environment.getExternalStorageDirectory() + "/Daily Post Maker");
-
-        if (!direct.exists()) {
-            File wallpaperDirectory = new File("/sdcard/Daily Post Maker/");
-            wallpaperDirectory.mkdirs();
-        }
-
-        File file = new File("/sdcard/Daily Post Maker/", ts + ".png");
-        if (file.exists()) {
-            file.delete();
-        }
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-            Toast.makeText(Editing_post.this, "Success save", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
 }
