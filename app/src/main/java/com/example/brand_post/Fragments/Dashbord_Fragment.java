@@ -1,5 +1,6 @@
 package com.example.brand_post.Fragments;
 
+import static com.example.brand_post.Activity.SpleshActivity.slider_list_s;
 import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
 
 import android.annotation.SuppressLint;
@@ -52,11 +53,13 @@ public class Dashbord_Fragment extends Fragment {
     private RecyclerView recycler_trending;
     public static List<Sub_Model> filter_date_cate = new ArrayList<Sub_Model>();
     public static List<Sub_Model> filter_date_cate_days = new ArrayList<Sub_Model>();
+    public static List<Sub_Model> filter_date_cate_daily_post = new ArrayList<Sub_Model>();
+    public static List<Sub_Model> filter_date_cate_all_days = new ArrayList<Sub_Model>();
     private String formattedDate;
     private SimpleDateFormat dateFormat;
     List<String> date15 = new ArrayList<String>();
     private SliderView imageSlider;
-    private RecyclerView recycler_upcoming;
+    private RecyclerView recycler_upcoming, recycler_daily, recycler_all;
     private NavigationView nav_drawer;
     private DrawerLayout drawer;
     private CircleImageView circle_profile;
@@ -75,28 +78,19 @@ public class Dashbord_Fragment extends Fragment {
 
         filter_date_cate.clear();
         filter_date_cate_days.clear();
+        filter_date_cate_daily_post.clear();
+        filter_date_cate_all_days.clear();
 
         imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
-        recycler_upcoming=view.findViewById(R.id.recycler_upcoming);
-        nav_drawer=view.findViewById(R.id.nav_drawer);
-        drawer=view.findViewById(R.id.drawer);
-        circle_profile=view.findViewById(R.id.circle_profile);
-        circle_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawer.openDrawer(GravityCompat.START
-                );
-            }
-        });
+        recycler_upcoming = view.findViewById(R.id.recycler_upcoming);
+        recycler_daily = view.findViewById(R.id.recycler_daily);
+        recycler_all = view.findViewById(R.id.recycler_all);
+        drawer = view.findViewById(R.id.drawer);
+        circle_profile = view.findViewById(R.id.circle_profile);
 
 
-        SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity());
-        imageSlider.setSliderAdapter(adapterExample);
-        imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        imageSlider.startAutoCycle();
-
+       Slider();
 
         data_filter();
 
@@ -104,14 +98,25 @@ public class Dashbord_Fragment extends Fragment {
         return view;
     }
 
+    public void Slider() {
+        SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity(),slider_list_s);
+        imageSlider.setSliderAdapter(adapterExample);
+        imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        imageSlider.startAutoCycle();
+
+    }
+
     void data_filter() {
         filter_date_cate.clear();
         filter_date_cate_days.clear();
+        filter_date_cate_daily_post.clear();
+        filter_date_cate_all_days.clear();
         for (int i = 0; i < sub_modelList.size(); i++) {
             for (int j = 0; j < date15.size(); j++) {
                 if (sub_modelList.get(i).getDate().equals(date15.get(j))) {
 
-                    if (sub_modelList.get(i).getC_id().equals("6")) {
+                    if (sub_modelList.get(i).getType().equals("0")) {
                         String id = sub_modelList.get(i).getId();
                         String title = sub_modelList.get(i).getC_id();
                         String body = sub_modelList.get(i).getDate();
@@ -127,7 +132,7 @@ public class Dashbord_Fragment extends Fragment {
 
                         filter_date_cate.add(model);
 
-                    } else {
+                    } else if (sub_modelList.get(i).getType().equals("1")) {
                         String id = sub_modelList.get(i).getId();
                         String title = sub_modelList.get(i).getC_id();
                         String body = sub_modelList.get(i).getDate();
@@ -143,6 +148,38 @@ public class Dashbord_Fragment extends Fragment {
 
                         filter_date_cate_days.add(model);
 
+                    } else if (sub_modelList.get(i).getType().equals("2")) {
+                        String id = sub_modelList.get(i).getId();
+                        String title = sub_modelList.get(i).getC_id();
+                        String body = sub_modelList.get(i).getDate();
+                        String body2 = sub_modelList.get(i).getName();
+                        String body3 = sub_modelList.get(i).getImage();
+
+                        Sub_Model model = new Sub_Model();
+                        model.setId(id);
+                        model.setC_id(title);
+                        model.setDate(body);
+                        model.setName(body2);
+                        model.setImage(body3);
+
+                        filter_date_cate_daily_post.add(model);
+
+                    } else if (sub_modelList.get(i).getType().equals("3")) {
+                        String id = sub_modelList.get(i).getId();
+                        String title = sub_modelList.get(i).getC_id();
+                        String body = sub_modelList.get(i).getDate();
+                        String body2 = sub_modelList.get(i).getName();
+                        String body3 = sub_modelList.get(i).getImage();
+
+                        Sub_Model model = new Sub_Model();
+                        model.setId(id);
+                        model.setC_id(title);
+                        model.setDate(body);
+                        model.setName(body2);
+                        model.setImage(body3);
+
+                        filter_date_cate_all_days.add(model);
+
                     }
                 }
             }
@@ -157,7 +194,6 @@ public class Dashbord_Fragment extends Fragment {
         });
 
 
-
         Collections.sort(filter_date_cate_days, new Comparator<Sub_Model>() {
             @Override
             public int compare(Sub_Model item1, Sub_Model item2) {
@@ -167,11 +203,26 @@ public class Dashbord_Fragment extends Fragment {
         });
 
 
+        Collections.sort(filter_date_cate_daily_post, new Comparator<Sub_Model>() {
+            @Override
+            public int compare(Sub_Model item1, Sub_Model item2) {
+                return item1.getDate().compareToIgnoreCase(item2.getDate());
 
+            }
+        });
 
+        Collections.sort(filter_date_cate_all_days, new Comparator<Sub_Model>() {
+            @Override
+            public int compare(Sub_Model item1, Sub_Model item2) {
+                return item1.getDate().compareToIgnoreCase(item2.getDate());
+
+            }
+        });
 
         Recycler_view();
         Recycler_view_day();
+        Recycler_view_daily_post();
+        Recycler_view_all_day();
     }
 
 
@@ -187,6 +238,20 @@ public class Dashbord_Fragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recycler_upcoming.setLayoutManager(layoutManager);
         recycler_upcoming.setAdapter(adapter);
+    }
+
+    void Recycler_view_daily_post() {
+        Rv_trending_Adapter adapter = new Rv_trending_Adapter(getActivity(), filter_date_cate_daily_post);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
+        recycler_daily.setLayoutManager(layoutManager);
+        recycler_daily.setAdapter(adapter);
+    }
+
+    void Recycler_view_all_day() {
+        Rv_trending_Adapter adapter = new Rv_trending_Adapter(getActivity(), filter_date_cate_all_days);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
+        recycler_all.setLayoutManager(layoutManager);
+        recycler_all.setAdapter(adapter);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -220,7 +285,6 @@ public class Dashbord_Fragment extends Fragment {
         }
 
     }
-
 
 
 }

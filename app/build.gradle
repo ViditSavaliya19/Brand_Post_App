@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.brand_post"
-        minSdk 21
+        minSdk 22
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -50,4 +50,7 @@ dependencies {
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.0.0'
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.0.6"
+
 }

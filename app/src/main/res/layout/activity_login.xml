@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Activity.Login_Activity">
@@ -17,76 +17,114 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="Login"
-            android:textColor="@color/backgroung"
-            android:textSize="30dp"
-            android:layout_marginBottom="50dp"/>
+            android:textColor="@color/primary2"
+            android:textSize="30dp" />
 
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardUseCompatPadding="true">
+            android:background="@drawable/tab_bg">
 
             <EditText
                 android:id="@+id/lEmail_edt"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="#B1B1B1"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/backgroung"
-                android:hint="Email" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#00FFFFFF"
+                android:hint="Email"
+                android:textColor="@color/primary2"
+                android:textColorHint="#FF9193" />
+        </LinearLayout>
 
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardUseCompatPadding="true">
+            android:background="@drawable/tab_bg">
 
             <EditText
                 android:id="@+id/lPassword_edt"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/backgroung"
-                android:textColorHint="#B1B1B1"
-                android:hint="Password" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#00FFFFFF"
+                android:hint="Password"
+                android:textColor="@color/primary2"
+                android:textColorHint="#FF9193" />
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="100dp"
-            android:layout_marginTop="30dp"
             android:id="@+id/login_btn"
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_shape">
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_bg">
+
             <TextView
-                android:gravity="center"
-                android:textSize="18dp"
-                android:textColor="@color/backgroung"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Login"/>
+                android:gravity="center"
+                android:text="Login"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/l_ragister"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:layout_marginTop="30dp"
-            android:textColor="@color/backgroung"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Create a new Account? Sing up"/>
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Create a new Account? Sing up"
+            android:textColor="@color/primary2"
+            android:textSize="12dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gmail"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/facebook"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/l_ragister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Don’t have an account? "
+                android:textColor="@color/primary4"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Register now"
+                android:textColor="@color/primary2"
+                android:textSize="15dp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

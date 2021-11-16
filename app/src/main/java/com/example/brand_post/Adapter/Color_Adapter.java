@@ -2,7 +2,7 @@ package com.example.brand_post.Adapter;
 
 import static com.example.brand_post.Activity.Editing_post.bottom_design;
 import static com.example.brand_post.Activity.Editing_post.title_text;
-import static com.example.brand_post.Activity.Editing_post.top_design;
+
 import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
@@ -57,8 +57,7 @@ public class Color_Adapter extends RecyclerView.Adapter<Color_Adapter.viewData> 
             public void onClick(View v) {
                 bottom_design.setColorFilter(list[position]);
                 title_text.setTextColor(list[position]);
-                GradientDrawable myGrad = (GradientDrawable)top_design.getBackground();
-                myGrad.setStroke(convertDpToPx(3), list[position]);
+
             }
         });
         holder.liner_color.setBackgroundColor(list[position]);

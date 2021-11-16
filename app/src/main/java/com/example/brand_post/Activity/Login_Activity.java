@@ -41,7 +41,7 @@ public class Login_Activity extends AppCompatActivity {
     boolean isCheck;
     private EditText lEmail_edt;
     private EditText lPassword_edt;
-    private TextView l_ragister;
+    private LinearLayout l_ragister;
     private List<String> list_data = new ArrayList<>();
     Constant constant = new Constant();
     Model_Ragister model_ragister12 = new Model_Ragister();

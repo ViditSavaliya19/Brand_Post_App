@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Activity.Register_Activity">
+    tools:context=".Activity.Business.New_Add_Business_Activity">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,23 +15,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:text="Sign up"
-                android:textColor="@color/primary2"
-                android:textSize="30dp" />
-
             <ImageView
-                android:id="@+id/r_image"
+                android:id="@+id/n_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/profile_image" />
+
+            <TextView
+                android:id="@+id/r_Login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Add Logo"
+                android:textColor="@color/primary2"
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                 android:background="@drawable/tab_bg">
 
                 <EditText
-                    android:id="@+id/r_Name_edt"
+                    android:id="@+id/n_Name_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -59,7 +61,7 @@
                 android:background="@drawable/tab_bg">
 
                 <EditText
-                    android:id="@+id/r_Email_edt"
+                    android:id="@+id/n_Email_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -76,15 +78,16 @@
                 android:background="@drawable/tab_bg">
 
                 <EditText
-                    android:id="@+id/r_Password_edt"
+                    android:id="@+id/n_Web_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:backgroundTint="#00FFFFFF"
-                    android:hint="Enter Password"
+                    android:hint="Enter Website"
                     android:textColor="@color/backgroung"
                     android:textColorHint="#B1B1B1" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,24 +96,7 @@
                 android:background="@drawable/tab_bg">
 
                 <EditText
-                    android:id="@+id/r_Business_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#00FFFFFF"
-                    android:hint="Enter Business Name"
-                    android:textColor="@color/backgroung"
-                    android:textColorHint="#B1B1B1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/tab_bg">
-
-                <EditText
-                    android:id="@+id/r_Mobile_edt"
+                    android:id="@+id/n_Mobile_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -121,7 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/Register_btn"
+                android:id="@+id/n_submit_btn"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -132,20 +118,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Registrator"
+                    android:text="Submit"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/r_Login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="You have alredy Account? Sing in"
-                android:textColor="@color/primary2"
-                android:textSize="15dp" />
+
         </LinearLayout>
 
     </ScrollView>

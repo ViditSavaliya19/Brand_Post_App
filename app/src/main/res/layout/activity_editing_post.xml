@@ -51,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,8 +73,6 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/imagebg" />
 
-                <include layout="@layout/shape_iyem" />
-
 
                 <ImageView
                     android:id="@+id/img_logo"
@@ -82,15 +81,33 @@
                     android:layout_margin="10dp"
                     android:src="@drawable/default_logo" />
 
-                <TextView
-                    android:id="@+id/title_text"
-                    android:layout_width="match_parent"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/e_rv_view_frame"
+                    android:layout_width="380dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Hello"
-                    android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:layout_gravity="bottom|center" />
+
+
+                <FrameLayout
+                    android:id="@+id/sticker_fram"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Hello"
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                        <include layout="@layout/stickerbg" />
+                </FrameLayout>
+
 
 
 
@@ -107,6 +124,21 @@
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+                android:id="@+id/indicator1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:spi_dotSelectedColor="@color/primary2" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -114,23 +146,22 @@
         android:layout_height="70dp"
         android:background="@drawable/bottom_bar_shape"
         android:padding="10dp">
+
         <ImageView
+            android:id="@+id/bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/bg"
             android:src="@drawable/image_select_icon" />
 
 
         <ImageView
+            android:id="@+id/add_logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:tint="@color/primary4"
-            android:id="@+id/add_logo"
-            android:src="@drawable/add_logo_icon" />
-
-
+            android:src="@drawable/add_logo_icon"
+            android:tint="@color/primary4" />
 
 
         <ImageView

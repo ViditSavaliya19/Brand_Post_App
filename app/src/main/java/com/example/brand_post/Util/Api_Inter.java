@@ -5,6 +5,7 @@ import com.example.brand_post.Util.Model.Data.Datum;
 import com.example.brand_post.Util.Model.Data.Example;
 import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Model.PostModel;
+import com.example.brand_post.Util.Model.Slider_data;
 import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.util.List;
@@ -32,6 +33,8 @@ public interface Api_Inter {
     @GET("sub_cate_api.php/")
     Call<List<Sub_Model>> getSub_Category();
 
+    @GET("slider_api.php/")
+    Call<List<Slider_data>>getSlider();
     @FormUrlEncoded
     @POST("postapi.php/")
     Call<Model_Ragister> getRagi(@Field("name") String  name,@Field("email")String  email,@Field("password")String  password,@Field("business_name")String  b_name,@Field("profile_image")String  profile,@Field("mobile")String  mobile,@Field("plan")String  plan);

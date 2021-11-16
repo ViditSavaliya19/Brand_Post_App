@@ -2,28 +2,36 @@ package com.example.brand_post.Util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.loader.content.CursorLoader;
 
-import com.example.brand_post.R;
+import com.example.brand_post.Activity.Editing_post;
+import com.example.brand_post.Activity.Login_Activity;
+import com.example.brand_post.Activity.SpleshActivity;
 import com.example.brand_post.Util.Model.Cate_model;
-import com.example.brand_post.Util.Model.Data.Example;
 import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Model.PostModel;
+import com.example.brand_post.Util.Model.Slider_data;
 import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -36,13 +44,12 @@ import retrofit2.Response;
 public class Constant {
 
 
-
-    public  static String imageLink="https://satkaivalsaheb.xyz/app/html/images/";
-    public  static String ThumbLink="https://satkaivalsaheb.xyz/app/html/thumb/";
+    public static String imageLink = "https://satkaivalsaheb.xyz/app/html/images/";
+    public static String ThumbLink = "https://satkaivalsaheb.xyz/app/html/thumb/";
     public List<PostModel> postModelList = new ArrayList<PostModel>();
     public List<Cate_model> cate_modelList1 = new ArrayList<Cate_model>();
     public List<Sub_Model> sub_modelList1 = new ArrayList<Sub_Model>();
-
+    public List<Slider_data> slider_list = new ArrayList<Slider_data>();
 
     public List<PostModel> GetData() {
 
@@ -78,7 +85,7 @@ public class Constant {
                         Log.e("demoo", "title   : " + title);
                         Log.e("demoo", "body    : " + body);
                         Log.e("demoo", "-------------------------------------------------");
-                        Log.e("TAG", "=============>> "+imageLink+""+postModelList.get(0).getimage_name());
+                        Log.e("TAG", "=============>> " + imageLink + "" + postModelList.get(0).getimage_name());
                     }
                 }
 
@@ -120,9 +127,10 @@ public class Constant {
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<Cate_model>> call, Throwable t) {
-                Log.e("TAG", "onFailure: "+t.getMessage() );
+                Log.e("TAG", "onFailure: " + t.getMessage());
             }
         });
         return cate_modelList1;
@@ -146,6 +154,7 @@ public class Constant {
                         String name = user.get(i).getName();
                         String date = user.get(i).getDate();
                         String image = user.get(i).getImage();
+                        String type = user.get(i).getType();
 
                         Sub_Model model = new Sub_Model();
                         model.setId(id);
@@ -153,6 +162,7 @@ public class Constant {
                         model.setName(name);
                         model.setImage(image);
                         model.setC_id(title);
+                        model.setType(type);
 
                         sub_modelList1.add(model);
                         Log.e("sub", "id      : " + id);
@@ -161,18 +171,49 @@ public class Constant {
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<Sub_Model>> call, Throwable t) {
-                Log.e("TAG", "onFailure: "+t.getMessage() );
+                Log.e("TAG", "onFailure: " + t.getMessage());
             }
         });
         return sub_modelList1;
     }
 
+    //SLIDER ================================
+
+
+    public List<Slider_data> Slider() {
+        Api_Inter apiInterface = Api.getData().create(Api_Inter.class);
+        apiInterface.getSlider().enqueue(new Callback<List<Slider_data>>() {
+            @Override
+            public void onResponse(Call<List<Slider_data>> call, Response<List<Slider_data>> response) {
+                if (response.isSuccessful()) {
+
+                    slider_list = response.body();
+                    SpleshActivity.slider_list_s=slider_list;
+                    Log.e("TAG", "onResponse: SLider**************** "+slider_list.size() );
+                    Log.e("TAG", "onBindViewHolder: *************** ------- "+imageLink+slider_list.get(0).getName());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Slider_data>> call, Throwable t) {
+
+            }
+
+
+        });
+
+        return slider_list;
+
+    }
+
 //Registration =================================
 
-    public void Registration(Activity activity,Model_Ragister model_ragister, Uri file1, Bitmap bitmap)
-    {
+    public void Registration(Activity activity, Model_Ragister model_ragister, Uri file1, Bitmap bitmap) {
 
 //        File file = new File(file1.toString());
 
@@ -190,45 +231,44 @@ public class Constant {
         String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
 
-        Log.e("TAG", "Registration: Byte Array ====          "+imageString );
+        Log.e("TAG", "Registration: Byte Array ====          " + imageString);
 
 
-        Api_Inter api_inter=Api.getData().create(Api_Inter.class);
-        api_inter.getRagi(model_ragister.getName(),model_ragister.getEmail(),model_ragister.getPassword(),model_ragister.getBusiness_name(),imageString,model_ragister.getMobile(),model_ragister.getPlan()).enqueue(new Callback<Model_Ragister>() {
+        Api_Inter api_inter = Api.getData().create(Api_Inter.class);
+        api_inter.getRagi(model_ragister.getName(), model_ragister.getEmail(), model_ragister.getPassword(), model_ragister.getBusiness_name(), imageString, model_ragister.getMobile(), model_ragister.getPlan()).enqueue(new Callback<Model_Ragister>() {
             @Override
             public void onResponse(Call<Model_Ragister> call, Response<Model_Ragister> response) {
 
-                Model_Ragister model_ragister1=response.body();
-             
-                Log.e("TAG", "onResponse: Registration "+response.errorBody());
+                Model_Ragister model_ragister1 = response.body();
+
+                Log.e("TAG", "onResponse: Registration " + response.errorBody());
             }
 
             @Override
             public void onFailure(Call<Model_Ragister> call, Throwable t) {
-                Log.e("TAG", "onFailure: "+t.getMessage() );
+                Log.e("TAG", "onFailure: " + t.getMessage());
             }
         });
 
-        api_inter.getImage(fileToUpload,filename).enqueue(new Callback() {
+        api_inter.getImage(fileToUpload, filename).enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
 
-                if(response.isSuccessful())
-                {
-                    Log.e("TAG", "onResponse: image "+response.body() );
+                if (response.isSuccessful()) {
+                    Log.e("TAG", "onResponse: image " + response.body());
                 }
 
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Log.e("TAG", "onFailure: image "+t.getMessage() );
+                Log.e("TAG", "onFailure: image " + t.getMessage());
             }
         });
     }
 
 
-    String getRealPathFromURI(Activity activity,Uri contentUri) {
+    String getRealPathFromURI(Activity activity, Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(activity, contentUri, proj, null, null, null);
         Cursor cursor = loader.loadInBackground();
@@ -242,39 +282,79 @@ public class Constant {
 // Shard pref ================================
 
 
-    public void Pref(Activity activity,Model_Ragister model_ragister)
-    {
+    public void Pref(Activity activity, Model_Ragister model_ragister) {
 
-        Log.e("TAG", "Pref: "+model_ragister.getBusiness_name()+" ******  "+model_ragister.getProfile_image());
-        SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("Name",model_ragister.getName());
-        editor.putString("Email",model_ragister.getEmail());
-        editor.putString("Password",model_ragister.getPassword());
-        editor.putString("Business",model_ragister.getBusiness_name());
-        editor.putString("mobile",model_ragister.getMobile());
-        editor.putString("image",model_ragister.getProfile_image());
-        editor.putString("plan",model_ragister.getPlan());
+        Log.e("TAG", "Pref: " + model_ragister.getBusiness_name() + " ******  " + model_ragister.getProfile_image());
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Name", model_ragister.getName());
+        editor.putString("Email", model_ragister.getEmail());
+        editor.putString("Password", model_ragister.getPassword());
+        editor.putString("Business", model_ragister.getBusiness_name());
+        editor.putString("mobile", model_ragister.getMobile());
+        editor.putString("image", model_ragister.getProfile_image());
+        editor.putString("plan", model_ragister.getPlan());
         editor.commit();
     }
 
 
-    public Model_Ragister Read_Pref(Activity activity)
-    {
-        Model_Ragister model_ragister=new Model_Ragister();
-        SharedPreferences sharedPreferences=activity.getSharedPreferences("MyPref",Context.MODE_PRIVATE);
-        model_ragister.setName(sharedPreferences.getString("Name",null));
-        model_ragister.setEmail(sharedPreferences.getString("Email",null));
-        model_ragister.setPassword(sharedPreferences.getString("Password",null));
-        model_ragister.setBusiness_name(sharedPreferences.getString("Business",null));
-        model_ragister.setMobile(sharedPreferences.getString("mobile",null));
-        model_ragister.setProfile_image(sharedPreferences.getString("image",null));
-        model_ragister.setPlan(sharedPreferences.getString("plan",null));
+    public Model_Ragister Read_Pref(Activity activity) {
+        Model_Ragister model_ragister = new Model_Ragister();
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        model_ragister.setName(sharedPreferences.getString("Name", null));
+        model_ragister.setEmail(sharedPreferences.getString("Email", null));
+        model_ragister.setPassword(sharedPreferences.getString("Password", null));
+        model_ragister.setBusiness_name(sharedPreferences.getString("Business", null));
+        model_ragister.setMobile(sharedPreferences.getString("mobile", null));
+        model_ragister.setProfile_image(sharedPreferences.getString("image", null));
+        model_ragister.setPlan(sharedPreferences.getString("plan", null));
 
 
         return model_ragister;
     }
 
+    public void ClearPref(Activity activity)
+    {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+        activity.startActivity(new Intent(activity, Login_Activity.class));
 
+    }
+
+// Save Post====================================================
+
+    public Bitmap getMainFrameBitmap(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmap));
+        return bitmap;
+    }
+
+    public void save_Post(Activity editing_post, Bitmap imageToSave) {
+        String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()).toString();
+        File direct = new File(Environment.getExternalStorageDirectory() + "/Daily Post Maker");
+
+        if (!direct.exists()) {
+            File wallpaperDirectory = new File("/sdcard/Daily Post Maker/");
+            wallpaperDirectory.mkdirs();
+        }
+
+        File file = new File("/sdcard/Daily Post Maker/", ts + ".png");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            Toast.makeText(editing_post, "Success save", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
