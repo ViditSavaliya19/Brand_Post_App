@@ -47,6 +47,7 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
         holder.date_txt.setText(list.get(position).getDate());
         Glide.with(activity).load(Constant.ThumbLink + "" + list.get(position).getImage()).into(holder.image_view);
 
+
         Log.e(TAG, "onBindViewHolder: " + Constant.ThumbLink + "" + list.get(position).getImage());
 
         holder.card.setOnClickListener(new View.OnClickListener() {
