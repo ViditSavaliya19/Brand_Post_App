@@ -2,7 +2,9 @@ package com.example.brand_post.Activity;
 
 import static com.example.brand_post.Activity.Post_list.filter_post_List1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -12,9 +14,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +44,9 @@ import com.example.brand_post.Util.Model.Model_Ragister;
 
 import com.example.brand_post.Util.Stickers.StickerImageView;
 import com.example.brand_post.Util.Stickers.StickerTextView;
+import com.example.brand_post.Util.Stickers.StickerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +88,7 @@ public class Editing_post extends AppCompatActivity {
     private LinearLayout settings_linera, sticker_bg;
     private ImageView fram_color;
     public static ImageView bottom_design;
-//    private StickerImageView stickerImageView;
+    //    private StickerImageView stickerImageView;
     private Model_Ragister model1 = new Model_Ragister();
     private ImageView e_save_btn;
     private String ts;
@@ -92,8 +98,12 @@ public class Editing_post extends AppCompatActivity {
     private FrameLayout inner_sticker_frame;
     private Dialog dialog;
     private EditText add_text_edt;
-    private StickerImageView stickerImageView;
 
+    private TextView f_web;
+    public static CheckBox mobile_txt_chk, email_txt_chk, business_txt_chk;
+    CardView e_edit_text_sticker_card;
+    private ImageView align_left;
+    private StickerTextView iv_sticker1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +111,8 @@ public class Editing_post extends AppCompatActivity {
         setContentView(R.layout.activity_editing_post);
 
 //        post_image = getIntent().getStringExtra("post");
+         iv_sticker1 = new StickerTextView(Editing_post.this);
+
         c1 = new Constant();
         showBottomSheetDialog();
 
@@ -126,17 +138,36 @@ public class Editing_post extends AppCompatActivity {
         text_edit = findViewById(R.id.text_edit);
 //        adda_Image = findViewById(R.id.adda_Image);
         add_logo = findViewById(R.id.add_logo);
-        mobile = findViewById(R.id.mobile);
-        sticker_fram = findViewById(R.id.sticker_fram);
-        sticker_fram.setOnTouchListener(new MultiTouchListener());
+        mobile = findViewById(R.id.f2_mobile);
+        f_web = findViewById(R.id.f_web);
+
 
         setting_image = findViewById(R.id.setting_image);
-        email_txt = findViewById(R.id.email_txt);
+        email_txt = findViewById(R.id.f_email);
         fram_color = findViewById(R.id.fram_color);
         bottom_design = findViewById(R.id.bottom_design);
         e_save_btn = findViewById(R.id.e_save_btn);
         e_rv_view_frame = findViewById(R.id.e_rv_view_frame);
         indicator1 = findViewById(R.id.indicator1);
+
+        //CONROLES ID;
+        e_edit_text_sticker_card = findViewById(R.id.e_edit_text_sticker_card);
+        align_left=findViewById(R.id.align_left);
+
+        align_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iv_sticker1.setAlignment(Gravity.LEFT);
+
+            }
+        });
+        iv_sticker1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                iv_sticker1.setControlItemsHidden(false);
+                return false;
+            }
+        });
 
 
         Fram_Adapter fram_adapter = new Fram_Adapter(Editing_post.this, layout_fram);
@@ -147,12 +178,15 @@ public class Editing_post extends AppCompatActivity {
         linearSnapHelper.attachToRecyclerView(e_rv_view_frame);
         indicator1.attachToRecyclerView(e_rv_view_frame);
 
+
+
+
 //        inner_sticker_frame=findViewById(R.id.inner_sticker_frame);
         title_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                addTextDailog();
+                addTextDailog(0);
                 add_text_edt.setText(title_text.getText());
             }
         });
@@ -160,11 +194,6 @@ public class Editing_post extends AppCompatActivity {
 //        StickerImageView iv_sticker = new StickerImageView(Editing_post.this);
 //        iv_sticker.setImageResource(R.drawable.add_logo_icon);
 //        framlayout.addView(iv_sticker);
-
-
-
-
-
 
 
         e_save_btn.setOnClickListener(new View.OnClickListener() {
@@ -177,14 +206,7 @@ public class Editing_post extends AppCompatActivity {
         });
 
 
-        stickerImageView = new StickerImageView(Editing_post.this);
-        stickerImageView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                stickerImageView.setControlItemsHidden(false);
-                return false;
-            }
-        });
+
 
         constant = new Constant();
         model1 = constant.Read_Pref(Editing_post.this);
@@ -215,10 +237,17 @@ public class Editing_post extends AppCompatActivity {
         });
 
 
-
 // STICKER VIEW ADDED CODE =====================================================================
 
 
+        framlayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (iv_sticker1 != null)
+                    iv_sticker1.setControlItemsHidden(false);
+                return false;
+            }
+        });
 
 //        adda_Image.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -238,14 +267,21 @@ public class Editing_post extends AppCompatActivity {
 //                rv_view.setVisibility(View.GONE);
 //                f_setting.setVisibility(View.VISIBLE);
 //                bottomSheetDialog.show();
-                addTextDailog();
+                addTextDailog(0);
+            }
+        });
+
+        e_edit_text_sticker_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addTextDailog(1);
             }
         });
 
         framlayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                stickerImageView.setControlItemsHidden(true);
+                iv_sticker1.setControlItemsHidden(true);
                 return false;
             }
         });
@@ -280,11 +316,14 @@ public class Editing_post extends AppCompatActivity {
     }
 
 
-    void addSticker(String s1)
-    {
-        StickerTextView iv_sticker1 = new StickerTextView(Editing_post.this);
+    void addSticker(String s1) {
         iv_sticker1.setText(s1);
+
+        iv_sticker1.setTextColor(Color.RED);
+        iv_sticker1.setAlignment(Gravity.CENTER);
         framlayout.addView(iv_sticker1);
+
+        setCurrentEdit(iv_sticker1);
 
 
 //        iv_sticker1.setOnClickListener(new View.OnClickListener() {
@@ -295,18 +334,34 @@ public class Editing_post extends AppCompatActivity {
 //        });
     }
 
+    private void setCurrentEdit(StickerTextView stickerView) {
+        if (iv_sticker1 != null) {
+            iv_sticker1.setControlItemsHidden(false);
+        }
+//        iv_sticker1 = stickerView;
+        stickerView.setControlItemsHidden(true);
+    }
 
-    void addTextDailog() {
+
+    void addTextDailog(int opreation) {
 
         dialog = new Dialog(Editing_post.this);
         dialog.setContentView(R.layout.add_text_item);
-         add_text_edt = dialog.findViewById(R.id.add_text_edt);
+        add_text_edt = dialog.findViewById(R.id.add_text_edt);
         Button add_text_btn = dialog.findViewById(R.id.add_text_btn);
 
         add_text_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addSticker(add_text_edt.getText().toString());
+
+                if(opreation ==0 )
+                {
+                    addSticker(add_text_edt.getText().toString());
+                }
+                else if(opreation==1)
+                {
+                    iv_sticker1.setText(add_text_edt.getText().toString());
+                }
 //                title_text.setText(add_text_edt.getText().toString());
                 dialog.dismiss();
             }
@@ -327,9 +382,9 @@ public class Editing_post extends AppCompatActivity {
 
         //SETTINGS TOOLS =================================
         settings_linera = bottomSheetDialog.findViewById(R.id.settings_linera);
-        CheckBox mobile_txt_chk = bottomSheetDialog.findViewById(R.id.mobile_txt_chk);
-        CheckBox email_txt_chk = bottomSheetDialog.findViewById(R.id.email_txt_chk);
-        CheckBox business_txt_chk = bottomSheetDialog.findViewById(R.id.business_txt_chk);
+        mobile_txt_chk = bottomSheetDialog.findViewById(R.id.mobile_txt_chk);
+        email_txt_chk = bottomSheetDialog.findViewById(R.id.email_txt_chk);
+        business_txt_chk = bottomSheetDialog.findViewById(R.id.business_txt_chk);
 
         mobile_txt_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -359,9 +414,9 @@ public class Editing_post extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    title_text.setVisibility(View.VISIBLE);
+                    f_web.setVisibility(View.VISIBLE);
                 } else {
-                    title_text.setVisibility(View.GONE);
+                    f_web.setVisibility(View.GONE);
 
                 }
             }
