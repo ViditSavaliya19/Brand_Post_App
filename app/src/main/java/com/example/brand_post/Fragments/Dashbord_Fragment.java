@@ -18,9 +18,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.example.brand_post.Activity.SpleshActivity;
 import com.example.brand_post.Adapter.Rv_Adapter;
 import com.example.brand_post.Adapter.Rv_day_Adapter;
 import com.example.brand_post.Adapter.Rv_trending_Adapter;
@@ -64,6 +67,8 @@ public class Dashbord_Fragment extends Fragment {
     private DrawerLayout drawer;
     private CircleImageView circle_profile;
     private Date[] date;
+    private TextView email_profile_h;
+    private TextView name_profile_h;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
@@ -88,7 +93,11 @@ public class Dashbord_Fragment extends Fragment {
         recycler_all = view.findViewById(R.id.recycler_all);
         drawer = view.findViewById(R.id.drawer);
         circle_profile = view.findViewById(R.id.circle_profile);
-
+        email_profile_h=view.findViewById(R.id.email_profile_h);
+        name_profile_h=view.findViewById(R.id.name_profile_h);
+        Glide.with(getActivity()).load(Constant.imageLink+ SpleshActivity.businessData_list_s.get(0).getLogo());
+        email_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getEmail());
+        name_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getName());
 
        Slider();
 

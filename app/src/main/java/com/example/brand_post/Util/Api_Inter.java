@@ -1,5 +1,6 @@
 package com.example.brand_post.Util;
 
+import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Model.Data.Datum;
 import com.example.brand_post.Util.Model.Data.Example;
@@ -33,17 +34,21 @@ public interface Api_Inter {
     @GET("sub_cate_api.php/")
     Call<List<Sub_Model>> getSub_Category();
 
+    @GET("business_retrive.php/")
+    Call<List<BusinessDatum>> getBusiness();
+
     @GET("slider_api.php/")
-    Call<List<Slider_data>>getSlider();
+    Call<List<Slider_data>> getSlider();
+
     @FormUrlEncoded
     @POST("postapi.php/")
-    Call<Model_Ragister> getRagi(@Field("name") String  name,@Field("email")String  email,@Field("password")String  password,@Field("business_name")String  b_name,@Field("profile_image")String  profile,@Field("mobile")String  mobile,@Field("plan")String  plan);
+    Call<Model_Ragister> getRagi(@Field("name") String name, @Field("email") String email, @Field("password") String password, @Field("business_name") String b_name, @Field("profile_image") String profile, @Field("mobile") String mobile, @Field("plan") String plan);
 
     @FormUrlEncoded
     @POST("loginapi.php")
-    Call<Example>getLoginData(@Field("email")String email, @Field("password")String password);
+    Call<Example> getLoginData(@Field("email") String email, @Field("password") String password);
 
     @Multipart
     @POST("postapi.php/")
-    Call <ResponseBody> getImage(@Part MultipartBody.Part file, @Part("file") RequestBody name);
+    Call<ResponseBody> getImage(@Part MultipartBody.Part file, @Part("file") RequestBody name);
 }

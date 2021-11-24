@@ -45,6 +45,7 @@
                     android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center"
                     android:text="Brand Post"
+                    android:id="@+id/email_profile_h"
                     android:textColor="@color/primary4"
                     android:textSize="15dp" />
 
@@ -53,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Fenil Virani"
+                    android:id="@+id/name_profile_h"
                     android:textColor="@color/primary3"
                     android:textSize="18dp" />
 

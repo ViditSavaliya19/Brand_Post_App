@@ -20,6 +20,7 @@ import androidx.loader.content.CursorLoader;
 import com.example.brand_post.Activity.Editing_post;
 import com.example.brand_post.Activity.Login_Activity;
 import com.example.brand_post.Activity.SpleshActivity;
+import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Model.Model_Ragister;
 import com.example.brand_post.Util.Model.PostModel;
@@ -50,6 +51,7 @@ public class Constant {
     public List<Cate_model> cate_modelList1 = new ArrayList<Cate_model>();
     public List<Sub_Model> sub_modelList1 = new ArrayList<Sub_Model>();
     public List<Slider_data> slider_list = new ArrayList<Slider_data>();
+    public List<BusinessDatum> business_data_list = new ArrayList<BusinessDatum>();
 
     public List<PostModel> GetData() {
 
@@ -278,6 +280,42 @@ public class Constant {
         cursor.close();
         return result;
     }
+
+
+    // =========================
+
+    public List<BusinessDatum> getBusiness() {
+        Api_Inter apiInterface = Api.getData().create(Api_Inter.class);
+        apiInterface.getBusiness().enqueue(new Callback<List<BusinessDatum>>() {
+            @Override
+            public void onResponse(Call<List<BusinessDatum>> call, Response<List<BusinessDatum>> response) {
+                if (response.isSuccessful()) {
+
+                    business_data_list = response.body();
+                    SpleshActivity.businessData_list_s=business_data_list;
+                    Log.e("TAG", "onResponse: Business**************** "+business_data_list.size() );
+                    Log.e("TAG", "onBindViewHolder: *************** ------- "+imageLink+business_data_list.get(0).getLogo());
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<BusinessDatum>> call, Throwable t) {
+
+            }
+
+
+        });
+
+        return business_data_list;
+
+    }
+
+
+
+
 
 // Shard pref ================================
 
