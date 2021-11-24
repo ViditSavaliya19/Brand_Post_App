@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.example.brand_post.Fragments.Dashbord_Fragment;
 import com.example.brand_post.R;
+import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Model_Ragister;
@@ -23,6 +24,7 @@ public class SpleshActivity extends AppCompatActivity {
     public static List<Cate_model> cate_modelList = new ArrayList<Cate_model>();
     public static List<Sub_Model> sub_modelList = new ArrayList<Sub_Model>();
     public static List<Slider_data> slider_list_s = new ArrayList<Slider_data>();
+    public static List<BusinessDatum> businessData_list_s = new ArrayList<BusinessDatum>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class SpleshActivity extends AppCompatActivity {
         postModelList = constant.GetData();
         cate_modelList = constant.GetCategory();
         sub_modelList = constant.GetSub();
+        businessData_list_s = constant.getBusiness();
          constant.Slider();
 
 
