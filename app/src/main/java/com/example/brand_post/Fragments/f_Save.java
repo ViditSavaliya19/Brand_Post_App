@@ -50,13 +50,16 @@ public class f_Save extends Fragment {
 
         filepath = Environment.getExternalStorageDirectory();
         File directory = new File(filepath.getAbsolutePath() + "/" + "Daily Post Maker");
-        files = directory.listFiles();
-        folder = new File(filepath.getAbsolutePath() + "/" + "Daily Post Maker" );
+
+        folder = new File(filepath.getAbsolutePath() + "/" + "Daily Post Maker");
         if (folder.exists()) {
-            setData();
-        }
-        else
-        {
+            files = directory.listFiles();
+            if (files.length <= 0) {
+
+                setData();
+            }
+
+        } else {
             Toast.makeText(getActivity(), "No Any Post Create", Toast.LENGTH_SHORT).show();
         }
         setRv();
@@ -82,6 +85,7 @@ public class f_Save extends Fragment {
                 data.setUri(imgfile.getAbsolutePath());
                 list.add(data);
             }
+
 
         }
     }

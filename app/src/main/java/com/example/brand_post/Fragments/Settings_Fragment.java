@@ -1,5 +1,6 @@
 package com.example.brand_post.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.brand_post.Activity.Business.AB_Activity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class Settings_Fragment extends Fragment {
 
     private LinearLayout s_logout;
+    private LinearLayout s_my_business;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +32,15 @@ public class Settings_Fragment extends Fragment {
 
 
         s_logout = view.findViewById(R.id.s_logout);
+        s_my_business=view.findViewById(R.id.s_my_business);
+        s_my_business.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AB_Activity.class));
+            }
+        });
+
+
         s_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
