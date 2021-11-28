@@ -17,14 +17,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="75dp"
             android:background="@drawable/home_profile_shape"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circle_profile1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/circle_profile1_settigs"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/user"
@@ -44,6 +44,7 @@
                     android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center"
                     android:text="Brand Post"
+                    android:id="@+id/email_header_setting"
                     android:textColor="@color/primary4"
                     android:textSize="15dp" />
 
@@ -51,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:id="@+id/business_name_header_settings"
                     android:text="Fenil Virani"
                     android:textColor="@color/primary3"
                     android:textSize="18dp" />
@@ -76,11 +78,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/s_my_business">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/business_icon" />
 
                 <TextView
@@ -97,11 +100,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/GetPremium"
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/premium" />
 
                 <TextView
@@ -121,8 +125,8 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/help" />
 
                 <TextView
@@ -142,8 +146,8 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/pp" />
 
                 <TextView
@@ -163,8 +167,8 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/share_icon" />
 
                 <TextView
@@ -184,8 +188,8 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/rating" />
 
                 <TextView
@@ -206,8 +210,8 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/logout" />
 
                 <TextView

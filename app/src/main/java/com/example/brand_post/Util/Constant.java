@@ -361,6 +361,37 @@ public class Constant {
 
     }
 
+
+
+
+    public  void Add_Selected_Business_pref(Activity activity, List<BusinessDatum> model_ragister, int position)
+    {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("Business_pref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Name", model_ragister.get(position).getName());
+        editor.putString("Email", model_ragister.get(position).getEmail());
+        editor.putString("Website", model_ragister.get(position).getWebsite());
+        editor.putString("mobile", model_ragister.get(position).getMobile());
+        editor.putString("image", model_ragister.get(position).getLogo());
+        editor.putString("user_number", model_ragister.get(position).getUserNumber());
+        editor.commit();
+    }
+
+    public BusinessDatum getSelected_business(Activity activity)
+    {
+
+        BusinessDatum model_ragister = new BusinessDatum();
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("Business_pref", Context.MODE_PRIVATE);
+        model_ragister.setName(sharedPreferences.getString("Name", null));
+        model_ragister.setEmail(sharedPreferences.getString("Email", null));
+        model_ragister.setWebsite(sharedPreferences.getString("Website", null));
+        model_ragister.setMobile(sharedPreferences.getString("mobile", null));
+        model_ragister.setLogo(sharedPreferences.getString("image", null));
+        model_ragister.setUserNumber(sharedPreferences.getString("user_number",null));
+
+        return model_ragister;
+    }
+
 // Save Post====================================================
 
     public Bitmap getMainFrameBitmap(View view) {

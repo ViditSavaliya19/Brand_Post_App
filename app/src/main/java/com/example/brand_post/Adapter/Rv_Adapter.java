@@ -59,17 +59,6 @@ public class Rv_Adapter extends RecyclerView.Adapter<Rv_Adapter.viewData> {
 
             }
         });
-//        for (int i = 0; i < postModelList.size(); i++) {
-//
-//            if (list.get(position).getId().equals(postModelList.get(i).gets_cate())) {
-//
-//                Log.e(TAG, "=============>> " + postModelList.get(i).gets_cate());
-//                Glide.with(activity)
-//                        .load(imageLink + "" + postModelList.get(position).getimage_name().toString())
-//                        .centerCrop()
-//                        .into(holder.image_view);
-//            }
-//        }
 
 
     }

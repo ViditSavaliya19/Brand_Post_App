@@ -4,10 +4,12 @@ import static com.example.brand_post.Activity.SpleshActivity.slider_list_s;
 import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
 
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -27,10 +29,13 @@ import com.example.brand_post.Activity.SpleshActivity;
 import com.example.brand_post.Adapter.Rv_Adapter;
 import com.example.brand_post.Adapter.Rv_day_Adapter;
 import com.example.brand_post.Adapter.Rv_trending_Adapter;
+import com.example.brand_post.Adapter.Selecct_business_Adapter;
 import com.example.brand_post.Adapter.SliderAdapterExample;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
+import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Sub_Model;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -53,6 +58,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Dashbord_Fragment extends Fragment {
 
+    String[] perms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+    int permsRequestCode = 200;
+
     private RecyclerView recycler_trending;
     public static List<Sub_Model> filter_date_cate = new ArrayList<Sub_Model>();
     public static List<Sub_Model> filter_date_cate_days = new ArrayList<Sub_Model>();
@@ -65,10 +73,11 @@ public class Dashbord_Fragment extends Fragment {
     private RecyclerView recycler_upcoming, recycler_daily, recycler_all;
     private NavigationView nav_drawer;
     private DrawerLayout drawer;
-    private CircleImageView circle_profile;
+    public static CircleImageView circle_profile;
     private Date[] date;
-    private TextView email_profile_h;
-    private TextView name_profile_h;
+    public static TextView email_profile_h;
+    public static TextView name_profile_h;
+    public static BottomSheetDialog sheetDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
@@ -76,6 +85,8 @@ public class Dashbord_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashbord_, container, false);
+
+        requestPermission();
 
         date15.clear();
         setDate();
@@ -93,13 +104,20 @@ public class Dashbord_Fragment extends Fragment {
         recycler_all = view.findViewById(R.id.recycler_all);
         drawer = view.findViewById(R.id.drawer);
         circle_profile = view.findViewById(R.id.circle_profile);
-        email_profile_h=view.findViewById(R.id.email_profile_h);
-        name_profile_h=view.findViewById(R.id.name_profile_h);
-        Glide.with(getActivity()).load(Constant.imageLink+ SpleshActivity.businessData_list_s.get(0).getLogo());
-        email_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getEmail());
-        name_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getName());
+        email_profile_h = view.findViewById(R.id.email_profile_h);
+        name_profile_h = view.findViewById(R.id.name_profile_h);
 
-       Slider();
+        setBusiness_header();
+
+        circle_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Select_Corrunt_Business();
+            }
+        });
+
+
+        Slider();
 
         data_filter();
 
@@ -108,7 +126,7 @@ public class Dashbord_Fragment extends Fragment {
     }
 
     public void Slider() {
-        SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity(),slider_list_s);
+        SliderAdapterExample adapterExample = new SliderAdapterExample(getActivity(), slider_list_s);
         imageSlider.setSliderAdapter(adapterExample);
         imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
         imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -295,5 +313,51 @@ public class Dashbord_Fragment extends Fragment {
 
     }
 
+
+    public void Select_Corrunt_Business() {
+        sheetDialog = new BottomSheetDialog(getActivity());
+        sheetDialog.setContentView(R.layout.select_business_item);
+        sheetDialog.show();
+        RecyclerView rv_select_business = sheetDialog.findViewById(R.id.rv_select_business);
+        Selecct_business_Adapter selecct_business_adapter = new Selecct_business_Adapter(getActivity(), SpleshActivity.businessData_list_s);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rv_select_business.setLayoutManager(layoutManager);
+        rv_select_business.setAdapter(selecct_business_adapter);
+
+    }
+
+
+    void setBusiness_header() {
+        Constant constant = new Constant();
+        BusinessDatum businessDatum = constant.getSelected_business(getActivity());
+
+        Glide.with(getActivity()).load(Constant.imageLink + businessDatum.getLogo()).into(circle_profile);
+        email_profile_h.setText(businessDatum.getEmail());
+        name_profile_h.setText(businessDatum.getName());
+
+
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(getActivity(), perms, permsRequestCode);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
+
+        switch (permsRequestCode) {
+
+            case 200:
+
+                boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                break;
+
+        }
+
+    }
 
 }

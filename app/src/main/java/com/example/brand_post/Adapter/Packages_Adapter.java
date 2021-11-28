@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.brand_post.Activity.Payment.Package;
+import com.example.brand_post.Activity.Payment.Pay_Activity;
 import com.example.brand_post.Activity.Post_list;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
@@ -50,6 +51,18 @@ public class Packages_Adapter extends RecyclerView.Adapter<Packages_Adapter.view
     public void onBindViewHolder(@NonNull viewData holder, @SuppressLint("RecyclerView") int position) {
         scale_anim = AnimationUtils.loadAnimation(activity, R.anim.scale_anim);
         holder.liner_package.startAnimation(scale_anim);
+
+        holder.image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(activity, Pay_Activity.class);
+                intent.putExtra("Name","Bhavik Makvana");
+                intent.putExtra("Email","bhavik.makvana@paykun.com");
+                intent.putExtra("Mobile","9876543210");
+                intent.putExtra("Price","2000");
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -60,10 +73,12 @@ public class Packages_Adapter extends RecyclerView.Adapter<Packages_Adapter.view
     class viewData extends RecyclerView.ViewHolder {
 
         LinearLayout liner_package;
+        ImageView image2;
 
         public viewData(@NonNull View itemView) {
             super(itemView);
             liner_package = itemView.findViewById(R.id.liner_package);
+            image2 = itemView.findViewById(R.id.image2);
 
         }
     }

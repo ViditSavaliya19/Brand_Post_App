@@ -41,10 +41,10 @@
 
         <ImageView
             android:id="@+id/e_save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/save" />
+            android:src="@drawable/t_downlode_icon" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,19 +88,14 @@
                     android:layout_gravity="bottom|center" />
 
 
-
-
-
-                    <TextView
-                        android:id="@+id/title_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Hello"
-                        android:textColor="@color/black"
-                        android:textSize="20dp" />
-
-
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Hello"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
 
             </FrameLayout>
@@ -160,9 +155,9 @@
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/e_edit_text_sticker_card"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/e_edit_text_sticker_card"
                             app:cardCornerRadius="5dp">
 
                             <LinearLayout
@@ -241,8 +236,8 @@
                                     android:id="@+id/align_left"
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_align_left_24" />
+                                    android:src="@drawable/ic_baseline_format_align_left_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -252,8 +247,8 @@
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_align_center_24" />
+                                    android:src="@drawable/ic_baseline_format_align_center_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -263,8 +258,8 @@
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_align_right_24" />
+                                    android:src="@drawable/ic_baseline_format_align_right_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -294,8 +289,8 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_text_fields_24" />
+                                    android:src="@drawable/ic_baseline_text_fields_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -305,8 +300,8 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_bold_24" />
+                                    android:src="@drawable/ic_baseline_format_bold_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -316,8 +311,8 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_underlined_24" />
+                                    android:src="@drawable/ic_baseline_format_underlined_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -327,8 +322,8 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:tint="@color/black"
-                                    android:src="@drawable/ic_baseline_format_italic_24" />
+                                    android:src="@drawable/ic_baseline_format_italic_24"
+                                    android:tint="@color/black" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -400,46 +395,98 @@
         android:layout_height="70dp"
         android:padding="10dp">
 
-        <ImageView
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
             android:id="@+id/bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/add_image" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Image"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/image_select_icon" />
-
-
-        <ImageView
+            android:gravity="center"
             android:id="@+id/add_logo"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/add_logo"
+                android:tint="@color/primary4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Logo"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/add_logo_icon"
-            android:tint="@color/primary4" />
-
-
-        <ImageView
+            android:gravity="center"
             android:id="@+id/text_edit"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/addtext"
+                android:tint="@color/primary4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Text"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/addtext" />
-
-
-        <ImageView
+            android:gravity="center"
             android:id="@+id/fram_color"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/sricker_pen" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_weight="1"
+                android:src="@drawable/sticker_pen" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Text"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/setting_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/setting_icon"
-            android:tint="@color/primary4" />
 
 
     </LinearLayout>
