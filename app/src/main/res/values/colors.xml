@@ -2,8 +2,9 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FAE2E2</color>
-    <color name="teal_200">#FE3B40</color>
+    <!--    <color name="purple_700">#F7EDFF</color>-->
+    <!--    <color name="teal_200">#FE3B40</color>-->
+    <!--    <color name="teal_200">#A83BFE</color>-->
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -39,9 +40,29 @@
         <item>@color/magenta</item>
     </array>
 
+    <!--Theme 1-->
 
+    <color name="purple_700">#FAE2E2</color>
+    <color name="teal_200">#FE3B40</color>
     <color name="primary">#FAE2E2</color>
     <color name="primary2">#FE3B40</color>
     <color name="primary3">#1C1C1C</color>
     <color name="primary4">#6F6F6F</color>
+
+
+    <!--    Theme-2-->
+    <!--    <color name="purple_700">#F7EDFF</color>-->
+    <!--    <color name="teal_200">#A83BFE</color>-->
+    <!--    <color name="primary">#F7EDFF</color>-->
+    <!--    <color name="primary2">#A83BFE</color>-->
+    <!--    <color name="primary3">#1C1C1C</color>-->
+    <!--    <color name="primary4">#6F6F6F</color>-->
+
+
+    <!--    <color name="purple_700">#E9FFEB</color>-->
+    <!--    <color name="teal_200">#00D115</color>-->
+    <!--    <color name="primary">#E9FFEB</color>-->
+    <!--    <color name="primary2">#00D115</color>-->
+    <!--    <color name="primary3">#1C1C1C</color>-->
+    <!--    <color name="primary4">#6F6F6F</color>-->
 </resources>

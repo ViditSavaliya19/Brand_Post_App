@@ -124,7 +124,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/up_lable_home" />
+                        android:src="@drawable/lable01" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -141,7 +141,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/trading_lable_home" />
+                        android:src="@drawable/lable02" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -158,7 +158,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/trading_lable_home" />
+                        android:src="@drawable/lable03" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -175,7 +175,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/trading_lable_home" />
+                        android:src="@drawable/lable04" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

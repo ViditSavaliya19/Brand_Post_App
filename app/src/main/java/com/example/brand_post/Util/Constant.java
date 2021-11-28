@@ -379,6 +379,7 @@ public class Constant {
 
     public BusinessDatum getSelected_business(Activity activity)
     {
+
         BusinessDatum model_ragister = new BusinessDatum();
         SharedPreferences sharedPreferences = activity.getSharedPreferences("Business_pref", Context.MODE_PRIVATE);
         model_ragister.setName(sharedPreferences.getString("Name", null));

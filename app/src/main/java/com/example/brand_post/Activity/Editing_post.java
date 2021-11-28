@@ -1,10 +1,14 @@
 package com.example.brand_post.Activity;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.example.brand_post.Activity.Post_list.filter_post_List1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -56,7 +61,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class Editing_post extends AppCompatActivity {
 
-    private ImageView bg;
+    private LinearLayout bg;
     private GridView grid_fontstyle;
     private Typeface typeface;
     public static TextView title_text;
@@ -67,7 +72,7 @@ public class Editing_post extends AppCompatActivity {
     private FrameLayout f_size;
     private FrameLayout m_size;
     private FrameLayout f_color;
-    private ImageView text_edit;
+    private LinearLayout text_edit;
     private String TAG = "Hello";
     private String id;
     private RecyclerView rv_view;
@@ -84,9 +89,9 @@ public class Editing_post extends AppCompatActivity {
     private List<String> preflist = new ArrayList<String>();
     private TextView mobile;
     private TextView email_txt;
-    private ImageView setting_image, add_logo;
+    private LinearLayout setting_image, add_logo;
     private LinearLayout settings_linera, sticker_bg;
-    private ImageView fram_color;
+    private LinearLayout fram_color;
     public static ImageView bottom_design;
     //    private StickerImageView stickerImageView;
     private Model_Ragister model1 = new Model_Ragister();
@@ -98,7 +103,7 @@ public class Editing_post extends AppCompatActivity {
     private FrameLayout inner_sticker_frame;
     private Dialog dialog;
     private EditText add_text_edt;
-
+    String[] perms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
     private TextView f_web;
     public static CheckBox mobile_txt_chk, email_txt_chk, business_txt_chk;
     CardView e_edit_text_sticker_card;
@@ -142,7 +147,7 @@ public class Editing_post extends AppCompatActivity {
         f_web = findViewById(R.id.f_web);
 
 
-        setting_image = findViewById(R.id.setting_image);
+//        setting_image = findViewById(R.id.setting_image);
         email_txt = findViewById(R.id.f_email);
         fram_color = findViewById(R.id.fram_color);
         bottom_design = findViewById(R.id.bottom_design);
@@ -226,15 +231,15 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
-        setting_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetDialog.show();
-                settings_linera.setVisibility(View.VISIBLE);
-                rv_view.setVisibility(View.GONE);
-                f_setting.setVisibility(View.GONE);
-            }
-        });
+//        setting_image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bottomSheetDialog.show();
+//                settings_linera.setVisibility(View.VISIBLE);
+//                rv_view.setVisibility(View.GONE);
+//                f_setting.setVisibility(View.GONE);
+//            }
+//        });
 
 
 // STICKER VIEW ADDED CODE =====================================================================
@@ -293,8 +298,16 @@ public class Editing_post extends AppCompatActivity {
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto, 1);
+
+                Boolean val=checkPermission();
+                if(val) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto, 1);
+                }
+                else {
+                    requestPermission();
+                }
+
 //                Rv_Post();
 //                settings_linera.setVisibility(View.GONE);
 //                rv_view.setVisibility(View.VISIBLE);
@@ -308,14 +321,30 @@ public class Editing_post extends AppCompatActivity {
         add_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto, 2);
+                Boolean val=checkPermission();
+                if(val) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto, 2);
+                }
+                else {
+                    requestPermission();
+                }
             }
         });
     }
 
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
 
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(Editing_post.this, perms, 200);
+
+    }
     void addSticker(String s1) {
         iv_sticker1.setText(s1);
 

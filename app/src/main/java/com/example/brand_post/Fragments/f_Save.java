@@ -54,10 +54,7 @@ public class f_Save extends Fragment {
         folder = new File(filepath.getAbsolutePath() + "/" + "Daily Post Maker");
         if (folder.exists()) {
             files = directory.listFiles();
-            if (files.length <= 0) {
-
-                setData();
-            }
+            setData();
 
         } else {
             Toast.makeText(getActivity(), "No Any Post Create", Toast.LENGTH_SHORT).show();

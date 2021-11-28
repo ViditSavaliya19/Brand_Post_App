@@ -4,10 +4,12 @@ import static com.example.brand_post.Activity.SpleshActivity.slider_list_s;
 import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
 
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -56,6 +58,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Dashbord_Fragment extends Fragment {
 
+    String[] perms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+    int permsRequestCode = 200;
+
     private RecyclerView recycler_trending;
     public static List<Sub_Model> filter_date_cate = new ArrayList<Sub_Model>();
     public static List<Sub_Model> filter_date_cate_days = new ArrayList<Sub_Model>();
@@ -80,6 +85,8 @@ public class Dashbord_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashbord_, container, false);
+
+        requestPermission();
 
         date15.clear();
         setDate();
@@ -324,19 +331,33 @@ public class Dashbord_Fragment extends Fragment {
         Constant constant = new Constant();
         BusinessDatum businessDatum = constant.getSelected_business(getActivity());
 
-        if (businessDatum != null) {
-            Glide.with(getActivity()).load(Constant.imageLink +  businessDatum.getLogo()).into(circle_profile);
-            email_profile_h.setText(businessDatum.getEmail());
-            name_profile_h.setText(businessDatum.getName());
+        Glide.with(getActivity()).load(Constant.imageLink + businessDatum.getLogo()).into(circle_profile);
+        email_profile_h.setText(businessDatum.getEmail());
+        name_profile_h.setText(businessDatum.getName());
 
 
-        } else {
-            Glide.with(getActivity()).load(Constant.imageLink + SpleshActivity.businessData_list_s.get(0).getLogo()).into(circle_profile);
-            email_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getEmail());
-            name_profile_h.setText(SpleshActivity.businessData_list_s.get(0).getName());
-
-        }
     }
 
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(getActivity(), perms, permsRequestCode);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
+
+        switch (permsRequestCode) {
+
+            case 200:
+
+                boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                break;
+
+        }
+
+    }
 
 }
