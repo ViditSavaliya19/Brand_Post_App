@@ -2,7 +2,7 @@ package com.example.brand_post.Util.Model;
 
 public class Model_Ragister {
 
-    String name,email,password,business_name,profile_image,mobile,plan;
+    String name,email,password,business_name,profile_image,mobile,plan,Uid;
 
     public Model_Ragister(String name, String email, String password, String business_name, String profile_image, String mobile, String plan) {
         this.name = name;
@@ -12,11 +12,20 @@ public class Model_Ragister {
         this.profile_image = profile_image;
         this.mobile = mobile;
         this.plan = plan;
+
     }
 
     public Model_Ragister() {
 
 
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
     }
 
     public String getName() {
