@@ -284,9 +284,9 @@ public class Constant {
 
     // =========================
 
-    public List<BusinessDatum> getBusiness() {
+    public List<BusinessDatum> getBusiness(String u_id) {
         Api_Inter apiInterface = Api.getData().create(Api_Inter.class);
-        apiInterface.getBusiness().enqueue(new Callback<List<BusinessDatum>>() {
+        apiInterface.getBusiness(u_id).enqueue(new Callback<List<BusinessDatum>>() {
             @Override
             public void onResponse(Call<List<BusinessDatum>> call, Response<List<BusinessDatum>> response) {
                 if (response.isSuccessful()) {
@@ -332,6 +332,7 @@ public class Constant {
         editor.putString("mobile", model_ragister.getMobile());
         editor.putString("image", model_ragister.getProfile_image());
         editor.putString("plan", model_ragister.getPlan());
+        editor.putString("Uid", model_ragister.getUid());
         editor.commit();
     }
 

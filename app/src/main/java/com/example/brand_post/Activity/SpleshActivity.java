@@ -35,7 +35,6 @@ public class SpleshActivity extends AppCompatActivity {
         postModelList = constant.GetData();
         cate_modelList = constant.GetCategory();
         sub_modelList = constant.GetSub();
-        businessData_list_s = constant.getBusiness();
          constant.Slider();
 
 

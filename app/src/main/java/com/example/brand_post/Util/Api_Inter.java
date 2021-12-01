@@ -34,8 +34,9 @@ public interface Api_Inter {
     @GET("sub_cate_api.php/")
     Call<List<Sub_Model>> getSub_Category();
 
-    @GET("business_retrive.php/")
-    Call<List<BusinessDatum>> getBusiness();
+    @FormUrlEncoded
+    @POST("business_retrive.php/")
+    Call<List<BusinessDatum>> getBusiness(@Field("user_id") String id);
 
     @GET("slider_api.php/")
     Call<List<Slider_data>> getSlider();

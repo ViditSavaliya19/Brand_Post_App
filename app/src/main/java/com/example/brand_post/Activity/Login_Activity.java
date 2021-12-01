@@ -16,6 +16,7 @@ import com.example.brand_post.Fragments.Dashbord_Fragment;
 import com.example.brand_post.Util.Api;
 import com.example.brand_post.Util.Api_Inter;
 import com.example.brand_post.Util.Constant;
+import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Data.Example;
 import com.example.brand_post.Util.Model.Model_Ragister;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,6 +46,7 @@ public class Login_Activity extends AppCompatActivity {
     private List<String> list_data = new ArrayList<>();
     Constant constant = new Constant();
     Model_Ragister model_ragister12 = new Model_Ragister();
+    private List<BusinessDatum> businessData_list_s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,9 @@ public class Login_Activity extends AppCompatActivity {
                 model_ragister12.setPlan(model_ragister1.getData().get(0).getPlan());
                 model_ragister12.setBusiness_name(model_ragister1.getData().get(0).getBusinessName());
                 model_ragister12.setProfile_image(model_ragister1.getData().get(0).getProfileImage());
+                model_ragister12.setProfile_image(model_ragister1.getData().get(0).getUid());
                 constant.Pref(Login_Activity.this,model_ragister12);
+
 
                 startActivity(new Intent(Login_Activity.this, Home.class));
 
@@ -119,7 +123,13 @@ public class Login_Activity extends AppCompatActivity {
         model_ragister12 = constant.Read_Pref(Login_Activity.this);
         if (model_ragister12.getEmail() == null) {
         } else {
-            startActivity(new Intent(Login_Activity.this, Home.class));
+
+
+            businessData_list_s = constant.getBusiness(model_ragister12.getUid());
+            Toast.makeText(Login_Activity.this, model_ragister12.getUid(), Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Login_Activity.this, Home.class);
+            i.putExtra("uid",model_ragister12.getUid());
+            startActivity(i);
 
         }
     }
