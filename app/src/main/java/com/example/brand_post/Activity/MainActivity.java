@@ -1,7 +1,7 @@
 //package com.example.brand_post.Activity;
 //
 //
-//import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
+//import static com.example.brand_post.Activity.Main.SpleshActivity.sub_modelList;
 //
 //import androidx.annotation.RequiresApi;
 //import androidx.appcompat.app.AppCompatActivity;

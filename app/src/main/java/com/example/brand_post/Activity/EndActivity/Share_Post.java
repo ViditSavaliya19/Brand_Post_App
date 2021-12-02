@@ -1,11 +1,9 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.EndActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;

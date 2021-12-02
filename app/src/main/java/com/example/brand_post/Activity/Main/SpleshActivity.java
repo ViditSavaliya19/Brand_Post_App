@@ -1,4 +1,4 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.brand_post.Fragments.Dashbord_Fragment;
+import com.example.brand_post.Activity.Login_Ragistration.Login_Activity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Cate_model;

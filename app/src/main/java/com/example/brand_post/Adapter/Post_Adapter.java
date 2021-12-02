@@ -1,6 +1,6 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.Editing_post.image;
+import static com.example.brand_post.Activity.Create_post.Editing_post.image;
 import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
@@ -9,14 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.brand_post.Activity.Editing_post;
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.PostModel;
 

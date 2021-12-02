@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Activity.Login_Activity">
+    tools:context=".Activity.Login_Ragistration.Login_Activity">
 
     <LinearLayout
         android:layout_width="match_parent"

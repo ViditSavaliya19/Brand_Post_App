@@ -1,4 +1,4 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.PostList;
 
 import androidx.appcompat.app.AppCompatActivity;
 

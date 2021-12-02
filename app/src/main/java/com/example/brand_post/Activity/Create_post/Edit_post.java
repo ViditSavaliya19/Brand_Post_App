@@ -1,16 +1,13 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.Create_post;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,10 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.brand_post.Activity.Payment.Package;
+import com.example.brand_post.Activity.PostList.Select_Fram;
 import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;

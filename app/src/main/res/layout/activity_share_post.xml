@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Activity.Share_Post">
+    tools:context=".Activity.EndActivity.Share_Post">
 
     <LinearLayout
         android:layout_width="match_parent"

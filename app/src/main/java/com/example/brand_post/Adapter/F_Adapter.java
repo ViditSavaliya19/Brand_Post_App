@@ -2,27 +2,20 @@ package com.example.brand_post.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.brand_post.Activity.Share_Post;
-import com.example.brand_post.BuildConfig;
+import com.example.brand_post.Activity.EndActivity.Share_Post;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Model.SAVEDATA;
 

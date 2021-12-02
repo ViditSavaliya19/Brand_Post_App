@@ -17,9 +17,8 @@ import android.widget.Toast;
 
 import androidx.loader.content.CursorLoader;
 
-import com.example.brand_post.Activity.Editing_post;
-import com.example.brand_post.Activity.Login_Activity;
-import com.example.brand_post.Activity.SpleshActivity;
+import com.example.brand_post.Activity.Login_Ragistration.Login_Activity;
+import com.example.brand_post.Activity.Main.SpleshActivity;
 import com.example.brand_post.Util.Model.BusinessDatum;
 import com.example.brand_post.Util.Model.Cate_model;
 import com.example.brand_post.Util.Model.Model_Ragister;

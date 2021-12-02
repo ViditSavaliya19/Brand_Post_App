@@ -1,4 +1,4 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.Fragments.Dashbord_Fragment;
 import com.example.brand_post.Fragments.Settings_Fragment;
 import com.example.brand_post.Fragments.f_Save;
@@ -48,7 +49,7 @@ public class Home extends AppCompatActivity {
                         loadFragment(firstFragment);
                         break;
                     case R.id.edit_post:
-                        startActivity(new Intent(Home.this,Editing_post.class));
+                        startActivity(new Intent(Home.this, Editing_post.class));
                         break;
                     case R.id.save_post:
                         loadFragment(new f_Save());

@@ -1,35 +1,21 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.Editing_post.bottom_design;
-import static com.example.brand_post.Activity.Editing_post.title_text;
-
-import static com.example.brand_post.Util.Constant.imageLink;
+import static com.example.brand_post.Activity.Create_post.Editing_post.bottom_design;
+import static com.example.brand_post.Activity.Create_post.Editing_post.title_text;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.cardview.widget.CardView;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.brand_post.Activity.Editing_post;
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.R;
-import com.example.brand_post.Util.Model.PostModel;
-
-import java.util.List;
 
 public class Color_Adapter extends RecyclerView.Adapter<Color_Adapter.viewData> {
 
