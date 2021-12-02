@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.brand_post.Activity.Editing_post;
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.R;
 
 

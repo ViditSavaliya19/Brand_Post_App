@@ -1,7 +1,7 @@
 package com.example.brand_post.Fragments;
 
-import static com.example.brand_post.Activity.SpleshActivity.slider_list_s;
-import static com.example.brand_post.Activity.SpleshActivity.sub_modelList;
+import static com.example.brand_post.Activity.Main.SpleshActivity.slider_list_s;
+import static com.example.brand_post.Activity.Main.SpleshActivity.sub_modelList;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,9 +24,8 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
-import com.example.brand_post.Activity.SpleshActivity;
+import com.example.brand_post.Activity.Main.SpleshActivity;
 import com.example.brand_post.Adapter.Rv_Adapter;
-import com.example.brand_post.Adapter.Rv_day_Adapter;
 import com.example.brand_post.Adapter.Rv_trending_Adapter;
 import com.example.brand_post.Adapter.Selecct_business_Adapter;
 import com.example.brand_post.Adapter.SliderAdapterExample;
@@ -41,11 +39,8 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
-import java.lang.reflect.Array;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;

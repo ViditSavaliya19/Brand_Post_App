@@ -7,8 +7,6 @@ import static com.example.brand_post.Fragments.Dashbord_Fragment.sheetDialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.brand_post.Activity.Business.AB_Activity;
-import com.example.brand_post.Activity.Post_list;
-import com.example.brand_post.Activity.SpleshActivity;
+import com.example.brand_post.Activity.Main.SpleshActivity;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.BusinessDatum;
-import com.example.brand_post.Util.Model.Sub_Model;
 
 import java.util.List;
 

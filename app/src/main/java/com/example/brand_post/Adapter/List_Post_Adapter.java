@@ -1,29 +1,24 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.Select_Fram.s_img;
+import static com.example.brand_post.Activity.PostList.Select_Fram.s_img;
 import static com.example.brand_post.Util.Constant.imageLink;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.brand_post.Activity.Editing_post;
-import com.example.brand_post.Activity.Post_list;
-import com.example.brand_post.Activity.Select_Fram;
+import com.example.brand_post.Activity.PostList.Post_list;
+import com.example.brand_post.Activity.PostList.Select_Fram;
 import com.example.brand_post.R;
-import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.PostModel;
 
 import java.util.List;

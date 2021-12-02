@@ -1,16 +1,14 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.Login_Ragistration;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,10 +21,6 @@ import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Model_Ragister;
 
 import java.io.File;
-import java.io.IOException;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.http.Url;
 
 public class Register_Activity extends AppCompatActivity {
 

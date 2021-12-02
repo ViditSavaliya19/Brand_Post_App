@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.brand_post.Activity.SpleshActivity;
+import com.example.brand_post.Activity.Main.SpleshActivity;
 import com.example.brand_post.Adapter.Selecct_business_Adapter;
 import com.example.brand_post.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

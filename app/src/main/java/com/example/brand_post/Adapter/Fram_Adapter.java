@@ -1,28 +1,21 @@
 package com.example.brand_post.Adapter;
 
-import static com.example.brand_post.Activity.Editing_post.business_txt_chk;
-import static com.example.brand_post.Activity.Editing_post.email_txt_chk;
-import static com.example.brand_post.Activity.Editing_post.mobile_txt_chk;
-
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.brand_post.Activity.Edit_post;
-import com.example.brand_post.Activity.Editing_post;
+import com.example.brand_post.Activity.Create_post.Edit_post;
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.BusinessDatum;
-import com.example.brand_post.Util.Model.Model_Ragister;
 
 public class Fram_Adapter extends RecyclerView.Adapter<Fram_Adapter.ViewData> {
     Activity activity;

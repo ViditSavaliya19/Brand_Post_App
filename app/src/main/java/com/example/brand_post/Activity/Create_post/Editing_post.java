@@ -1,10 +1,9 @@
-package com.example.brand_post.Activity;
+package com.example.brand_post.Activity.Create_post;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static com.example.brand_post.Activity.Post_list.filter_post_List1;
+import static com.example.brand_post.Activity.PostList.Post_list.filter_post_List1;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -47,9 +46,7 @@ import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.Model_Ragister;
 
-import com.example.brand_post.Util.Stickers.StickerImageView;
 import com.example.brand_post.Util.Stickers.StickerTextView;
-import com.example.brand_post.Util.Stickers.StickerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
@@ -347,7 +344,6 @@ public class Editing_post extends AppCompatActivity {
     }
     void addSticker(String s1) {
         iv_sticker1.setText(s1);
-
         iv_sticker1.setTextColor(Color.RED);
         iv_sticker1.setAlignment(Gravity.CENTER);
         framlayout.addView(iv_sticker1);
