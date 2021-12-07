@@ -1,31 +1,20 @@
 package com.example.brand_post.Util.Model;
 
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class BusinessDatum {
 
-    @SerializedName("id")
-    @Expose
     private String id;
-    @SerializedName("user_number")
-    @Expose
+
     private String userNumber;
-    @SerializedName("name")
-    @Expose
+
     private String name;
-    @SerializedName("email")
-    @Expose
+
     private String email;
-    @SerializedName("website")
-    @Expose
+
     private String website;
-    @SerializedName("mobile")
-    @Expose
+
     private String mobile;
-    @SerializedName("logo")
-    @Expose
+
     private String logo;
 
     private String selected;

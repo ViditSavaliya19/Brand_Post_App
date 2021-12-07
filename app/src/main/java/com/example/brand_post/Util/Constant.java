@@ -283,7 +283,7 @@ public class Constant {
 
     // =========================
 
-    public List<BusinessDatum> getBusiness(String u_id) {
+    public List<BusinessDatum> getBusiness(Activity activity,String u_id) {
         Api_Inter apiInterface = Api.getData().create(Api_Inter.class);
         apiInterface.getBusiness(u_id).enqueue(new Callback<List<BusinessDatum>>() {
             @Override
@@ -295,8 +295,8 @@ public class Constant {
                     Log.e("TAG", "onResponse: Business**************** "+business_data_list.size() );
                     Log.e("TAG", "onBindViewHolder: *************** ------- "+imageLink+business_data_list.get(0).getLogo());
 
-
                 }
+
 
             }
 

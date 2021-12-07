@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -41,6 +42,9 @@ import com.example.brand_post.Adapter.Color_Adapter;
 import com.example.brand_post.Adapter.FontStyleAdapter;
 import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.Adapter.Post_Adapter;
+import com.example.brand_post.StickerAdapter;
+
+import com.example.brand_post.StickerView1;
 import com.example.brand_post.Util.MTouch.MultiTouchListener;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
@@ -57,7 +61,8 @@ import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class Editing_post extends AppCompatActivity {
-
+    private StickerView1 mCurrentView;
+    private ArrayList<Integer> stickerlist;
     private LinearLayout bg;
     private GridView grid_fontstyle;
     private Typeface typeface;
@@ -106,6 +111,8 @@ public class Editing_post extends AppCompatActivity {
     CardView e_edit_text_sticker_card;
     private ImageView align_left;
     private StickerTextView iv_sticker1;
+    private StickerAdapter stickerAdapter;
+    private Integer stickerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,11 +227,7 @@ public class Editing_post extends AppCompatActivity {
         fram_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rv_Color();
-                settings_linera.setVisibility(View.GONE);
-                rv_view.setVisibility(View.VISIBLE);
-                f_setting.setVisibility(View.GONE);
-                bottomSheetDialog.show();
+                showFxDialog();
             }
         });
 
@@ -251,18 +254,7 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
-//        adda_Image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stickerImageView.setImageResource(R.drawable.ad_congratulations);
-//
-//                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-//                framlayout.addView(stickerImageView, layoutParams);
-//
-////                img_logo.setImageBitmap(bmp);
-////                addStrickerView(R.draw(intent, 0);
-//            }
-//        });
+
         text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -342,30 +334,30 @@ public class Editing_post extends AppCompatActivity {
         ActivityCompat.requestPermissions(Editing_post.this, perms, 200);
 
     }
-    void addSticker(String s1) {
-        iv_sticker1.setText(s1);
-        iv_sticker1.setTextColor(Color.RED);
-        iv_sticker1.setAlignment(Gravity.CENTER);
-        framlayout.addView(iv_sticker1);
-
-        setCurrentEdit(iv_sticker1);
-
-
-//        iv_sticker1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+//    void addSticker(String s1) {
+//        iv_sticker1.setText(s1);
+//        iv_sticker1.setTextColor(Color.RED);
+//        iv_sticker1.setAlignment(Gravity.CENTER);
+//        framlayout.addView(iv_sticker1);
 //
-//            }
-//        });
-    }
+//        setCurrentEdit(iv_sticker1);
+//
+//
+////        iv_sticker1.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////
+////            }
+////        });
+//    }
 
-    private void setCurrentEdit(StickerTextView stickerView) {
-        if (iv_sticker1 != null) {
-            iv_sticker1.setControlItemsHidden(false);
-        }
-//        iv_sticker1 = stickerView;
-        stickerView.setControlItemsHidden(true);
-    }
+//    private void setCurrentEdit(StickerTextView stickerView) {
+//        if (iv_sticker1 != null) {
+//            iv_sticker1.setControlItemsHidden(false);
+//        }
+////        iv_sticker1 = stickerView;
+//        stickerView.setControlItemsHidden(true);
+//    }
 
 
     void addTextDailog(int opreation) {
@@ -375,22 +367,22 @@ public class Editing_post extends AppCompatActivity {
         add_text_edt = dialog.findViewById(R.id.add_text_edt);
         Button add_text_btn = dialog.findViewById(R.id.add_text_btn);
 
-        add_text_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(opreation ==0 )
-                {
-                    addSticker(add_text_edt.getText().toString());
-                }
-                else if(opreation==1)
-                {
-                    iv_sticker1.setText(add_text_edt.getText().toString());
-                }
-//                title_text.setText(add_text_edt.getText().toString());
-                dialog.dismiss();
-            }
-        });
+//        add_text_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(opreation ==0 )
+//                {
+//                    addSticker(add_text_edt.getText().toString());
+//                }
+//                else if(opreation==1)
+//                {
+//                    iv_sticker1.setText(add_text_edt.getText().toString());
+//                }
+////                title_text.setText(add_text_edt.getText().toString());
+//                dialog.dismiss();
+//            }
+//        });
 
         dialog.show();
     }
@@ -489,10 +481,86 @@ public class Editing_post extends AppCompatActivity {
     }
 
     private void Rv_Color() {
-        Color_Adapter adapter = new Color_Adapter(Editing_post.this, getResources().getIntArray(R.array.rainbow));
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Editing_post.this, LinearLayoutManager.HORIZONTAL, false);
-        rv_view.setLayoutManager(layoutManager);
-        rv_view.setAdapter(adapter);
+
+        Dialog dialog=new Dialog(Editing_post.this);
+        dialog.setContentView(R.layout.sticker_dialog);
+        dialog.show();
+
+
+//        Color_Adapter adapter = new Color_Adapter(Editing_post.this, getResources().getIntArray(R.array.rainbow));
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Editing_post.this, LinearLayoutManager.HORIZONTAL, false);
+//        rv_view.setLayoutManager(layoutManager);
+//        rv_view.setAdapter(adapter);
+    }
+
+    private void showFxDialog() {
+
+        final Dialog dial = new Dialog(this, android.R.style.Theme_Translucent);
+        dial.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dial.setContentView(R.layout.sticker_dialog);
+        dial.setCancelable(true);
+        dial.setCanceledOnTouchOutside(false);
+
+
+        stickerlist = new ArrayList<>();
+        final GridView grid_sticker = (GridView) dial.findViewById(R.id.gridStickerList);
+//        setStickerList1();
+//        stickerAdapter = new StickerAdapter(getApplicationContext(), stickerlist);
+//        grid_sticker.setAdapter(stickerAdapter);
+
+        stickerlist.clear();
+        setStickerList1();
+        stickerAdapter = new StickerAdapter(getApplicationContext(), stickerlist);
+        grid_sticker.setAdapter(stickerAdapter);
+
+        grid_sticker.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final StickerView1 stickerView = new StickerView1(Editing_post.this);
+                stickerId = stickerlist.get(i);
+                stickerView.setImageResource(stickerId);
+                stickerView.setOperationListener(new StickerView1.OperationListener() {
+                    @Override
+                    public void onDeleteClick() {
+                        framlayout.removeView(stickerView);
+                    }
+
+                    @Override
+                    public void onEdit(StickerView1 stickerView) {
+                        mCurrentView.setInEdit(false);
+                        mCurrentView = stickerView;
+                        mCurrentView.setInEdit(true);
+                    }
+
+                    @Override
+                    public void onTop(StickerView1 stickerView) {
+                    }
+                });
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+                stickerView.setLayoutParams(new FrameLayout.LayoutParams(200, 200, Gravity.CENTER));
+                framlayout.addView(stickerView, lp);
+                setCurrentEdit(stickerView);
+                dial.dismiss();
+            }
+        });
+        dial.show();
+    }
+
+    private void setCurrentEdit(StickerView1 stickerView) {
+        if (mCurrentView != null) {
+            mCurrentView.setInEdit(false);
+        }
+        mCurrentView = stickerView;
+        stickerView.setInEdit(true);
+    }
+
+    private void setStickerList1() {
+        stickerlist.add(R.drawable.close);
+        stickerlist.add(R.drawable.close);
+        stickerlist.add(R.drawable.close);
+        stickerlist.add(R.drawable.close);
+        stickerlist.add(R.drawable.close);
     }
 
     public void color(boolean AlphaSupport) {

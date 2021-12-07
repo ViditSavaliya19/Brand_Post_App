@@ -37,6 +37,7 @@
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="#00FFFFFF"
                 android:hint="Email"
+                android:text="demo@gmail.com"
                 android:textColor="@color/primary2"
                 android:textColorHint="#FF9193" />
         </LinearLayout>
@@ -53,6 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
+                android:text="12345"
+                android:inputType="numberPassword"
                 android:backgroundTint="#00FFFFFF"
                 android:hint="Password"
                 android:textColor="@color/primary2"

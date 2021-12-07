@@ -1,6 +1,9 @@
 package com.example.brand_post.Activity.Login_Ragistration;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.brand_post.Activity.Main.Home;
+import com.example.brand_post.Activity.Main.SpleshActivity;
 import com.example.brand_post.Util.Api;
 import com.example.brand_post.Util.Api_Inter;
 import com.example.brand_post.Util.Constant;
@@ -41,6 +45,8 @@ public class Login_Activity extends AppCompatActivity {
     private List<String> list_data = new ArrayList<>();
     Constant constant = new Constant();
     Model_Ragister model_ragister12 = new Model_Ragister();
+//    private List<BusinessDatum> businessData_list_s;
+    private Dialog dialog;
     private List<BusinessDatum> businessData_list_s;
 
     @Override
@@ -64,10 +70,10 @@ public class Login_Activity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (list_data.size() == 0) {
-                    Login(lEmail_edt.getText().toString().trim(), lPassword_edt.getText().toString().trim());
+                    lodingdialoge();
+                   Login(lEmail_edt.getText().toString().trim(), lPassword_edt.getText().toString().trim());
+
                 }
             }
         });
@@ -81,9 +87,6 @@ public class Login_Activity extends AppCompatActivity {
             public void onResponse(Call<Example> call, Response<Example> response) {
 
                 model_ragister1 = response.body();
-
-
-
                 model_ragister12.setEmail(model_ragister1.getData().get(0).getEmail());
                 model_ragister12.setName(model_ragister1.getData().get(0).getName());
                 model_ragister12.setPassword(model_ragister1.getData().get(0).getPassword());
@@ -91,14 +94,19 @@ public class Login_Activity extends AppCompatActivity {
                 model_ragister12.setPlan(model_ragister1.getData().get(0).getPlan());
                 model_ragister12.setBusiness_name(model_ragister1.getData().get(0).getBusinessName());
                 model_ragister12.setProfile_image(model_ragister1.getData().get(0).getProfileImage());
-                model_ragister12.setProfile_image(model_ragister1.getData().get(0).getUid());
+                model_ragister12.setUid(model_ragister1.getData().get(0).getUser_id());
                 constant.Pref(Login_Activity.this,model_ragister12);
 
+                businessData_list_s = constant.getBusiness(Login_Activity.this,model_ragister12.getUid());
+//                constant.Add_Selected_Business_pref(Login_Activity.this,  businessData_list_s,0);
+                Intent i = new Intent(Login_Activity.this, Home.class);
+                i.putExtra("uid",model_ragister12.getUid());
+                startActivity(i);
 
-                startActivity(new Intent(Login_Activity.this, Home.class));
-
-
+                dialog.dismiss();
                 Log.e("TAG", "onResponse: Registration " + model_ragister1.getMsg());
+                isCheck=true;
+
 
             }
 
@@ -120,13 +128,20 @@ public class Login_Activity extends AppCompatActivity {
         } else {
 
 
-            businessData_list_s = constant.getBusiness(model_ragister12.getUid());
+            SpleshActivity.businessData_list_s = constant.getBusiness(Login_Activity.this,model_ragister12.getUid());
             Toast.makeText(Login_Activity.this, model_ragister12.getUid(), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(Login_Activity.this, Home.class);
             i.putExtra("uid",model_ragister12.getUid());
             startActivity(i);
 
         }
+    }
+
+    void lodingdialoge()
+    {
+        dialog=new Dialog(Login_Activity.this,R.style.full_screen_dialog);
+        dialog.setContentView(R.layout.loding);
+        dialog.show();
     }
 
     @Override

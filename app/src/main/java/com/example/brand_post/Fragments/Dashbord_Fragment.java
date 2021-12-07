@@ -91,6 +91,8 @@ public class Dashbord_Fragment extends Fragment {
         filter_date_cate_days.clear();
         filter_date_cate_daily_post.clear();
         filter_date_cate_all_days.clear();
+        setBusiness_header();
+
 
         imageSlider = view.findViewById(R.id.imageSlider);
         recycler_trending = view.findViewById(R.id.recycler_trending);
@@ -102,7 +104,6 @@ public class Dashbord_Fragment extends Fragment {
         email_profile_h = view.findViewById(R.id.email_profile_h);
         name_profile_h = view.findViewById(R.id.name_profile_h);
 
-        setBusiness_header();
 
         circle_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,7 +326,6 @@ public class Dashbord_Fragment extends Fragment {
     void setBusiness_header() {
         Constant constant = new Constant();
         BusinessDatum businessDatum = constant.getSelected_business(getActivity());
-
         Glide.with(getActivity()).load(Constant.imageLink + businessDatum.getLogo()).into(circle_profile);
         email_profile_h.setText(businessDatum.getEmail());
         name_profile_h.setText(businessDatum.getName());
