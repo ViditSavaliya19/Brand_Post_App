@@ -47,7 +47,7 @@ public class Login_Activity extends AppCompatActivity {
     Model_Ragister model_ragister12 = new Model_Ragister();
 //    private List<BusinessDatum> businessData_list_s;
     private Dialog dialog;
-    private List<BusinessDatum> businessData_list_s;
+    private List<BusinessDatum> businessData_list_s=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class Login_Activity extends AppCompatActivity {
                 model_ragister12.setUid(model_ragister1.getData().get(0).getUser_id());
                 constant.Pref(Login_Activity.this,model_ragister12);
 
-                businessData_list_s = constant.getBusiness(Login_Activity.this,model_ragister12.getUid());
+                constant.getBusiness(model_ragister12.getUid());
 //                constant.Add_Selected_Business_pref(Login_Activity.this,  businessData_list_s,0);
                 Intent i = new Intent(Login_Activity.this, Home.class);
                 i.putExtra("uid",model_ragister12.getUid());
@@ -128,8 +128,7 @@ public class Login_Activity extends AppCompatActivity {
         } else {
 
 
-            SpleshActivity.businessData_list_s = constant.getBusiness(Login_Activity.this,model_ragister12.getUid());
-            Toast.makeText(Login_Activity.this, model_ragister12.getUid(), Toast.LENGTH_SHORT).show();
+            constant.getBusiness(model_ragister12.getUid());
             Intent i = new Intent(Login_Activity.this, Home.class);
             i.putExtra("uid",model_ragister12.getUid());
             startActivity(i);

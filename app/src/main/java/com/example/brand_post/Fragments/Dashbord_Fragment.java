@@ -91,7 +91,7 @@ public class Dashbord_Fragment extends Fragment {
         filter_date_cate_days.clear();
         filter_date_cate_daily_post.clear();
         filter_date_cate_all_days.clear();
-        setBusiness_header();
+//        setBusiness_header();
 
 
         imageSlider = view.findViewById(R.id.imageSlider);

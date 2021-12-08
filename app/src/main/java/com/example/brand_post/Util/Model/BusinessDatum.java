@@ -1,7 +1,7 @@
 package com.example.brand_post.Util.Model;
 
-
 public class BusinessDatum {
+
 
     private String id;
 
@@ -16,8 +16,6 @@ public class BusinessDatum {
     private String mobile;
 
     private String logo;
-
-    private String selected;
 
     public String getId() {
         return id;
@@ -75,12 +73,4 @@ public class BusinessDatum {
         this.logo = logo;
     }
 
-
-    public String getSelected() {
-        return selected;
-    }
-
-    public void setSelected(String selected) {
-        this.selected = selected;
-    }
 }

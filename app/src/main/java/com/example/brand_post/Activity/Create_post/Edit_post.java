@@ -59,13 +59,13 @@ public class Edit_post extends AppCompatActivity {
         e_main_save_frame=findViewById(R.id.e_main_save_frame);
         indicator=findViewById(R.id.indicator);
 
-        Fram_Adapter fram_adapter=new Fram_Adapter(this,layout_fram);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        rv_view_frame.setLayoutManager(layoutManager);
-        rv_view_frame.setAdapter(fram_adapter);
-        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
-        linearSnapHelper.attachToRecyclerView(rv_view_frame);
-        indicator.attachToRecyclerView(rv_view_frame);
+//        Fram_Adapter fram_adapter=new Fram_Adapter(this,layout_fram);
+//        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+//        rv_view_frame.setLayoutManager(layoutManager);
+//        rv_view_frame.setAdapter(fram_adapter);
+//        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+//        linearSnapHelper.attachToRecyclerView(rv_view_frame);
+//        indicator.attachToRecyclerView(rv_view_frame);
 
 
 

@@ -283,32 +283,20 @@ public class Constant {
 
     // =========================
 
-    public List<BusinessDatum> getBusiness(Activity activity,String u_id) {
-        Api_Inter apiInterface = Api.getData().create(Api_Inter.class);
-        apiInterface.getBusiness(u_id).enqueue(new Callback<List<BusinessDatum>>() {
+    public void getBusiness(String u_id) {
+        Api_Inter api_inter=Api.getData().create(Api_Inter.class);
+        api_inter.getBusiness(u_id).enqueue(new Callback<List<BusinessDatum>>() {
             @Override
             public void onResponse(Call<List<BusinessDatum>> call, Response<List<BusinessDatum>> response) {
-                if (response.isSuccessful()) {
-
                     business_data_list = response.body();
                     SpleshActivity.businessData_list_s=business_data_list;
-                    Log.e("TAG", "onResponse: Business**************** "+business_data_list.size() );
-                    Log.e("TAG", "onBindViewHolder: *************** ------- "+imageLink+business_data_list.get(0).getLogo());
-
-                }
-
-
             }
 
             @Override
             public void onFailure(Call<List<BusinessDatum>> call, Throwable t) {
-
+                Log.e("TAG", "onFailure: getBusiness==== "+t.getMessage() );
             }
-
-
         });
-
-        return business_data_list;
 
     }
 

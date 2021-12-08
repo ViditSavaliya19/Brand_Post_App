@@ -6,6 +6,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,12 +25,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.brand_post.Activity.Create_post.Edit_post;
+import com.example.brand_post.Activity.Payment.Package;
+import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.Adapter.List_Post_Adapter;
 import com.example.brand_post.R;
+import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.PostModel;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class Select_Fram extends AppCompatActivity {
 
@@ -40,11 +49,41 @@ public class Select_Fram extends AppCompatActivity {
     private ImageView s_back_btn;
     private CardView s_image_card;
     public static Bitmap bitmap_image;
+    int[] layout_fram={R.layout.frame2,R.layout.frame3};
+    private RecyclerView rv_view_frame;
+    private ScrollingPagerIndicator indicator;
+    ImageView s_save_btn,edit_setting_image;
+    private BottomSheetDialog bottomSheetDialog;
+    private Constant constant;
+    private FrameLayout fram_view;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_fram);
+
+        rv_view_frame=findViewById(R.id.s_rv_view_frame);
+        indicator=findViewById(R.id.s_indicator);
+        s_save_btn = findViewById(R.id.s_fram_save_btn);
+        fram_view=findViewById(R.id.fram_view);
+
+        Fram_Adapter fram_adapter=new Fram_Adapter(Select_Fram.this,layout_fram);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        rv_view_frame.setLayoutManager(layoutManager);
+        rv_view_frame.setAdapter(fram_adapter);
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(rv_view_frame);
+        indicator.attachToRecyclerView(rv_view_frame);
+
+
+        s_save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                image_downlod_Dialoge();
+                bottomSheetDialog.show();
+            }
+        });
 
         s_back_btn = findViewById(R.id.s_back_btn);
         s_image_card = findViewById(R.id.s_image_card);
@@ -136,6 +175,42 @@ public class Select_Fram extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
         s_rv_post.setLayoutManager(layoutManager);
         s_rv_post.setAdapter(list_post_adapter);
+    }
+    void image_downlod_Dialoge() {
+        bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.downlode_dialoge_item);
+        LinearLayout subcribe = bottomSheetDialog.findViewById(R.id.subcribe);
+        LinearLayout watch_video = bottomSheetDialog.findViewById(R.id.watch_video);
+        LinearLayout close_bottom_sheet = bottomSheetDialog.findViewById(R.id.close_bottom_sheet);
+
+
+        close_bottom_sheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        // Show Ad
+        watch_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ad Code
+
+                Bitmap finalEditedImage = constant.getMainFrameBitmap(fram_view);
+                constant.save_Post(Select_Fram.this,finalEditedImage);
+            }
+        });
+
+        // Show a Package
+        subcribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Payment code hear
+                startActivity(new Intent(Select_Fram.this, Package.class));
+            }
+        });
+
     }
 
     public List<PostModel> Guj_Filter_Cate(String n, String s) {

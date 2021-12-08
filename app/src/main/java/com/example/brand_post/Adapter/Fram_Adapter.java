@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brand_post.Activity.Create_post.Edit_post;
 import com.example.brand_post.Activity.Create_post.Editing_post;
+import com.example.brand_post.Activity.PostList.Select_Fram;
 import com.example.brand_post.R;
 import com.example.brand_post.Util.Constant;
 import com.example.brand_post.Util.Model.BusinessDatum;
@@ -22,7 +23,7 @@ public class Fram_Adapter extends RecyclerView.Adapter<Fram_Adapter.ViewData> {
     int[] layout_fram;
     Constant constant;
 
-    public Fram_Adapter(Edit_post edit_post, int[] layout_fram) {
+    public Fram_Adapter(Select_Fram edit_post, int[] layout_fram) {
         this.activity = edit_post;
         this.layout_fram = layout_fram;
     }
