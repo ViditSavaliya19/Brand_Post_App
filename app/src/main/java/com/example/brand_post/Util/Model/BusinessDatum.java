@@ -1,34 +1,21 @@
 package com.example.brand_post.Util.Model;
 
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class BusinessDatum {
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("user_number")
-    @Expose
-    private String userNumber;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("website")
-    @Expose
-    private String website;
-    @SerializedName("mobile")
-    @Expose
-    private String mobile;
-    @SerializedName("logo")
-    @Expose
-    private String logo;
 
-    private String selected;
+    private String id;
+
+    private String userNumber;
+
+    private String name;
+
+    private String email;
+
+    private String website;
+
+    private String mobile;
+
+    private String logo;
 
     public String getId() {
         return id;
@@ -86,12 +73,4 @@ public class BusinessDatum {
         this.logo = logo;
     }
 
-
-    public String getSelected() {
-        return selected;
-    }
-
-    public void setSelected(String selected) {
-        this.selected = selected;
-    }
 }
