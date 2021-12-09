@@ -15,7 +15,7 @@ import android.view.MotionEvent;
 import androidx.core.view.MotionEventCompat;
 
 
-public class StickerView1 extends androidx.appcompat.widget.AppCompatImageView {
+public class StickerView extends androidx.appcompat.widget.AppCompatImageView {
     private static final String TAG = "StickerView";
 
     private Bitmap deleteBitmap;
@@ -86,19 +86,19 @@ public class StickerView1 extends androidx.appcompat.widget.AppCompatImageView {
     //水平镜像
     private boolean isHorizonMirror = false;
 
-    public StickerView1(Context context, AttributeSet attrs) {
+    public StickerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         stickerId = 0;
         init();
     }
 
-    public StickerView1(Context context) {
+    public StickerView(Context context) {
         super(context);
         stickerId = 0;
         init();
     }
 
-    public StickerView1(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StickerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         stickerId = 0;
         init();
@@ -544,9 +544,9 @@ public class StickerView1 extends androidx.appcompat.widget.AppCompatImageView {
     public interface OperationListener {
         void onDeleteClick();
 
-        void onEdit(StickerView1 stickerView1);
+        void onEdit(StickerView stickerView);
 
-        void onTop(StickerView1 stickerView1);
+        void onTop(StickerView stickerView);
     }
 
     public void setOperationListener(OperationListener operationListener) {

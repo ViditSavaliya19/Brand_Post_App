@@ -6,8 +6,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         app:cardBackgroundColor="#E8F7FF"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true">
@@ -39,10 +39,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="FESTIVAL"
+                android:maxLines="1"
                 android:textColor="@color/primary3"
                 android:textSize="15dp" />
 
             <TextView
+                android:maxLines="1"
                 android:id="@+id/date_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

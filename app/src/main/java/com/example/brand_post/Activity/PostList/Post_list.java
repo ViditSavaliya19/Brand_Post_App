@@ -107,7 +107,6 @@ public class Post_list extends AppCompatActivity {
     public List<PostModel> Guj_Filter_Cate(String n, String s) {
         List<PostModel> filter_post_List = new ArrayList<PostModel>();
         for (int i = 0; i < postModelList.size(); i++) {
-            Toast.makeText(Post_list.this, "" + postModelList.get(i).gets_cate(), Toast.LENGTH_SHORT).show();
             if (postModelList.get(i).gets_cate().equals(n)) {
                 if (postModelList.get(i).getlangauge().equals(s)) {
 
