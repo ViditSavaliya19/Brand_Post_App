@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.brand_post.Activity.Create_post.Edit_post;
+import com.example.brand_post.Activity.Create_post.Editing_post;
 import com.example.brand_post.Activity.Payment.Package;
 import com.example.brand_post.Adapter.Fram_Adapter;
 import com.example.brand_post.Adapter.List_Post_Adapter;
@@ -87,14 +88,7 @@ public class Select_Fram extends AppCompatActivity {
 
         s_back_btn = findViewById(R.id.s_back_btn);
         s_image_card = findViewById(R.id.s_image_card);
-        s_image_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BitmapDrawable drawable = (BitmapDrawable)s_img.getDrawable();
-                bitmap_image = drawable.getBitmap();
-                startActivity(new Intent(Select_Fram.this, Edit_post.class));
-            }
-        });
+
 
 
         s_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +192,7 @@ public class Select_Fram extends AppCompatActivity {
                 // Ad Code
 
                 Bitmap finalEditedImage = constant.getMainFrameBitmap(fram_view);
-                constant.save_Post(Select_Fram.this,finalEditedImage);
+                constant.save_Post(Select_Fram.this, finalEditedImage);
             }
         });
 
