@@ -50,10 +50,10 @@ public class Select_Fram extends AppCompatActivity {
     private ImageView s_back_btn;
     private CardView s_image_card;
     public static Bitmap bitmap_image;
-    int[] layout_fram={R.layout.frame2,R.layout.frame3};
+    int[] layout_fram = {R.layout.frame2, R.layout.frame3};
     private RecyclerView rv_view_frame;
     private ScrollingPagerIndicator indicator;
-    ImageView s_save_btn,edit_setting_image;
+    ImageView s_save_btn, edit_setting_image;
     private BottomSheetDialog bottomSheetDialog;
     private Constant constant;
     private FrameLayout fram_view;
@@ -63,14 +63,14 @@ public class Select_Fram extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_fram);
-
-        rv_view_frame=findViewById(R.id.s_rv_view_frame);
-        indicator=findViewById(R.id.s_indicator);
+        constant = new Constant();
+        rv_view_frame = findViewById(R.id.s_rv_view_frame);
+        indicator = findViewById(R.id.s_indicator);
         s_save_btn = findViewById(R.id.s_fram_save_btn);
-        fram_view=findViewById(R.id.fram_view);
+        fram_view = findViewById(R.id.fram_view);
 
-        Fram_Adapter fram_adapter=new Fram_Adapter(Select_Fram.this,layout_fram);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        Fram_Adapter fram_adapter = new Fram_Adapter(Select_Fram.this, layout_fram);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rv_view_frame.setLayoutManager(layoutManager);
         rv_view_frame.setAdapter(fram_adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
@@ -88,7 +88,6 @@ public class Select_Fram extends AppCompatActivity {
 
         s_back_btn = findViewById(R.id.s_back_btn);
         s_image_card = findViewById(R.id.s_image_card);
-
 
 
         s_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +169,7 @@ public class Select_Fram extends AppCompatActivity {
         s_rv_post.setLayoutManager(layoutManager);
         s_rv_post.setAdapter(list_post_adapter);
     }
+
     void image_downlod_Dialoge() {
         bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.downlode_dialoge_item);

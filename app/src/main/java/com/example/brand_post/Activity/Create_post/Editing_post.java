@@ -110,6 +110,7 @@ public class Editing_post extends AppCompatActivity {
     private StickerAdapter stickerAdapter;
     private Integer stickerId;
     private FrameLayout frame_sticker;
+    private Dialog dial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +146,7 @@ public class Editing_post extends AppCompatActivity {
         mobile = findViewById(R.id.f2_mobile);
         f_web = findViewById(R.id.f_web);
 
-        frame_sticker=findViewById(R.id.frame_sticker);
+
 
 //        setting_image = findViewById(R.id.setting_image);
         email_txt = findViewById(R.id.f_email);
@@ -169,6 +170,7 @@ public class Editing_post extends AppCompatActivity {
             }
         });
 
+        showFxDialog();
 
         f_size.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,7 +220,7 @@ public class Editing_post extends AppCompatActivity {
         fram_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFxDialog();
+                dial.show();
             }
         });
         text_edit.setOnClickListener(new View.OnClickListener() {
@@ -339,7 +341,7 @@ public class Editing_post extends AppCompatActivity {
 
     private void showFxDialog() {
 
-        final Dialog dial = new Dialog(this, android.R.style.Theme_Translucent);
+        dial = new Dialog(this, android.R.style.Theme_Translucent);
         dial.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dial.setContentView(R.layout.sticker_dialog);
         dial.setCancelable(true);
@@ -383,12 +385,12 @@ public class Editing_post extends AppCompatActivity {
                 });
                 FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER);
                 stickerView.setLayoutParams(new FrameLayout.LayoutParams(200, 200, Gravity.CENTER));
-                frame_sticker.addView(stickerView, lp);
+                framlayout.addView(stickerView, lp);
                 setCurrentEdit(stickerView);
                 dial.dismiss();
             }
         });
-        dial.show();
+
     }
 
     private void setCurrentEdit(StickerView stickerView) {

@@ -43,7 +43,7 @@ public class Login_Activity extends AppCompatActivity {
     private EditText lPassword_edt;
     private LinearLayout l_ragister;
     private List<String> list_data = new ArrayList<>();
-    Constant constant = new Constant();
+    Constant constant;
     Model_Ragister model_ragister12 = new Model_Ragister();
 //    private List<BusinessDatum> businessData_list_s;
     private Dialog dialog;
@@ -53,8 +53,7 @@ public class Login_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Constant constant = new Constant();
+        constant = new Constant();
         l_ragister = findViewById(R.id.l_ragister);
         login_btn = findViewById(R.id.login_btn);
         lEmail_edt = findViewById(R.id.lEmail_edt);
@@ -138,7 +137,7 @@ public class Login_Activity extends AppCompatActivity {
 
     void lodingdialoge()
     {
-        dialog=new Dialog(Login_Activity.this,R.style.full_screen_dialog);
+        dialog=new Dialog(Login_Activity.this,android.R.style.Theme_Translucent);
         dialog.setContentView(R.layout.loding);
         dialog.show();
     }

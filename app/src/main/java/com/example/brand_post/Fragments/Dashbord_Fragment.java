@@ -301,7 +301,7 @@ public class Dashbord_Fragment extends Fragment {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
             String formattedDate = df.format(d);
 
-            Toast.makeText(getActivity(), "" + formattedDate, Toast.LENGTH_SHORT).show();
+
             Log.e("TAG", "addOneDay: " + formattedDate);
             date15.add(formattedDate);
 
